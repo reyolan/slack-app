@@ -6,8 +6,5 @@
   align-items: center;
   height: 32px;
   width: 32px;
-}
-
-.text {
   color: var(--white);
 }

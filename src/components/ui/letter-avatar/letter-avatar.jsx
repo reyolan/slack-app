@@ -1,9 +1,9 @@
 import styles from "./letter-avatar.module.css";
 
-function LetterAvatar({ letter }) {
+function LetterAvatar({ letter, className = "" }) {
   return (
-    <div className={styles.container}>
-      <span className={styles.text}>{letter}</span>
+    <div className={`${styles.container} ${className}`}>
+      <span>{letter}</span>
     </div>
   );
 }
