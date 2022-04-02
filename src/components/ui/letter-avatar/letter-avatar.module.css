@@ -1,0 +1,13 @@
+.container {
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+}
+
+.text {
+  color: var(--white);
+}
