@@ -3,23 +3,26 @@ import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "../user-card";
+import Header from "components/ui/texts/header";
 import { getFirstChar } from "utils/helpers";
 
 function ChannelSideBar({ isAdmin, users }) {
-  <ColumnContainer>
-    <h1>Channel Name</h1>
-    {isAdmin && <Button type="button">Add Users</Button>}
-    <h2>Users</h2>
-    <UnorderedList>
-      {users.map(user => (
-        <UserCard
-          key={user.id}
-          letter={getFirstChar(user.email)}
-          name={user.email}
-        />
-      ))}
-    </UnorderedList>
-  </ColumnContainer>;
+  return (
+    <ColumnContainer>
+      <Header level={2}>Channel Name</Header>
+      {isAdmin && <Button type="button">Add Users</Button>}
+      <Header level={2}>Users</Header>
+      <UnorderedList>
+        {users.map(user => (
+          <UserCard
+            key={user.id}
+            letter={getFirstChar(user.email)}
+            name={getFirstChar(user.email)}
+          />
+        ))}
+      </UnorderedList>
+    </ColumnContainer>
+  );
 }
 
 export default ChannelSideBar;

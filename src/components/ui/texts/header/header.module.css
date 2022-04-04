@@ -1,4 +1,9 @@
-.header {
+.header1 {
+  font-size: 8rem;
+  color: var(--primary-font-color);
+}
+
+.header2 {
   font-size: 2rem;
   color: var(--primary-font-color);
 }

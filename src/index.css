@@ -10,7 +10,6 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
-  line-height: 1.15;
 }
 
 :root {
@@ -20,6 +19,7 @@ textarea {
   --primary-font-color: #d7d6d9;
   --secondary-font-color: #72767d;
   --white: white;
+  --button-color-hover: #1164a3bf;
 }
 
 html {
@@ -32,4 +32,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #00aff4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

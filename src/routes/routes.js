@@ -1,7 +1,4 @@
-import Login from "pages/login";
-import Register from "pages/register";
-import Home from "pages/home";
-import Channel from "pages/channel";
+import { Login, Register, Home, Channel } from "pages";
 
 const PUBLIC_ROUTES = [
   { path: "/", element: <Home /> },

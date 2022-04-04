@@ -1,20 +1,24 @@
 import styles from "./input-field.module.css";
+import Text from "../texts/text";
+import ColumnContainer from "../containers/column-container";
 
 function InputField({
   name,
   label,
   type,
-  placeholder,
+  placeholder = null,
   onChange,
   error = null,
 }) {
   return (
-    <div>
+    <ColumnContainer className={styles.inputContainer}>
       <div>
-        <span>
-          <label htmlFor={name}>{label}</label>
-        </span>
-        <span>- {error}</span>
+        <Text className={styles.label}>
+          <label htmlFor={name} className={styles.label}>
+            {label}&nbsp;
+          </label>
+          <span className={styles.error}>{error}</span>
+        </Text>
       </div>
       <input
         className={styles.input}
@@ -22,8 +26,9 @@ function InputField({
         id={name}
         placeholder={placeholder}
         onChange={onChange}
+        autoComplete="off"
       />
-    </div>
+    </ColumnContainer>
   );
 }
 
