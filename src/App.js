@@ -4,13 +4,16 @@ import { PUBLIC_ROUTES, PRIVATE_ROUTES } from "routes/routes";
 import PublicRoute from "routes/public-route";
 import PrivateRoute from "routes/private-route";
 import AuthProvider from "context/AuthContext";
-import { Home, Login, Register } from "pages";
+import { Channel, Home, Login, Register } from "pages";
+import SideBar from "components/sidebar";
+import ChannelSideBar from "components/channel/channel-sidebar";
+import RowContainer from "components/ui/containers/row-container";
 
 function App() {
   return (
     <MainContainer>
       <BrowserRouter>
-        <Register />
+        <Channel />
         {/* <Routes>
           <PublicRoute>
             {PUBLIC_ROUTES.map((route, i) => (

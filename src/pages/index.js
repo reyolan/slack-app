@@ -1,4 +1,4 @@
-import Channel from "./channel";
+import Channel from "./channel/channel";
 import Home from "./home/home";
 import Login from "./login/login";
 import Register from "./register/register";

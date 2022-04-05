@@ -1,0 +1,11 @@
+.userCard {
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.userCard:hover {
+  background: gray;
+  border-radius: 5px;
+}

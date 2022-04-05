@@ -1,0 +1,16 @@
+.channelSideBar {
+  padding: 0.5rem 1.4rem;
+  background: #2f3136;
+  width: 200px;
+  gap: 1rem;
+}
+
+.channelSideBar > .addBtn {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+}
+
+.channelSideBar > .channelName {
+  border-bottom: solid black 1px;
+  padding: 0.4rem;
+}

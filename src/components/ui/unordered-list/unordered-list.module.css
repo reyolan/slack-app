@@ -1,3 +1,29 @@
 .list {
   list-style: none;
+  overflow: hidden;
+}
+
+.list:hover {
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+
+.list::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.list::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #202225;
+
+  border-radius: 10px;
 }
