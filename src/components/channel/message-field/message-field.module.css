@@ -1,0 +1,20 @@
+.messageInput {
+  border-radius: 5px;
+  background-color: #40444b;
+  outline: 0;
+  border: 0;
+  padding: 0.4rem 0.8rem;
+  color: white;
+  font-size: 1.6rem;
+  width: 100%;
+}
+
+.messageField {
+  background-color: var(--primary-color);
+  padding: 0.5rem 1rem;
+}
+
+.sendBtn {
+  width: auto;
+  background-color: transparent;
+}

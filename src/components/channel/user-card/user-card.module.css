@@ -1,11 +1,17 @@
 .userCard {
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   cursor: pointer;
   padding: 0.5rem;
+  position: relative;
 }
 
 .userCard:hover {
   background: gray;
   border-radius: 5px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 1.5rem;
 }

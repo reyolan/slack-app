@@ -1,0 +1,31 @@
+.channelCardContainer {
+  position: relative;
+}
+
+.icon {
+  height: 48px;
+  width: 48px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-weight: 500;
+  transition: all 0.5s;
+}
+
+.icon:hover {
+  background: gray;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.arrow {
+  display: none;
+}
+
+.icon:hover + .arrow {
+  display: block;
+  position: absolute;
+  color: white;
+  bottom: 15%;
+  left: 125%;
+}

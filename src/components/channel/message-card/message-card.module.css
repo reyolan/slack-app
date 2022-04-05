@@ -1,8 +1,15 @@
-.container {
-  display: flex;
+.messageCard {
+  gap: 1rem;
+  align-items: center;
 }
 
-.subContainer {
-  display: flex;
-  flex-direction: column;
+.name {
+  color: white;
+  font-weight: 500;
+}
+
+.avatar {
+  height: 48px;
+  width: 48px;
+  font-size: 1.6rem;
 }

@@ -5,7 +5,7 @@ import PublicRoute from "routes/public-route";
 import PrivateRoute from "routes/private-route";
 import AuthProvider from "context/AuthContext";
 import { Channel, Home, Login, Register } from "pages";
-import SideBar from "components/sidebar";
+import Sidebar from "components/sidebar";
 import ChannelSideBar from "components/channel/channel-sidebar";
 import RowContainer from "components/ui/containers/row-container";
 

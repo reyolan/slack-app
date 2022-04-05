@@ -5,21 +5,18 @@ import Button from "components/ui/button";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "../user-card";
 import Header from "components/ui/texts/header";
+import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
 import { getFirstChar } from "utils/helpers";
 
 function ChannelSideBar(/*{ isAdmin, users }*/) {
   return (
-    <ColumnContainer className={styles.channelSideBar}>
-      <Header level={2} className={styles.channelName}>
-        Channel Name
-      </Header>
+    <ChannelSidebarContainer>
+      <Header level={2}>Channel Name</Header>
       {/* {isAdmin && <Button type="button">Add Users</Button>} */}
       <Button type="button" className={styles.addBtn}>
-        Add Users
+        Add Members
       </Button>
-      <Header level={2} className={styles.channelName}>
-        Members
-      </Header>
+      <Header level={2}>Members</Header>
       <UnorderedList>
         {/* {users.map(user => (
           <UserCard
@@ -29,8 +26,8 @@ function ChannelSideBar(/*{ isAdmin, users }*/) {
           />
         ))} */}
         <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
+        <UserCard letter="Ae" name="Aeron" />
+        <UserCard letter="Be" name="Bella" />
         <UserCard letter="Ab" name="Abarth" />
         <UserCard letter="Ab" name="Abarth" />
         <UserCard letter="Ab" name="Abarth" />
@@ -43,7 +40,7 @@ function ChannelSideBar(/*{ isAdmin, users }*/) {
         <UserCard letter="Ab" name="Abarth" />
         <UserCard letter="Ab" name="Abarth" />
       </UnorderedList>
-    </ColumnContainer>
+    </ChannelSidebarContainer>
   );
 }
 

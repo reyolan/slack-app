@@ -6,8 +6,8 @@ import Text from "components/ui/texts/text";
 function UserCard({ letter, name }) {
   return (
     <RowContainer className={styles.userCard}>
-      <LetterAvatar letter={letter} />
-      <Text>{name}</Text>
+      <LetterAvatar letter={letter} className={styles.avatar} />
+      <Text className={styles.name}>{name}</Text>
     </RowContainer>
   );
 }

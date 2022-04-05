@@ -1,0 +1,25 @@
+.arrowBox {
+  position: relative;
+  background: #000000;
+  padding: 0.5rem 1rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  z-index: 1;
+  width: auto;
+  white-space: pre;
+}
+
+.arrowBox:after {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-right-color: #000000;
+  border-width: 5px;
+  margin-top: -5px;
+}

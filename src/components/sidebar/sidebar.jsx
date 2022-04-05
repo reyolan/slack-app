@@ -1,15 +1,15 @@
 import styles from "./sidebar.module.css";
-import LetterAvatar from "components/ui/letter-avatar";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
+import ChannelCard from "components/sidebar/channel-card";
 
-function SideBar() {
+function Sidebar() {
   return (
     <ColumnCenterContainer className={styles.container}>
-      <LetterAvatar letter="A" className={styles.icon} />
-      <LetterAvatar letter="B" className={styles.icon} />
-      <LetterAvatar letter="+" className={`${styles.add} ${styles.icon}`} />
+      <ChannelCard channelName="Abarth" />
+      <ChannelCard channelName="Barter" />
+      <ChannelCard channelName="+" hoverName="Add a server" />
     </ColumnCenterContainer>
   );
 }
 
-export default SideBar;
+export default Sidebar;
