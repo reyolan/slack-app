@@ -12,7 +12,7 @@ function MessageField() {
         className={styles.messageInput}
       />
       <Button type="button" className={styles.sendBtn}>
-        <i className="las la-paper-plane" />
+        <i className="las la-lg la-paper-plane" />
       </Button>
     </RowContainer>
   );

@@ -10,4 +10,5 @@
   background: black;
   font-size: 1.4rem;
   cursor: pointer;
+  user-select: none;
 }

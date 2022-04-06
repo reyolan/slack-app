@@ -2,9 +2,9 @@
   position: relative;
 }
 
-.icon {
-  height: 48px;
-  width: 48px;
+.channelCardContainer > .icon {
+  height: 56px;
+  width: 56px;
   color: white;
   cursor: pointer;
   font-size: 1.8rem;
@@ -18,14 +18,21 @@
   transition: all 0.3s;
 }
 
-.arrow {
-  display: none;
+.channelCardContainer > .arrow {
+  height: 0;
+  width: 0;
+  font-weight: 500;
+  opacity: 0;
 }
 
 .icon:hover + .arrow {
-  display: block;
   position: absolute;
   color: white;
-  bottom: 15%;
-  left: 125%;
+  font-size: 1rem;
+  height: auto;
+  width: 100%;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s;
+  z-index: 1;
 }

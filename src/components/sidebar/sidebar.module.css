@@ -1,17 +1,23 @@
 body .container {
-  width: 80px;
   height: 100%;
+  width: 100px;
   background-color: #202225;
-  gap: 0.8rem;
   justify-content: flex-start;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.container > .add {
-  font-size: 2.4rem;
-  font-weight: 500;
+.container > .channelList {
+  outline: solid red 1px;
 }
 
-.arrow {
-  position: absolute;
+.container > .channelList::-webkit-scrollbar {
+  display: none;
+}
+
+.channelList > li {
+  margin-bottom: 0.8rem;
 }

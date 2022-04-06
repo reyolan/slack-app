@@ -6,7 +6,21 @@ import UnorderedList from "components/ui/unordered-list";
 import UserCard from "../user-card";
 import Header from "components/ui/texts/header";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
-import { getFirstChar } from "utils/helpers";
+
+const NAMES = [
+  "Abarth",
+  "Aeron",
+  "Bella",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+  "Abarth",
+];
 
 function ChannelSideBar(/*{ isAdmin, users }*/) {
   return (
@@ -17,7 +31,7 @@ function ChannelSideBar(/*{ isAdmin, users }*/) {
         Add Members
       </Button>
       <Header level={2}>Members</Header>
-      <UnorderedList>
+      <UnorderedList Component={<UserCard />}>
         {/* {users.map(user => (
           <UserCard
             key={user.id}
@@ -25,20 +39,13 @@ function ChannelSideBar(/*{ isAdmin, users }*/) {
             name={getFirstChar(user.email)}
           />
         ))} */}
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ae" name="Aeron" />
-        <UserCard letter="Be" name="Bella" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
-        <UserCard letter="Ab" name="Abarth" />
+        {NAMES.map((user, i) => {
+          return (
+            <li key={i}>
+              <UserCard name={user} />
+            </li>
+          );
+        })}
       </UnorderedList>
     </ChannelSidebarContainer>
   );

@@ -1,3 +1,3 @@
-import LeftArrowContainer from "./left-arrow-container";
+import TopArrowContainer from "./top-arrow-container";
 
-export default LeftArrowContainer;
+export default TopArrowContainer;
