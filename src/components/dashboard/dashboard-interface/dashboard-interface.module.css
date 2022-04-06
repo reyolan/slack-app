@@ -1,0 +1,14 @@
+.interface {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.username {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.signOut {
+  width: auto;
+  margin-top: 2rem;
+}

@@ -10,10 +10,6 @@ body .container {
   scrollbar-width: none;
 }
 
-.container > .channelList {
-  outline: solid red 1px;
-}
-
 .container > .channelList::-webkit-scrollbar {
   display: none;
 }

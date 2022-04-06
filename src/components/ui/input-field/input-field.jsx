@@ -3,15 +3,17 @@ import Text from "../texts/text";
 import ColumnContainer from "../containers/column-container";
 
 function InputField({
-  name,
-  label,
+  name = "",
+  label = "",
   type,
+  value = "",
   placeholder = null,
   onChange,
   error = null,
+  className = "",
 }) {
   return (
-    <ColumnContainer className={styles.inputContainer}>
+    <ColumnContainer className={`${styles.inputContainer} ${className}`}>
       <div>
         <Text className={styles.label}>
           <label htmlFor={name} className={styles.label}>
@@ -27,6 +29,7 @@ function InputField({
         placeholder={placeholder}
         onChange={onChange}
         autoComplete="off"
+        value={value}
       />
     </ColumnContainer>
   );

@@ -1,0 +1,9 @@
+.layout {
+  height: 100%;
+}
+
+.messagesContainer {
+  width: 100%;
+  gap: 0.5rem;
+  background: var(--primary-color);
+}

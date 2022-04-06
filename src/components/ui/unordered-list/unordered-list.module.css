@@ -4,7 +4,7 @@
 }
 
 .list:hover {
-  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
 .list::-webkit-scrollbar {
@@ -24,6 +24,5 @@
 
 .list::-webkit-scrollbar-thumb {
   background-color: #202225;
-
   border-radius: 10px;
 }

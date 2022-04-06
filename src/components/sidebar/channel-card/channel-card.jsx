@@ -1,6 +1,6 @@
 import styles from "./channel-card.module.css";
 import LetterAvatar from "components/ui/letter-avatar";
-import TopArrowContainer from "components/ui/containers/left-arrow-container";
+import TopArrowContainer from "components/ui/containers/top-arrow-container";
 import { getFirstTwoChars } from "utils/helpers";
 
 function ChannelCard({ channelName, hoverName = "" }) {

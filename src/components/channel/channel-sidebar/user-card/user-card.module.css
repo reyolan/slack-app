@@ -5,12 +5,11 @@
   padding: 0.5rem;
 }
 
-.userCard:hover {
-  background: gray;
-  border-radius: 5px;
+.userCard > .avatar {
+  font-size: 1.4rem;
 }
 
 .name {
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }

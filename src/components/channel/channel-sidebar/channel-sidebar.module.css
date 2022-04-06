@@ -1,4 +1,9 @@
-body .addBtn {
+body .addMemberBtn {
   font-size: 1.6rem;
   padding: 0.5rem;
+}
+
+.userCard:hover {
+  background: gray;
+  border-radius: 5px;
 }

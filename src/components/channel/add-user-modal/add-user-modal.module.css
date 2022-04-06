@@ -1,0 +1,32 @@
+body .addBtn {
+  width: auto;
+  font-size: 1.2rem;
+  height: 70%;
+}
+
+.userListModal {
+  height: 70%;
+  padding: 0 0.5rem;
+}
+
+.addContainerModal {
+  justify-content: space-between;
+  align-items: center;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.addContainerModal:hover {
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.inputContainer input {
+  width: 100%;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+.headerInputContainer {
+  padding: 0 1rem;
+}

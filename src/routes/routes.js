@@ -1,4 +1,4 @@
-import { Login, Register, Home, Channel } from "pages";
+import { Login, Register, Home, Channel, Dashboard, NotFound } from "pages";
 
 const PUBLIC_ROUTES = [
   { path: "/", element: <Home /> },
@@ -11,15 +11,9 @@ const PUBLIC_ROUTES = [
 
 const PRIVATE_ROUTES = [
   { path: "channels/:channelId", element: <Channel /> },
-  { path: "channels/me/:channelId", element: <Channel /> },
+  { path: "channels/me/", element: <Dashboard /> },
 ];
 
-export { PUBLIC_ROUTES, PRIVATE_ROUTES };
-/*
+const NOTFOUND_ROUTE = { path: "*", element: <NotFound /> };
 
-/ 
-/login
-/register
-/channel/:channelId
-/user/messages/:userId
-*/
+export { PUBLIC_ROUTES, PRIVATE_ROUTES, NOTFOUND_ROUTE };

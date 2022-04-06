@@ -1,5 +1,3 @@
-// maybe not needed due to only one time only passing of authentication props
-
 // import { createContext } from "react";
 
 // const AuthContext = createContext();
