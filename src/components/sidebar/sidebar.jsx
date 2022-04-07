@@ -26,6 +26,10 @@ function Sidebar() {
   return (
     <ColumnCenterContainer className={styles.container}>
       <UnorderedList className={styles.channelList}>
+        <li>
+          <ChannelCard channelName="Home" />
+        </li>
+
         {CHANNEL_NAMES.map((channel, i) => (
           <li key={i}>
             <ChannelCard channelName={channel} />

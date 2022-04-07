@@ -17,3 +17,8 @@ body .container {
 .channelList > li {
   margin-bottom: 0.8rem;
 }
+
+.channelList > li:first-child {
+  border-bottom: solid gray 1px;
+  padding-bottom: 1rem;
+}

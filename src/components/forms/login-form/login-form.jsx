@@ -27,13 +27,16 @@ function LoginForm() {
         name="email"
         label="EMAIL"
         type="email"
+        value={email}
         onChange={e => setEmail(e.target.value)}
         error={error}
+        className={styles.inputContainer}
       />
       <InputField
         name="password"
         label="PASSWORD"
         type="password"
+        value={password}
         onChange={e => setPassword(e.target.value)}
         error={error}
       />

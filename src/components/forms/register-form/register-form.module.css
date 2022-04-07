@@ -1,3 +1,7 @@
 .registerBtn {
   margin-top: 10px;
 }
+
+.inputContainer input {
+  width: 300px;
+}

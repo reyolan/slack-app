@@ -17,18 +17,22 @@ function RegisterForm() {
   return (
     <FormContainer onSubmit={handleSubmit}>
       <InputField
+        name="email"
         label="EMAIL"
         type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        className={styles.inputContainer}
       />
       <InputField
+        name="passsword"
         label="PASSWORD"
         type="password"
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
       <InputField
+        name="confirm-password"
         label="CONFIRM PASSWORD"
         type="password"
         value={confirmPassword}

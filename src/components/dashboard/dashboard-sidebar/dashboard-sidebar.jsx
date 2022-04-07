@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./dashboard-sidebar.module.css";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
 import Header from "components/ui/texts/header";

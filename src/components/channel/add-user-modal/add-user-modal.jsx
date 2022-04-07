@@ -7,16 +7,10 @@ import UserCard from "../channel-sidebar/user-card";
 import RowContainer from "components/ui/containers/row-container";
 import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
+import useFilterUser from "hooks/useFilterUser";
 
 function AddUserModal({ users, toggleModal }) {
-  const [search, setSearch] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(users);
-
-  useEffect(() => {
-    setFilteredUsers(
-      users.filter(user => user.toLowerCase().includes(search.toLowerCase()))
-    );
-  }, [search]);
+  const { search, filteredUsers, setSearch } = useFilterUser(users);
 
   return (
     <Modal className={styles.modal} toggleModal={toggleModal}>
@@ -34,7 +28,7 @@ function AddUserModal({ users, toggleModal }) {
         {filteredUsers.map((user, i) => (
           <li key={i}>
             <RowContainer className={styles.addContainerModal}>
-              <UserCard name={user} />
+              <UserCard name={user.name} />
               <Button type="button" className={styles.addBtn}>
                 Add
               </Button>

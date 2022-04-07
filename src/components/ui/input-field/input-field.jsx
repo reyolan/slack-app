@@ -14,14 +14,16 @@ function InputField({
 }) {
   return (
     <ColumnContainer className={`${styles.inputContainer} ${className}`}>
-      <div>
-        <Text className={styles.label}>
-          <label htmlFor={name} className={styles.label}>
-            {label}&nbsp;
-          </label>
-          <span className={styles.error}>{error}</span>
-        </Text>
-      </div>
+      {label && (
+        <div>
+          <Text className={styles.label}>
+            <label htmlFor={name} className={styles.label}>
+              {label}&nbsp;
+            </label>
+            <span className={styles.error}>{error}</span>
+          </Text>
+        </div>
+      )}
       <input
         className={styles.input}
         type={type}
