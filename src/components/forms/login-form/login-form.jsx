@@ -7,25 +7,32 @@ import FormContainer from "components/ui/containers/form-container";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import { loginValidation } from "utils/form-validate";
+import resolveAxios from "services/axios-resolver";
 
 function LoginForm() {
   const { setIsAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
 
     setErrors(loginValidation(email, password));
 
-    if (Object.values(errors).every(error => error === null)) {
-      setIsAuthenticated(true);
-      navigate("/channels/me");
+    if (
+      Object.values(errors).every(error => error === null) &&
+      email &&
+      password
+    ) {
+      resolveAxios("/api/v1/auth/sign_in", "POST", { email, password }).then(
+        res => {
+          console.log(res);
+          // if (res.response) {
+          //   setIsAuthenticated(true);
+          // }
+        }
+      );
     }
   };
 

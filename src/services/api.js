@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://slackapi.avionschool.com",
+  baseURL: "http://206.189.91.54",
 });
 
 // const RELATIVE_URL = Object.freeze({

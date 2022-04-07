@@ -5,3 +5,10 @@
 .inputContainer input {
   width: 350px;
 }
+
+.statusMessage {
+  width: 350px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+}

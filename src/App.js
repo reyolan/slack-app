@@ -4,6 +4,7 @@ import { PUBLIC_ROUTES, PRIVATE_ROUTES, NOTFOUND_ROUTE } from "routes/routes";
 import PublicRoute from "routes/public-route";
 import PrivateRoute from "routes/private-route";
 import AuthProvider from "context/AuthContext";
+import UserProvider from "context/UserContext";
 import { Channel, Home, Login, Register, Dashboard } from "pages";
 import Sidebar from "components/sidebar";
 
