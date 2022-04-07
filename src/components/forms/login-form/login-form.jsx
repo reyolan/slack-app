@@ -25,14 +25,13 @@ function LoginForm() {
       email &&
       password
     ) {
-      resolveAxios("/api/v1/auth/sign_in", "POST", { email, password }).then(
-        res => {
-          console.log(res);
-          // if (res.response) {
-          //   setIsAuthenticated(true);
-          // }
-        }
-      );
+      resolveAxios("/api/v1/auth/sign_in", { email, password }).then(res => {
+        console.log(res);
+        // if (res.response) {
+        //   setIsAuthenticated(true);
+        //   //dito mo na rin istore yung headers from the contextAPI
+        // }
+      });
     }
   };
 

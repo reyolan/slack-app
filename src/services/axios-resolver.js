@@ -1,15 +1,15 @@
 import API from "./api";
 
-async function resolveAxios(relativeUrl, method = "GET", data) {
+async function resolveAxios(relativeUrl, data = null) {
   const resolved = { response: null, error: null };
 
   try {
-    if (method === "GET") {
+    if (!data) {
       const res = await API.get(relativeUrl);
       resolved.response = res;
     }
 
-    if (method === "POST") {
+    if (data) {
       const res = await API.post(relativeUrl, data);
       resolved.response = res;
     }
