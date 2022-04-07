@@ -11,7 +11,11 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    email: null,
+    password: null,
+    confirmPassword: null,
+  });
   const [statusMessage, setStatusMessage] = useState("");
 
   const handleSubmit = e => {
@@ -25,7 +29,7 @@ function RegisterForm() {
       confirmPassword
     ) {
       const data = { email, password, password_confirmation: confirmPassword };
-      resolveAxios("/api/v1/auth", data).then(res => {
+      resolveAxios("auth", data).then(res => {
         console.log(res);
         if (res.response) {
           setStatusMessage("Registration Success. Proceed to Login page.");

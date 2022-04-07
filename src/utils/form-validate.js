@@ -56,9 +56,7 @@ function registerValidation(email, password, confirmPassword = null) {
 function loginValidation(email, password) {
   const errors = {};
 
-  if (isFieldEmpty(email)) {
-    errors.email = "- This field is required";
-  }
+  errors.email = emailValidation(email);
 
   if (isFieldEmpty(password)) {
     errors.password = "- This field is required";
