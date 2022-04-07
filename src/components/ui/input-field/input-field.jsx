@@ -3,6 +3,7 @@ import Text from "../texts/text";
 import ColumnContainer from "../containers/column-container";
 
 function InputField({
+  className = "",
   name = "",
   label = "",
   type,
@@ -10,7 +11,7 @@ function InputField({
   placeholder = null,
   onChange,
   error = null,
-  className = "",
+  ...props
 }) {
   return (
     <ColumnContainer className={`${styles.inputContainer} ${className}`}>
@@ -32,6 +33,7 @@ function InputField({
         onChange={onChange}
         autoComplete="off"
         value={value}
+        {...props}
       />
     </ColumnContainer>
   );

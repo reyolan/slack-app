@@ -1,35 +1,37 @@
-const BASE_URL = "https://slackapi.avionschool.com";
+import axios from "axios";
 
-const RELATIVE_URL = Object.freeze({
-  registerUser: `${BASE_URL}/register`,
-  sendMessage: `${BASE_URL}/api/v1/messages`,
-  createChannel: `${BASE_URL}/api/v1/channels`,
-  getChannelUsers: `${BASE_URL}/api/v1/channels`,
-  addMember: `${BASE_URL}/api/v1/channel/add_member`,
-  getAllUsers: `${BASE_URL}/api/v1/users`,
-  getChannelDetails: id => `${BASE_URL}/api/v1/channels/${id}`,
-  retrieveMessage: (id, receiver) =>
-    `${BASE_URL}/api/v1/messages?receiver_id=${id}&receiver_class=${receiver}`,
+export default axios.create({
+  baseURL: "https://slackapi.avionschool.com",
 });
 
-function fetchOptions(method, responseHeader = null, data = null) {
-  const options = { method };
+// const RELATIVE_URL = Object.freeze({
+//   registerUser: `${BASE_URL}/register`,
+//   sendMessage: `${BASE_URL}/api/v1/messages`,
+//   createChannel: `${BASE_URL}/api/v1/channels`,
+//   getChannelUsers: `${BASE_URL}/api/v1/channels`,
+//   addMember: `${BASE_URL}/api/v1/channel/add_member`,
+//   getAllUsers: `${BASE_URL}/api/v1/users`,
+//   getChannelDetails: id => `${BASE_URL}/api/v1/channels/${id}`,
+//   retrieveMessage: (id, receiver) =>
+//     `${BASE_URL}/api/v1/messages?receiver_id=${id}&receiver_class=${receiver}`,
+// });
 
-  if (Object.keys(responseHeader).length) {
-    const { accessToken, client, expiry, uid } = responseHeader;
-    options.headers = {
-      "access-token": accessToken,
-      client,
-      expiry,
-      uid,
-    };
-  }
+// function fetchOptions(method, responseHeader = null, data = null) {
+//   const options = { method };
 
-  if (method === "POST" && data) {
-    options.body = JSON.stringify(data);
-  }
+//   if (Object.keys(responseHeader).length) {
+//     const { accessToken, client, expiry, uid } = responseHeader;
+//     options.headers = {
+//       "access-token": accessToken,
+//       client,
+//       expiry,
+//       uid,
+//     };
+//   }
 
-  return options;
-}
+//   if (method === "POST" && data) {
+//     options.body = JSON.stringify(data);
+//   }
 
-export { RELATIVE_URL, fetchOptions };
+//   return options;
+// }

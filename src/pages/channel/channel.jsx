@@ -10,7 +10,7 @@ import MessageField from "components/channel/message-field";
 function Channel() {
   return (
     <RowContainer className={styles.layout}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <ChannelSideBar />
       <ColumnContainer className={styles.messagesContainer}>
         <MessageContainer />

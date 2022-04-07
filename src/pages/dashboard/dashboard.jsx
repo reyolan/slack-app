@@ -10,7 +10,7 @@ import DashboardInterface from "components/dashboard/dashboard-interface";
 function Dashboard() {
   return (
     <RowContainer className={styles.layout}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <DashboardSidebar />
       <DashboardInterface />
     </RowContainer>

@@ -3,6 +3,7 @@ import LetterAvatar from "components/ui/letter-avatar";
 import ColumnContainer from "components/ui/containers/column-container";
 import RowContainer from "components/ui/containers/row-container";
 import Text from "components/ui/texts/text";
+import UserDetailCard from "../user-detail-card";
 import { getFirstChar } from "utils/helpers";
 
 function MessageCard({ name, message }) {
@@ -10,6 +11,7 @@ function MessageCard({ name, message }) {
     <RowContainer className={styles.messageCard}>
       <div>
         <LetterAvatar letter={getFirstChar(name)} className={styles.avatar} />
+        {/* <UserDetailCard name={name} /> */}
       </div>
       <ColumnContainer>
         <Text className={styles.name}>{name}</Text>

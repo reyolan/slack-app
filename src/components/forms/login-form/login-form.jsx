@@ -1,24 +1,32 @@
 import InputField from "components/ui/input-field";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./login-form.module.css";
 import Button from "components/ui/button";
 import FormContainer from "components/ui/containers/form-container";
+import { useContext } from "react";
+import { AuthContext } from "context/AuthContext";
+import { loginValidation } from "utils/form-validate";
 
 function LoginForm() {
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("- This field is required");
-      return;
-    }
+    setErrors(loginValidation(email, password));
 
-    setError(null);
-    console.log("Logging in with email:", email, "and password:", password);
+    if (Object.values(errors).every(error => error === null)) {
+      setIsAuthenticated(true);
+      navigate("/channels/me");
+    }
   };
 
   return (
@@ -29,7 +37,7 @@ function LoginForm() {
         type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
-        error={error}
+        error={errors.email}
         className={styles.inputContainer}
       />
       <InputField
@@ -38,7 +46,7 @@ function LoginForm() {
         type="password"
         value={password}
         onChange={e => setPassword(e.target.value)}
-        error={error}
+        error={errors.password}
       />
       <Button type="submit" className={styles.loginBtn}>
         Login
