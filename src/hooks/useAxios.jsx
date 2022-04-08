@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "services/api";
 
-function useAxios(relativeUrl, data, method = "GET") {
+function useAxios(relativeUrl) {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -10,16 +10,8 @@ function useAxios(relativeUrl, data, method = "GET") {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-
-        if (method === "GET") {
-          const response = await API.get(relativeUrl);
-          setResponse(response);
-        }
-
-        if (method === "POST") {
-          const response = await API.post(relativeUrl, data);
-          console.log(response);
-        }
+        const response = await API.get(relativeUrl);
+        setResponse(response);
       } catch (error) {
         console.log(error);
         setError(error);

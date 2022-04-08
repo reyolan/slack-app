@@ -1,18 +1,11 @@
 import API from "./api";
 
-async function resolveAxios(relativeUrl, data = null) {
+async function getRequest(relativeUrl, config = null) {
   const resolved = { response: null, error: null };
 
   try {
-    if (!data) {
-      const res = await API.get(relativeUrl);
-      resolved.response = res;
-    }
-
-    if (data) {
-      const res = await API.post(relativeUrl, data);
-      resolved.response = res;
-    }
+    const res = await API.get(relativeUrl, config);
+    resolved.response = res;
   } catch (error) {
     resolved.error = error;
   }
@@ -20,4 +13,17 @@ async function resolveAxios(relativeUrl, data = null) {
   return resolved;
 }
 
-export default resolveAxios;
+async function postRequest(relativeUrl, data, config = null) {
+  const resolved = { response: null, error: null };
+
+  try {
+    const res = await API.post(relativeUrl, data, config);
+    resolved.response = res;
+  } catch (error) {
+    resolved.error = error;
+  }
+
+  return resolved;
+}
+
+export { getRequest, postRequest };

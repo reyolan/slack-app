@@ -1,17 +1,17 @@
 import InputField from "components/ui/input-field";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./login-form.module.css";
 import Button from "components/ui/button";
 import FormContainer from "components/ui/containers/form-container";
 import { useContext } from "react";
-import { AuthContext } from "context/AuthContext";
+import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
 import Text from "components/ui/texts/text";
-import resolveAxios from "services/axios-resolver";
+import { postRequest } from "services/axios-resolver";
 
 function LoginForm() {
-  const { setIsAuthenticated, setLoginHeader } = useContext(AuthContext);
+  const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
+    useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
@@ -27,17 +27,20 @@ function LoginForm() {
       email &&
       password
     ) {
-      resolveAxios("auth/sign_in", { email, password }).then(res => {
+      postRequest("auth/sign_in", { email, password }).then(res => {
         console.log(res);
         if (res.response) {
-          // setIsAuthenticated(true);
+          setIsAuthenticated(true);
           const {
             "access-token": accessToken,
             client,
             expiry,
             uid,
           } = res.response.headers;
-          setLoginHeader({ "access-token": accessToken, client, expiry, uid });
+          setLoginHeaders({
+            headers: { "access-token": accessToken, client, expiry, uid },
+          });
+          setLoggedInId(res.response.data.id);
           return;
         }
         setStatusMessage("Login Failed");

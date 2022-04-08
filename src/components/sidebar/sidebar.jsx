@@ -1,7 +1,14 @@
+import { Outlet, NavLink } from "react-router-dom";
+import { DataContext } from "context/data-context";
+import { AuthContext } from "context/auth-context";
+import useModal from "hooks/useModal";
 import styles from "./sidebar.module.css";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
 import ChannelCard from "components/sidebar/channel-card";
 import UnorderedList from "components/ui/unordered-list";
+import AddChannelModal from "./add-channel-modal";
+import { useEffect, useContext } from "react";
+import { getRequest } from "services/axios-resolver";
 
 const CHANNEL_NAMES = [
   "Abarth",
@@ -9,38 +16,45 @@ const CHANNEL_NAMES = [
   "Noob Squad",
   "The Great Crypto",
   "PC Master Race",
-  "KQM | Genshin Impact",
-  "The Crew Community",
-  "Avion School",
-  "SERVER",
-  "SERVER",
-  "SERVER",
-  "SERVER",
-  "SERVER",
-  "SERVER",
-  "SERVER",
-  "SERVER",
 ];
 
 function Sidebar() {
+  const { isOpen, toggleModal } = useModal(false);
+  const { loginHeaders } = useContext(AuthContext);
+  const { setChannels, channels } = useContext(DataContext);
+
+  useEffect(() => {
+    getRequest("channels", loginHeaders).then(res => {
+      console.log(res);
+      setChannels(res.response.data.data);
+      console.log(channels);
+    });
+  }, []);
+
   return (
-    <ColumnCenterContainer className={styles.container}>
-      <UnorderedList className={styles.channelList}>
-        <li>
-          <ChannelCard channelName="Home" />
-        </li>
-
-        {CHANNEL_NAMES.map((channel, i) => (
-          <li key={i}>
-            <ChannelCard channelName={channel} />
+    <div className={styles.layout}>
+      {isOpen && <AddChannelModal toggleModal={toggleModal} />}
+      <ColumnCenterContainer className={styles.container}>
+        <UnorderedList className={styles.channelList}>
+          <li>
+            <NavLink to="/channels/me">
+              <ChannelCard channelName="Home" />
+            </NavLink>
           </li>
-        ))}
 
-        <li>
-          <ChannelCard channelName="+" hoverName="Add a server" />
-        </li>
-      </UnorderedList>
-    </ColumnCenterContainer>
+          {channels.map((channel, i) => (
+            <li key={i}>
+              <ChannelCard channelName={channel.name} />
+            </li>
+          ))}
+
+          <li onClick={toggleModal}>
+            <ChannelCard channelName="+" hoverName="Add a server" />
+          </li>
+        </UnorderedList>
+      </ColumnCenterContainer>
+      <Outlet />
+    </div>
   );
 }
 

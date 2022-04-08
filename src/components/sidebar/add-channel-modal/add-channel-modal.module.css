@@ -1,0 +1,15 @@
+body .addChannelModal {
+  height: auto;
+  width: 300px;
+  padding-bottom: 1.5rem;
+}
+
+body .inputChannel {
+  margin-top: 1rem;
+}
+
+.addChannelModal > .addChannelBtn {
+  padding: 0.5rem;
+  font-size: 2rem;
+  margin-top: 1rem;
+}

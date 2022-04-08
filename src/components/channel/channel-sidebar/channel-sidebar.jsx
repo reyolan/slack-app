@@ -1,7 +1,5 @@
 import { useState } from "react";
 import styles from "./channel-sidebar.module.css";
-import ColumnContainer from "components/ui/containers/column-container";
-import RowContainer from "components/ui/containers/row-container";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
 import UnorderedList from "components/ui/unordered-list";
@@ -26,7 +24,7 @@ const NAMES = [
   { name: "Cadillac", id: 10 },
 ];
 
-function ChannelSideBar(/*{ isAdmin, users }*/) {
+function ChannelSideBar() {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
   const { search, filteredUsers, setSearch } = useFilterUser(NAMES);

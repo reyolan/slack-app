@@ -4,7 +4,7 @@ import FormContainer from "components/ui/containers/form-container";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
 import { registerValidation } from "utils/form-validate";
-import resolveAxios from "services/axios-resolver";
+import { postRequest } from "services/axios-resolver";
 import Text from "components/ui/texts/text";
 
 function RegisterForm() {
@@ -29,7 +29,7 @@ function RegisterForm() {
       confirmPassword
     ) {
       const data = { email, password, password_confirmation: confirmPassword };
-      resolveAxios("auth", data).then(res => {
+      postRequest("auth", data).then(res => {
         console.log(res);
         if (res.response) {
           setStatusMessage("Registration Success. Proceed to Login page.");

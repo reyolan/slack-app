@@ -1,6 +1,6 @@
 body .container {
   height: 100%;
-  width: 100px;
+  width: 96px;
   background-color: #202225;
   justify-content: flex-start;
   padding: 1rem 0.5rem;
@@ -8,6 +8,10 @@ body .container {
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.container > .channelList {
+  height: 100%;
 }
 
 .container > .channelList::-webkit-scrollbar {
@@ -21,4 +25,9 @@ body .container {
 .channelList > li:first-child {
   border-bottom: solid gray 1px;
   padding-bottom: 1rem;
+}
+
+.layout {
+  display: flex;
+  height: 100%;
 }

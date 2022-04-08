@@ -9,11 +9,13 @@ import DashboardInterface from "components/dashboard/dashboard-interface";
 
 function Dashboard() {
   return (
-    <RowContainer className={styles.layout}>
-      {/* <Sidebar /> */}
+    <>
+      {/* <RowContainer className={styles.layout}> */}
+
       <DashboardSidebar />
       <DashboardInterface />
-    </RowContainer>
+      {/* </RowContainer> */}
+    </>
   );
 }
 
