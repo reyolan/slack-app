@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
 import Text from "components/ui/texts/text";
-import { postRequest } from "services/axios-resolver";
+import useAxiosPost from "hooks/useAxiosPost";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -16,6 +16,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
   const [statusMessage, setStatusMessage] = useState("");
+  const { isLoading, postRequest } = useAxiosPost();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -28,9 +29,7 @@ function LoginForm() {
       password
     ) {
       postRequest("auth/sign_in", { email, password }).then(res => {
-        console.log(res);
         if (res.response) {
-          setIsAuthenticated(true);
           const {
             "access-token": accessToken,
             client,
@@ -40,10 +39,12 @@ function LoginForm() {
           setLoginHeaders({
             headers: { "access-token": accessToken, client, expiry, uid },
           });
-          setLoggedInId(res.response.data.id);
-          return;
+          setLoggedInId(res.response.data.data.id);
+          setIsAuthenticated(true);
+        } else {
+          console.error(res.error);
+          setStatusMessage("Login Failed");
         }
-        setStatusMessage("Login Failed");
       });
     }
   };
@@ -70,7 +71,6 @@ function LoginForm() {
       <Button type="submit" className={styles.loginBtn}>
         Login
       </Button>
-
       {statusMessage && <Text>{statusMessage}</Text>}
     </FormContainer>
   );

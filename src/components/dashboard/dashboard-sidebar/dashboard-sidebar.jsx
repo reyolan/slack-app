@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "context/auth-context";
 import { NavLink } from "react-router-dom";
 import styles from "./dashboard-sidebar.module.css";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
 import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
-import { getEmailUsername } from "utils/helpers";
 
 const NAMES = [
   "Daniel",
@@ -22,9 +19,7 @@ const NAMES = [
   "Abarth",
   "Abarth",
 ];
-function DashboardSidebar() {
-  const { loggedInUser } = useContext(AuthContext);
-
+function DashboardSidebar({ loggedInUser }) {
   return (
     <ChannelSidebarContainer>
       <Header level={2}>{loggedInUser}</Header>

@@ -9,6 +9,7 @@ import UnorderedList from "components/ui/unordered-list";
 import AddChannelModal from "./add-channel-modal";
 import { useEffect, useContext } from "react";
 import { getRequest } from "services/axios-resolver";
+import useAxiosGet from "hooks/useAxiosGet";
 
 const CHANNEL_NAMES = [
   "Abarth",
@@ -22,14 +23,14 @@ function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { loginHeaders } = useContext(AuthContext);
   const { setChannels, channels } = useContext(DataContext);
+  const { response, error, isLoading } = useAxiosGet("channels", loginHeaders);
 
   useEffect(() => {
-    getRequest("channels", loginHeaders).then(res => {
-      console.log(res);
-      setChannels(res.response.data.data);
+    if (response) {
+      setChannels(response.data.data);
       console.log(channels);
-    });
-  }, []);
+    }
+  }, [response]);
 
   return (
     <div className={styles.layout}>
@@ -44,7 +45,9 @@ function Sidebar() {
 
           {channels.map((channel, i) => (
             <li key={i}>
-              <ChannelCard channelName={channel.name} />
+              <NavLink to={`/channels/${channel.id}`}>
+                <ChannelCard channelName={channel.name} />
+              </NavLink>
             </li>
           ))}
 

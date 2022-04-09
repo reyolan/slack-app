@@ -2,12 +2,8 @@ import styles from "./dashboard-interface.module.css";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
-import { useContext } from "react";
-import { AuthContext } from "context/auth-context";
 
-function DashboardInterface() {
-  const { loggedInUser } = useContext(AuthContext);
-
+function DashboardInterface({ loggedInUser }) {
   return (
     <ColumnCenterContainer className={styles.interface}>
       <Header level={1}>Welcome!</Header>

@@ -1,15 +1,18 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "context/auth-context";
+import { DataContext } from "context/data-context";
 import styles from "./add-channel-modal.module.css";
 import Modal from "components/ui/modal";
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 import InputField from "components/ui/input-field";
-import { postRequest } from "services/axios-resolver";
+import useAxiosPost from "hooks/useAxiosPost";
 
 function AddChannelModal({ toggleModal }) {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
+  const { fetchChannels } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
+  const { isLoading, postRequest } = useAxiosPost();
 
   const handleSubmit = () => {
     postRequest(
@@ -21,6 +24,7 @@ function AddChannelModal({ toggleModal }) {
       loginHeaders
     ).then(res => {
       console.log(res);
+      fetchChannels();
     });
     //yung pinakaunang user sa channel, ayun yung i-assign as admin for that channel, let's see
   };

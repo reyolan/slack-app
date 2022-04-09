@@ -24,7 +24,7 @@ const NAMES = [
   { name: "Cadillac", id: 10 },
 ];
 
-function ChannelSideBar() {
+function ChannelSideBar({ channelName, isAdmin = false }) {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
   const { search, filteredUsers, setSearch } = useFilterUser(NAMES);
@@ -41,7 +41,7 @@ function ChannelSideBar() {
     <>
       {isOpen && <AddUserModal users={NAMES} toggleModal={toggleModal} />}
       <ChannelSidebarContainer>
-        <Header level={2}>Channel Name</Header>
+        <Header level={2}>{channelName}</Header>
         {/* {isAdmin && <Button type="button">Add Users</Button>} */}
         <Button
           type="button"
