@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./channel-sidebar.module.css";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
@@ -12,22 +12,22 @@ import UserDetailCard from "../user-detail-card";
 import useFilterUser from "hooks/useFilterUser";
 
 const NAMES = [
-  { name: "Abarth", id: 1 },
-  { name: "Acura", id: 2 },
-  { name: "Alfa Romeo", id: 3 },
-  { name: "Aston Martin", id: 4 },
-  { name: "Audi", id: 5 },
-  { name: "Bentley", id: 6 },
-  { name: "BMW", id: 7 },
-  { name: "Bugatti", id: 8 },
-  { name: "Buick", id: 9 },
-  { name: "Cadillac", id: 10 },
+  { email: "Abarth", id: 1 },
+  { email: "Acura", id: 2 },
+  { email: "Alfa Romeo", id: 3 },
+  { email: "Aston Martin", id: 4 },
+  { email: "Audi", id: 5 },
+  { email: "Bentley", id: 6 },
+  { email: "BMW", id: 7 },
+  { email: "Bugatti", id: 8 },
+  { email: "Buick", id: 9 },
+  { email: "Cadillac", id: 10 },
 ];
 
-function ChannelSideBar({ channelName, isAdmin = false }) {
+function ChannelSideBar({ channelName, isOwner }) {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
-  const { search, filteredUsers, setSearch } = useFilterUser(NAMES);
+  const { search, filteredUsers, setSearch, setUsers } = useFilterUser();
 
   const handleClick = id => {
     if (clickedId === id) {
@@ -37,21 +37,22 @@ function ChannelSideBar({ channelName, isAdmin = false }) {
     setClickedId(id);
   };
 
+  useEffect(() => {});
+
   return (
     <>
-      {isOpen && <AddUserModal users={NAMES} toggleModal={toggleModal} />}
+      {isOpen && <AddUserModal toggleModal={toggleModal} />}
       <ChannelSidebarContainer>
         <Header level={2}>{channelName}</Header>
-        {/* {isAdmin && <Button type="button">Add Users</Button>} */}
-        <Button
-          type="button"
-          onClick={toggleModal}
-          className={styles.addMemberBtn}
-        >
-          Add Members
-        </Button>
-        {/* The button above shall be able to list all users 
-      basically may modal tayo na input field then sa baba nun is yung list ng lahat ng users */}
+        {isOwner && (
+          <Button
+            type="button"
+            onClick={toggleModal}
+            className={styles.addMemberBtn}
+          >
+            Add Members
+          </Button>
+        )}
         <InputField
           type="text"
           placeholder="Search members"
@@ -63,10 +64,10 @@ function ChannelSideBar({ channelName, isAdmin = false }) {
           {filteredUsers.map(user => {
             return (
               <li key={user.id} onClick={() => handleClick(user.id)}>
-                <UserCard name={user.name} className={styles.userCard} />
+                <UserCard name={user.email} className={styles.userCard} />
                 {clickedId === user.id && (
                   <UserDetailCard
-                    name={user.name}
+                    name={user.email}
                     className={styles.userDetailCard}
                   />
                 )}

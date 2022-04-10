@@ -13,6 +13,7 @@ function UserDetailCard({ name, onClick, className }) {
         <LetterAvatar letter={getFirstChar(name)} className={styles.avatar} />
       </div>
       <Header level={2}>{name}</Header>
+      <Header level={2}>Email:</Header>
       <Button className={styles.messageBtn} onClick={onClick}>
         Message
       </Button>

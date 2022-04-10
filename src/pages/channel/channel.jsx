@@ -9,18 +9,27 @@ import ColumnContainer from "components/ui/containers/column-container";
 import MessageField from "components/channel/message-field";
 
 function Channel() {
+  const { loggedInId } = useContext(AuthContext);
   const { channels } = useContext(DataContext);
   const { channelId } = useParams();
   const [channelDetails, setChannelDetails] = useState({});
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     setChannelDetails(channels.find(channel => channel.id === +channelId));
+
     //now think of a way to know who is the ownerId to hide the add member button
-  }, [channelId]);
+  }, [channelId, channels]);
+
+  useEffect(() => {
+    if (channelDetails.owner_id === +loggedInId) {
+      setIsOwner(true);
+    }
+  }, [channelDetails, loggedInId]);
 
   return (
     <>
-      <ChannelSideBar channelName={channelDetails.name} />
+      <ChannelSideBar channelName={channelDetails.name} isOwner={isOwner} />
       <ColumnContainer className={styles.messagesContainer}>
         <MessageContainer />
         <MessageField />

@@ -1,4 +1,4 @@
-.userCard {
+body .userCard {
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
@@ -12,4 +12,5 @@
 .name {
   font-weight: 500;
   font-size: 1.6rem;
+  word-break: break-all;
 }

@@ -10,18 +10,21 @@ import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/useFilterUser";
 import { AuthContext } from "context/auth-context";
 import { getRequest } from "services/axios-resolver";
+import useAxiosGet from "hooks/useAxiosGet";
+import { getEmailUsername } from "utils/helpers";
 
-function AddUserModal({ users, toggleModal }) {
-  const { search, filteredUsers, setSearch } = useFilterUser(users);
-  // const [users, setUsers] = useState([]);
+function AddUserModal({ toggleModal }) {
   const { loginHeaders } = useContext(AuthContext);
+  const { search, filteredUsers, debounceSearch, setSearch, setUsers } =
+    useFilterUser();
+  const { response, error, isLoading } = useAxiosGet("users", loginHeaders);
   // dito mo ilagay yung user data kasi dito lang naman tayo maglilist ng users
 
   useEffect(() => {
-    getRequest("users", loginHeaders).then(res => console.log(res));
-    //pag nag-add ka na ng users, fetch na ulit para magbago yung list ng users so mababago yung list
-    //gawa function dito na kapag nakapag-add, re-fetch tayo ng users para maupdate yung list
-  }, []);
+    if (response) {
+      setUsers(response.data.data);
+    }
+  }, [response]);
 
   return (
     <Modal className={styles.modal} toggleModal={toggleModal}>
@@ -30,23 +33,30 @@ function AddUserModal({ users, toggleModal }) {
         <InputField
           type="text"
           placeholder="Search users"
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => {
+            setSearch(e.target.value);
+            debounceSearch(e.target.value);
+          }}
           value={search}
           className={styles.inputContainer}
         />
       </div>
-      <UnorderedList className={styles.userListModal}>
-        {filteredUsers.map((user, i) => (
-          <li key={i}>
-            <RowContainer className={styles.addContainerModal}>
-              <UserCard name={user.name} />
-              <Button type="button" className={styles.addBtn}>
-                Add
-              </Button>
-            </RowContainer>
-          </li>
-        ))}
-      </UnorderedList>
+      {isLoading ? (
+        <p>LOADINGG!!</p>
+      ) : (
+        <UnorderedList className={styles.userListModal}>
+          {filteredUsers.map((user, i) => (
+            <li key={user.id}>
+              <RowContainer className={styles.addContainerModal}>
+                <UserCard name={user.uid} />
+                <Button type="button" className={styles.addBtn}>
+                  Add
+                </Button>
+              </RowContainer>
+            </li>
+          ))}
+        </UnorderedList>
+      )}
     </Modal>
   );
 }

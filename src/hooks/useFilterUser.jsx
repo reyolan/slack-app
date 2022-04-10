@@ -1,18 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useDebounce from "./useDebounce";
 
-function useFilterUser(unfilteredUsers) {
+function useFilterUser() {
   const [search, setSearch] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(unfilteredUsers);
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  useEffect(() => {
+  const debounceSearch = useDebounce(search => filterUsers(search), 500, users);
+
+  const filterUsers = search => {
+    if (search.length === 0) {
+      return;
+    }
+    console.log(users);
+    console.log("search", search);
     setFilteredUsers(
-      unfilteredUsers.filter(data =>
-        data.name.toLowerCase().includes(search.toLowerCase())
+      users.filter(user =>
+        user.email.toLowerCase().includes(search.toLowerCase())
       )
     );
-  }, [search, unfilteredUsers]);
+  };
 
-  return { search, filteredUsers, setSearch };
+  return {
+    search,
+    filteredUsers,
+    filterUsers,
+    debounceSearch,
+    setSearch,
+    setUsers,
+  };
 }
 
 export default useFilterUser;
