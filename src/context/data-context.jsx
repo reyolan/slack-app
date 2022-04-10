@@ -26,6 +26,8 @@ function DataProvider({ children }) {
         messages,
         setMessages,
         fetchChannels,
+        // fetchAllUsers,
+        // allUsers,
       }}
     >
       {children}

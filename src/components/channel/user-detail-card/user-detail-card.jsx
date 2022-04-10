@@ -4,16 +4,17 @@ import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 import ColumnContainer from "components/ui/containers/column-container";
 import { getFirstChar } from "utils/helpers";
+import { getEmailUsername } from "utils/helpers";
 
-function UserDetailCard({ name, onClick, className }) {
+function UserDetailCard({ email, onClick, className }) {
   //pwedeng ilagay na dito mismo yung function sa onClick tapos magpapasa nalang ng id
   return (
     <ColumnContainer className={`${styles.userDetailCard} ${className}`}>
       <div>
-        <LetterAvatar letter={getFirstChar(name)} className={styles.avatar} />
+        <LetterAvatar letter={getFirstChar(email)} className={styles.avatar} />
       </div>
-      <Header level={2}>{name}</Header>
-      <Header level={2}>Email:</Header>
+      <Header level={2}>{getEmailUsername(email)}</Header>
+      <Header level={2}>Email: {email}</Header>
       <Button className={styles.messageBtn} onClick={onClick}>
         Message
       </Button>

@@ -8,12 +8,12 @@ import MessageField from "components/channel/message-field";
 import DashboardInterface from "components/dashboard/dashboard-interface";
 
 function Dashboard() {
-  const { loggedInUser } = useContext(AuthContext);
+  const { loggedInUser, loggedInId } = useContext(AuthContext);
 
   return (
     <>
-      <DashboardSidebar loggedInUser={loggedInUser} />
-      <DashboardInterface loggedInUser={loggedInUser} />
+      <DashboardSidebar loggedInUser={loggedInUser} loggedInId={loggedInId} />
+      <DashboardInterface loggedInUser={loggedInUser} loggedInId={loggedInId} />
     </>
   );
 }

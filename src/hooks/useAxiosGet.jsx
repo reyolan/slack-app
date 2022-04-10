@@ -19,7 +19,7 @@ function useAxiosGet(relativeUrl, config = null, dependency = null) {
       .finally(() => setIsLoading(false));
   }, [dependency]);
 
-  return { response, error, isLoading };
+  return [response, error, isLoading];
 }
 
 export default useAxiosGet;

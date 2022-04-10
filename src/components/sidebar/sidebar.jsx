@@ -23,7 +23,7 @@ function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { loginHeaders } = useContext(AuthContext);
   const { setChannels, channels } = useContext(DataContext);
-  const { response, error, isLoading } = useAxiosGet("channels", loginHeaders);
+  const [response, error, isLoading] = useAxiosGet("channels", loginHeaders);
 
   useEffect(() => {
     if (response) {

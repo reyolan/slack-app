@@ -19,16 +19,16 @@ const NAMES = [
   "Abarth",
   "Abarth",
 ];
-function DashboardSidebar({ loggedInUser }) {
+function DashboardSidebar({ loggedInUser, loggedInId }) {
   return (
     <ChannelSidebarContainer>
-      <Header level={2}>{loggedInUser}</Header>
+      <Header level={2}>{`${loggedInUser} #${loggedInId} `}</Header>
       <Header level={2}>Direct Messages</Header>
       <UnorderedList>
         {NAMES.map((user, i) => {
           return (
             <li key={i}>
-              <UserCard name={user} />
+              <UserCard email={user} />
               {/* dito dapat pagkaclick nung li, mapapanavigate tayo don sa messages  */}
               {/* so may navigate dapat tayo dito na link pagkaclick nung li */}
             </li>

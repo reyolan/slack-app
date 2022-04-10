@@ -2,7 +2,7 @@ import { useState } from "react";
 import API from "services/api";
 
 function useAxiosPost() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPosting, setIsLoading] = useState(false);
 
   async function postRequest(relativeUrl, data, config = null) {
     const resolved = { response: null, error: null };
@@ -19,6 +19,6 @@ function useAxiosPost() {
     return resolved;
   }
 
-  return { isLoading, postRequest };
+  return { isPosting, postRequest };
 }
 export default useAxiosPost;

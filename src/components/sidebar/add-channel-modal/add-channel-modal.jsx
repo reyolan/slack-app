@@ -12,7 +12,7 @@ function AddChannelModal({ toggleModal }) {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
   const { fetchChannels } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
-  const { isLoading, postRequest } = useAxiosPost();
+  const { isPosting, postRequest } = useAxiosPost();
 
   const handleSubmit = () => {
     postRequest(

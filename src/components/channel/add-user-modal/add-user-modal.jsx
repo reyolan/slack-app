@@ -9,27 +9,29 @@ import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/useFilterUser";
 import { AuthContext } from "context/auth-context";
-import { getRequest } from "services/axios-resolver";
 import useAxiosGet from "hooks/useAxiosGet";
+import useAxiosPost from "hooks/useAxiosPost";
 import { getEmailUsername } from "utils/helpers";
 
-function AddUserModal({ toggleModal }) {
+function AddUserModal({ toggleModal, channelName, channelId, allUsers }) {
   const { loginHeaders } = useContext(AuthContext);
-  const { search, filteredUsers, debounceSearch, setSearch, setUsers } =
-    useFilterUser();
-  const { response, error, isLoading } = useAxiosGet("users", loginHeaders);
+  const { search, filteredUsers, debounceSearch, setSearch } =
+    useFilterUser(allUsers);
+  const { isPosting, postRequest } = useAxiosPost();
   // dito mo ilagay yung user data kasi dito lang naman tayo maglilist ng users
 
-  useEffect(() => {
-    if (response) {
-      setUsers(response.data.data);
-    }
-  }, [response]);
+  const addUser = member_id => {
+    postRequest(
+      "channel/add_member",
+      { id: channelId, member_id },
+      loginHeaders
+    ).then(res => console.log(res));
+  };
 
   return (
     <Modal className={styles.modal} toggleModal={toggleModal}>
       <div className={styles.headerInputContainer}>
-        <Header level={2}>Invite users to Channel Name</Header>
+        <Header level={2}>Invite users to {channelName}</Header>
         <InputField
           type="text"
           placeholder="Search users"
@@ -41,22 +43,23 @@ function AddUserModal({ toggleModal }) {
           className={styles.inputContainer}
         />
       </div>
-      {isLoading ? (
-        <p>LOADINGG!!</p>
-      ) : (
-        <UnorderedList className={styles.userListModal}>
-          {filteredUsers.map((user, i) => (
-            <li key={user.id}>
-              <RowContainer className={styles.addContainerModal}>
-                <UserCard name={user.uid} />
-                <Button type="button" className={styles.addBtn}>
-                  Add
-                </Button>
-              </RowContainer>
-            </li>
-          ))}
-        </UnorderedList>
-      )}
+
+      <UnorderedList className={styles.userListModal}>
+        {filteredUsers.map(user => (
+          <li key={user.id}>
+            <RowContainer className={styles.addContainerModal}>
+              <UserCard email={getEmailUsername(user.uid)} id={user.id} />
+              <Button
+                type="button"
+                className={styles.addBtn}
+                onClick={() => addUser(user.id)}
+              >
+                Add
+              </Button>
+            </RowContainer>
+          </li>
+        ))}
+      </UnorderedList>
     </Modal>
   );
 }

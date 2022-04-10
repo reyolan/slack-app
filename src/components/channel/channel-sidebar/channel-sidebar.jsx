@@ -10,6 +10,7 @@ import AddUserModal from "../add-user-modal";
 import useModal from "hooks/useModal";
 import UserDetailCard from "../user-detail-card";
 import useFilterUser from "hooks/useFilterUser";
+import { getEmailUsername } from "utils/helpers";
 
 const NAMES = [
   { email: "Abarth", id: 1 },
@@ -24,14 +25,22 @@ const NAMES = [
   { email: "Cadillac", id: 10 },
 ];
 
-function ChannelSideBar({ channelName, isOwner }) {
+function ChannelSideBar({
+  channelName = "",
+  isOwner = false,
+  channelId,
+  channelMembers = [],
+  ownerId,
+  allUsers = [],
+}) {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
-  const { search, filteredUsers, setSearch, setUsers } = useFilterUser();
+  const { search, filteredUsers, debounceSearch, setSearch, setUsers } =
+    useFilterUser();
 
   const handleClick = id => {
     if (clickedId === id) {
-      setClickedId(0);
+      setClickedId(-1);
       return;
     }
     setClickedId(id);
@@ -41,7 +50,14 @@ function ChannelSideBar({ channelName, isOwner }) {
 
   return (
     <>
-      {isOpen && <AddUserModal toggleModal={toggleModal} />}
+      {isOpen && (
+        <AddUserModal
+          toggleModal={toggleModal}
+          channelName={channelName}
+          channelId={channelId}
+          allUsers={allUsers}
+        />
+      )}
       <ChannelSidebarContainer>
         <Header level={2}>{channelName}</Header>
         {isOwner && (
@@ -59,7 +75,21 @@ function ChannelSideBar({ channelName, isOwner }) {
           onChange={e => setSearch(e.target.value)}
           value={search}
         />
-        <Header level={2}>Members</Header>
+        {/* <Header level={2}>Admin</Header>
+        <UserCard
+          name={getEmailUsername("example123@example.com")}
+          className={styles.userCard}
+        />
+        {clickedId === 0 && (
+          <div onClick={() => handleClick(0)}>
+            <UserDetailCard
+              email="example123@example.com"
+              className={styles.userDetailCard}
+            />
+          </div>
+        )} */}
+
+        <Header level={2}>Members - {channelMembers.length}</Header>
         <UnorderedList>
           {filteredUsers.map(user => {
             return (
@@ -67,7 +97,7 @@ function ChannelSideBar({ channelName, isOwner }) {
                 <UserCard name={user.email} className={styles.userCard} />
                 {clickedId === user.id && (
                   <UserDetailCard
-                    name={user.email}
+                    email={user.email}
                     className={styles.userDetailCard}
                   />
                 )}
