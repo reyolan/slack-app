@@ -4,12 +4,12 @@ import RowContainer from "components/ui/containers/row-container";
 import Text from "components/ui/texts/text";
 import { getFirstChar } from "utils/helpers";
 
-function UserCard({ email, id = null, className }) {
+function UserCard({ name, id = null, className }) {
   return (
     <RowContainer className={`${styles.userCard} ${className}`}>
-      <LetterAvatar letter={getFirstChar(email)} className={styles.avatar} />
+      <LetterAvatar letter={getFirstChar(name)} className={styles.avatar} />
       <Text className={styles.email}>
-        {email} {id && `#${id}`}
+        {name} {id && `#${id}`}
       </Text>
     </RowContainer>
   );

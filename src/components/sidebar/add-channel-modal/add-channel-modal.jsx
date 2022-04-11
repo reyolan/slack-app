@@ -19,14 +19,14 @@ function AddChannelModal({ toggleModal }) {
       "channels",
       {
         name: channelName,
-        user_ids: [loggedInId],
+        user_ids: [],
       },
       loginHeaders
     ).then(res => {
       console.log(res);
+      //create error if same channel name has already been taken
       fetchChannels();
     });
-    //yung pinakaunang user sa channel, ayun yung i-assign as admin for that channel, let's see
   };
   return (
     <Modal toggleModal={toggleModal} className={styles.addChannelModal}>

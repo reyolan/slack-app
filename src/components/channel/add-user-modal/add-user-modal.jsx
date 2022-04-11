@@ -9,18 +9,23 @@ import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/useFilterUser";
 import { AuthContext } from "context/auth-context";
-import useAxiosGet from "hooks/useAxiosGet";
 import useAxiosPost from "hooks/useAxiosPost";
 import { getEmailUsername } from "utils/helpers";
 
-function AddUserModal({ toggleModal, channelName, channelId, allUsers }) {
+function AddUserModal({
+  toggleModal,
+  channelName,
+  channelId,
+  allUsers,
+  setRefetchUsers,
+}) {
   const { loginHeaders } = useContext(AuthContext);
   const { search, filteredUsers, debounceSearch, setSearch } =
     useFilterUser(allUsers);
   const { isPosting, postRequest } = useAxiosPost();
-  // dito mo ilagay yung user data kasi dito lang naman tayo maglilist ng users
 
   const addUser = member_id => {
+    // setRefetchUsers(true);
     postRequest(
       "channel/add_member",
       { id: channelId, member_id },
@@ -48,7 +53,7 @@ function AddUserModal({ toggleModal, channelName, channelId, allUsers }) {
         {filteredUsers.map(user => (
           <li key={user.id}>
             <RowContainer className={styles.addContainerModal}>
-              <UserCard email={getEmailUsername(user.uid)} id={user.id} />
+              <UserCard name={user.uid} id={user.id} />
               <Button
                 type="button"
                 className={styles.addBtn}

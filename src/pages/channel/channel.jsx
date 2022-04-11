@@ -9,6 +9,7 @@ import MessageContainer from "components/channel/message-container";
 import ColumnContainer from "components/ui/containers/column-container";
 import MessageField from "components/channel/message-field";
 import LoadingContainer from "components/ui/containers/loading-container";
+import { getEmailUsername } from "utils/helpers";
 
 function Channel() {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
@@ -17,40 +18,47 @@ function Channel() {
   const [usernames, setUsernames] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
+  const [reFetchUsers, setRefetchUsers] = useState(false);
   const [channelResponse, channelError, isChannelLoading] = useAxiosGet(
     `channels/${channelId}`,
     loginHeaders,
-    channelId
+    channelId,
+    reFetchUsers
   );
   const [allUsersResponse, allUsersError, isAllUsersLoading] = useAxiosGet(
     "users",
     loginHeaders,
-    channelId
+    channelId,
+    reFetchUsers
   );
-
-  useEffect(() => {
-    if (allUsersResponse && channelDetails) {
-      const usernames = allUsersResponse.data.data.filter(user =>
-        channelDetails.channel_members.some(
-          member => member.user_id === user.id
-        )
-      );
-      setUsernames(usernames);
-      console.log(usernames);
-    }
-  }, [allUsersResponse, channelDetails]);
 
   useEffect(() => {
     if (channelResponse) {
       setChannelDetails(channelResponse.data.data);
+      console.log(channelResponse);
     }
   }, [channelResponse]);
 
   useEffect(() => {
     if (allUsersResponse) {
-      setAllUsers(allUsersResponse.data.data);
+      const allUsers = allUsersResponse.data.data.map(user => ({
+        ...user,
+        uid: getEmailUsername(user.uid),
+      }));
+      setAllUsers(allUsers);
     }
   }, [allUsersResponse]);
+
+  useEffect(() => {
+    if (allUsers && channelDetails) {
+      const usernames = allUsers.filter(user =>
+        channelDetails.channel_members.some(
+          member => member.user_id === user.id
+        )
+      );
+      setUsernames(usernames);
+    }
+  }, [allUsers]);
 
   useEffect(() => {
     if (channelDetails.owner_id === +loggedInId) {
@@ -64,10 +72,10 @@ function Channel() {
         channelName={channelDetails.name}
         isOwner={isOwner}
         channelId={channelDetails.id}
-        channelMembers={channelDetails.channel_members}
         ownerId={channelDetails.owner_id}
-        users={usernames}
+        channelUsers={usernames}
         allUsers={allUsers}
+        setRefetchUsers={setRefetchUsers}
       />
       <ColumnContainer className={styles.messagesContainer}>
         <MessageContainer />

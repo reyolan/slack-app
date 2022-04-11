@@ -10,7 +10,6 @@ import AddUserModal from "../add-user-modal";
 import useModal from "hooks/useModal";
 import UserDetailCard from "../user-detail-card";
 import useFilterUser from "hooks/useFilterUser";
-import { getEmailUsername } from "utils/helpers";
 
 const NAMES = [
   { email: "Abarth", id: 1 },
@@ -29,14 +28,18 @@ function ChannelSideBar({
   channelName = "",
   isOwner = false,
   channelId,
-  channelMembers = [],
   ownerId,
+  channelUsers,
   allUsers = [],
+  setRefetchUsers,
 }) {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
-  const { search, filteredUsers, debounceSearch, setSearch, setUsers } =
-    useFilterUser();
+  const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
+  const { search, filteredUsers, debounceSearch, setSearch } = useFilterUser(
+    channelUsers,
+    true
+  );
 
   const handleClick = id => {
     if (clickedId === id) {
@@ -46,7 +49,15 @@ function ChannelSideBar({
     setClickedId(id);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (allUsers) {
+      const usersAbleToAdd = allUsers.filter(
+        user => !channelUsers.find(channelUser => channelUser.id === user.id)
+      );
+
+      setUsersAbleToAdd(usersAbleToAdd);
+    }
+  }, [allUsers, isOpen]);
 
   return (
     <>
@@ -55,7 +66,8 @@ function ChannelSideBar({
           toggleModal={toggleModal}
           channelName={channelName}
           channelId={channelId}
-          allUsers={allUsers}
+          allUsers={usersAbleToAdd}
+          setRefetchUsers={setRefetchUsers}
         />
       )}
       <ChannelSidebarContainer>
@@ -72,7 +84,10 @@ function ChannelSideBar({
         <InputField
           type="text"
           placeholder="Search members"
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => {
+            setSearch(e.target.value);
+            debounceSearch(e.target.value);
+          }}
           value={search}
         />
         {/* <Header level={2}>Admin</Header>
@@ -89,15 +104,16 @@ function ChannelSideBar({
           </div>
         )} */}
 
-        <Header level={2}>Members - {channelMembers.length}</Header>
+        <Header level={2}>Members - {channelUsers.length}</Header>
         <UnorderedList>
           {filteredUsers.map(user => {
             return (
               <li key={user.id} onClick={() => handleClick(user.id)}>
-                <UserCard name={user.email} className={styles.userCard} />
+                <UserCard name={user.uid} className={styles.userCard} />
                 {clickedId === user.id && (
                   <UserDetailCard
-                    email={user.email}
+                    name={user.uid}
+                    id={user.id}
                     className={styles.userDetailCard}
                   />
                 )}

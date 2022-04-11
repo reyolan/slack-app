@@ -5,20 +5,8 @@ import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
 
-const NAMES = [
-  "Daniel",
-  "Dominique",
-  "Evan",
-  "Raven",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-  "Abarth",
-];
+const NAMES = ["Daniel", "Dominique", "Evan", "Raven", "Abarth", "Abarth"];
+
 function DashboardSidebar({ loggedInUser, loggedInId }) {
   return (
     <ChannelSidebarContainer>
@@ -28,7 +16,7 @@ function DashboardSidebar({ loggedInUser, loggedInId }) {
         {NAMES.map((user, i) => {
           return (
             <li key={i}>
-              <UserCard email={user} />
+              <UserCard name={user} />
               {/* dito dapat pagkaclick nung li, mapapanavigate tayo don sa messages  */}
               {/* so may navigate dapat tayo dito na link pagkaclick nung li */}
             </li>

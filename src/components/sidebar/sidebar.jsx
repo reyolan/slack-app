@@ -11,14 +11,6 @@ import { useEffect, useContext } from "react";
 import { getRequest } from "services/axios-resolver";
 import useAxiosGet from "hooks/useAxiosGet";
 
-const CHANNEL_NAMES = [
-  "Abarth",
-  "Barter",
-  "Noob Squad",
-  "The Great Crypto",
-  "PC Master Race",
-];
-
 function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { loginHeaders } = useContext(AuthContext);
