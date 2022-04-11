@@ -8,21 +8,8 @@ import Header from "components/ui/texts/header";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
 import AddUserModal from "../add-user-modal";
 import useModal from "hooks/useModal";
-import UserDetailCard from "../user-detail-card";
+import UserDetailCard from "./user-card/user-detail-card";
 import useFilterUser from "hooks/useFilterUser";
-
-const NAMES = [
-  { email: "Abarth", id: 1 },
-  { email: "Acura", id: 2 },
-  { email: "Alfa Romeo", id: 3 },
-  { email: "Aston Martin", id: 4 },
-  { email: "Audi", id: 5 },
-  { email: "Bentley", id: 6 },
-  { email: "BMW", id: 7 },
-  { email: "Bugatti", id: 8 },
-  { email: "Buick", id: 9 },
-  { email: "Cadillac", id: 10 },
-];
 
 function ChannelSideBar({
   channelName = "",
@@ -31,7 +18,8 @@ function ChannelSideBar({
   ownerId,
   channelUsers,
   allUsers = [],
-  setRefetchUsers,
+  channelDetails,
+  refetchChannelDetails,
 }) {
   const { isOpen, toggleModal } = useModal(false);
   const [clickedId, setClickedId] = useState(0);
@@ -50,14 +38,14 @@ function ChannelSideBar({
   };
 
   useEffect(() => {
-    if (allUsers) {
+    if (allUsers && isOpen) {
       const usersAbleToAdd = allUsers.filter(
         user => !channelUsers.find(channelUser => channelUser.id === user.id)
       );
-
+      console.log(usersAbleToAdd);
       setUsersAbleToAdd(usersAbleToAdd);
     }
-  }, [allUsers, isOpen]);
+  }, [allUsers, isOpen, channelUsers]);
 
   return (
     <>
@@ -66,8 +54,8 @@ function ChannelSideBar({
           toggleModal={toggleModal}
           channelName={channelName}
           channelId={channelId}
-          allUsers={usersAbleToAdd}
-          setRefetchUsers={setRefetchUsers}
+          usersAbleToAdd={usersAbleToAdd}
+          refetchChannelDetails={refetchChannelDetails}
         />
       )}
       <ChannelSidebarContainer>
@@ -91,11 +79,8 @@ function ChannelSideBar({
           value={search}
         />
         {/* <Header level={2}>Admin</Header>
-        <UserCard
-          name={getEmailUsername("example123@example.com")}
-          className={styles.userCard}
-        />
-        {clickedId === 0 && (
+        <UserCard name={"example123"} className={styles.userCard} />
+        {clickedId === ownerId && (
           <div onClick={() => handleClick(0)}>
             <UserDetailCard
               email="example123@example.com"

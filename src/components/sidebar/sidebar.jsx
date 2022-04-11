@@ -20,7 +20,6 @@ function Sidebar() {
   useEffect(() => {
     if (response) {
       setChannels(response.data.data);
-      console.log(channels);
     }
   }, [response]);
 

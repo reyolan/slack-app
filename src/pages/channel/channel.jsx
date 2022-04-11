@@ -5,9 +5,7 @@ import { DataContext } from "context/data-context";
 import useAxiosGet from "hooks/useAxiosGet";
 import styles from "./channel.module.css";
 import ChannelSideBar from "components/channel/channel-sidebar";
-import MessageContainer from "components/channel/message-container";
-import ColumnContainer from "components/ui/containers/column-container";
-import MessageField from "components/channel/message-field";
+import MessageArea from "components/channel/message-area";
 import LoadingContainer from "components/ui/containers/loading-container";
 import { getEmailUsername } from "utils/helpers";
 
@@ -18,24 +16,26 @@ function Channel() {
   const [usernames, setUsernames] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
-  const [reFetchUsers, setRefetchUsers] = useState(false);
-  const [channelResponse, channelError, isChannelLoading] = useAxiosGet(
-    `channels/${channelId}`,
-    loginHeaders,
-    channelId,
-    reFetchUsers
-  );
-  const [allUsersResponse, allUsersError, isAllUsersLoading] = useAxiosGet(
-    "users",
-    loginHeaders,
-    channelId,
-    reFetchUsers
-  );
+  const [
+    channelResponse,
+    channelError,
+    isChannelLoading,
+    refetchChannelDetails,
+  ] = useAxiosGet(`channels/${channelId}`, loginHeaders, channelId);
+  const [allUsersResponse, allUsersError, isAllUsersLoading, refetchUsers] =
+    useAxiosGet("users", loginHeaders, channelId);
+
+  // useEffect(() => {
+  //   if (channelId) {
+  //     getChannelDetails();
+  //     getAllUsers();
+  //   }
+  // }, [channelId]);
 
   useEffect(() => {
     if (channelResponse) {
       setChannelDetails(channelResponse.data.data);
-      console.log(channelResponse);
+      // console.log(channelResponse);
     }
   }, [channelResponse]);
 
@@ -58,7 +58,7 @@ function Channel() {
       );
       setUsernames(usernames);
     }
-  }, [allUsers]);
+  }, [allUsers, channelDetails]);
 
   useEffect(() => {
     if (channelDetails.owner_id === +loggedInId) {
@@ -75,12 +75,15 @@ function Channel() {
         ownerId={channelDetails.owner_id}
         channelUsers={usernames}
         allUsers={allUsers}
-        setRefetchUsers={setRefetchUsers}
+        channelDetails={channelDetails}
+        refetchChannelDetails={refetchChannelDetails}
       />
-      <ColumnContainer className={styles.messagesContainer}>
-        <MessageContainer />
-        <MessageField />
-      </ColumnContainer>
+
+      <MessageArea
+        id={channelId}
+        receiver="Channel"
+        name={channelDetails.name}
+      />
     </>
   );
 }

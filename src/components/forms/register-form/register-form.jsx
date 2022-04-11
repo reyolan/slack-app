@@ -17,7 +17,7 @@ function RegisterForm() {
     confirmPassword: null,
   });
   const [statusMessage, setStatusMessage] = useState("");
-  const [isLoading, postRequest] = useAxiosPost();
+  const { isPosting, postRequest } = useAxiosPost();
 
   const handleSubmit = e => {
     e.preventDefault();

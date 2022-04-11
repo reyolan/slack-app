@@ -1,31 +1,44 @@
 import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 
-function useFilterUser(users, immediateLoading = false) {
+function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [search, setSearch] = useState("");
-  // const [users, setUsers] = useState(unfilteredUsers);
+  // const [users, setUsers] = useState(unFilteredUsers);
   const [filteredUsers, setFilteredUsers] = useState([]);
-
-  const debounceSearch = useDebounce(search => filterUsers(search), 800, users);
+  const debounceSearch = useDebounce(
+    search => filterUsers(search),
+    800,
+    unFilteredUsers
+  );
 
   const filterUsers = search => {
     if (!search) {
-      setFilteredUsers(users);
+      setFilteredUsers(unFilteredUsers);
     }
 
     console.log("search", search);
     setFilteredUsers(
-      users.filter(user =>
+      unFilteredUsers.filter(user =>
         user.uid.toLowerCase().includes(search.toLowerCase())
       )
     );
   };
 
   useEffect(() => {
-    if (users && immediateLoading) {
-      setFilteredUsers(users);
+    if (unFilteredUsers && immediateLoading) {
+      setFilteredUsers(unFilteredUsers);
     }
-  }, [users, immediateLoading]);
+  }, [unFilteredUsers, immediateLoading]);
+
+  useEffect(() => {
+    if (search) {
+      setFilteredUsers(
+        unFilteredUsers.filter(user =>
+          user.uid.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
+  }, [unFilteredUsers]);
 
   return {
     search,

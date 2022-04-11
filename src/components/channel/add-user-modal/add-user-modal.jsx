@@ -10,27 +10,31 @@ import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/useFilterUser";
 import { AuthContext } from "context/auth-context";
 import useAxiosPost from "hooks/useAxiosPost";
-import { getEmailUsername } from "utils/helpers";
 
 function AddUserModal({
   toggleModal,
   channelName,
   channelId,
-  allUsers,
-  setRefetchUsers,
+  usersAbleToAdd,
+  refetchChannelDetails,
 }) {
   const { loginHeaders } = useContext(AuthContext);
   const { search, filteredUsers, debounceSearch, setSearch } =
-    useFilterUser(allUsers);
+    useFilterUser(usersAbleToAdd);
   const { isPosting, postRequest } = useAxiosPost();
 
   const addUser = member_id => {
-    // setRefetchUsers(true);
     postRequest(
       "channel/add_member",
       { id: channelId, member_id },
       loginHeaders
-    ).then(res => console.log(res));
+    ).then(res => {
+      if (res.response.data.data) {
+        refetchChannelDetails();
+      }
+      //dapat maremove yung nasa mismong list
+      console.log("USER ALREADY ADDED!");
+    });
   };
 
   return (
