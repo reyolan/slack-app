@@ -4,23 +4,27 @@ import { AuthContext } from "context/auth-context";
 import ColumnContainer from "components/ui/containers/column-container";
 import MessageCard from "./message-card";
 import useAxiosGet from "hooks/useAxiosGet";
+import { getEmailUsername } from "utils/helpers";
 
-function MessageContainer({ id, receiver }) {
-  const { loginHeaders } = useContext(AuthContext);
+function MessageContainer({ messagesResponse }) {
   const [messages, setMessages] = useState([]);
-  const [messagesResponse, messagesError, isMessagesLoading, refetchMessages] =
-    useAxiosGet(
-      `messages?receiver_id=${id}&receiver_class=${receiver}`,
-      loginHeaders
-    );
 
   useEffect(() => {
-    console.log(messagesResponse);
+    if (messagesResponse) {
+      setMessages(messagesResponse.data.data.reverse());
+      //check if there are optional layout to move the message cards at the bottom
+    }
   }, [messagesResponse]);
 
   return (
     <ColumnContainer className={styles.messageContainer}>
-      <MessageCard name="Abarth" message="Hello" />
+      {messages.map((message, i) => (
+        <MessageCard
+          key={i}
+          name={getEmailUsername(message.sender.uid)}
+          message={message.body}
+        />
+      ))}
     </ColumnContainer>
   );
 }

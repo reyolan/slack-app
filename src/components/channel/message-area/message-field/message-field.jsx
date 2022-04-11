@@ -5,7 +5,7 @@ import styles from "./message-field.module.css";
 import RowContainer from "components/ui/containers/row-container";
 import Button from "components/ui/button";
 
-function MessageField({ id, receiver, name = "" }) {
+function MessageField({ id, receiver, name = "", refetchMessages }) {
   const { loginHeaders } = useContext(AuthContext);
   const { isPosting, postRequest } = useAxiosPost();
   const [messageInput, setMessageInput] = useState("");
@@ -19,7 +19,10 @@ function MessageField({ id, receiver, name = "" }) {
         body: messageInput,
       },
       loginHeaders
-    ).then(res => console.log(res));
+    ).then(res => {
+      console.log(res);
+      refetchMessages();
+    });
     setMessageInput("");
   };
 

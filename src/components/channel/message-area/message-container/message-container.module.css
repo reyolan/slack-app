@@ -3,9 +3,9 @@
   height: 100%;
   width: 100%;
   padding: 0.5rem 1rem;
+  overflow-y: auto;
   gap: 1.2rem;
   flex-direction: column-reverse;
-  overflow-y: auto;
 }
 
 .messageContainer::-webkit-scrollbar {

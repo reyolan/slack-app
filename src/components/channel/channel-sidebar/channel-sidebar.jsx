@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./channel-sidebar.module.css";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
