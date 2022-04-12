@@ -33,10 +33,10 @@ function Dashboard() {
   }, [allUsersResponse]);
 
   useEffect(() => {
-    if (userId) {
-      setClickedUser(allUsers.find(user => user.id === +userId).uid);
+    if (userId && allUsers) {
+      setClickedUser(allUsers.find(user => user.id === +userId)?.uid);
     }
-  }, [userId]);
+  }, [userId, allUsers]);
 
   return (
     <>
