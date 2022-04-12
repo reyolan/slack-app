@@ -1,9 +1,9 @@
 import styles from "./channel-sidebar-container.module.css";
 import ColumnContainer from "../column-container";
 
-function ChannelSidebarContainer({ children }) {
+function ChannelSidebarContainer({ children, className = "" }) {
   return (
-    <ColumnContainer className={styles.channelSidebar}>
+    <ColumnContainer className={`${styles.channelSidebar} ${className}`}>
       {children}
     </ColumnContainer>
   );

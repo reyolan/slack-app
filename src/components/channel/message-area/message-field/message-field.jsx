@@ -20,10 +20,17 @@ function MessageField({ id, receiver, name = "", refetchMessages }) {
       },
       loginHeaders
     ).then(res => {
-      console.log(res);
-      refetchMessages();
+      if (res.response.data.data) {
+        refetchMessages();
+      }
     });
     setMessageInput("");
+  };
+
+  const handleKeyPress = e => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
   };
 
   return (
@@ -35,6 +42,7 @@ function MessageField({ id, receiver, name = "", refetchMessages }) {
         className={styles.messageInput}
         value={messageInput}
         onChange={e => setMessageInput(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <Button
         type="button"

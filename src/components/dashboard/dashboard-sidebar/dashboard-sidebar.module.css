@@ -1,0 +1,8 @@
+.userCard:hover {
+  background: gray;
+  border-radius: 5px;
+}
+
+body .sidebarContainer {
+  width: 290px;
+}

@@ -32,7 +32,7 @@ function ChannelSideBar({
 
   const handleClick = id => {
     if (clickedId === id) {
-      setClickedId(-1);
+      setClickedId(0);
       return;
     }
     setClickedId(id);
@@ -94,8 +94,10 @@ function ChannelSideBar({
         <UnorderedList>
           {filteredUsers.map(user => {
             return (
-              <li key={user.id} onClick={() => handleClick(user.id)}>
-                <UserCard name={user.uid} className={styles.userCard} />
+              <li key={user.id}>
+                <div onClick={() => handleClick(user.id)}>
+                  <UserCard name={user.uid} className={styles.userCard} />
+                </div>
                 {clickedId === user.id && (
                   <UserDetailCard
                     name={user.uid}

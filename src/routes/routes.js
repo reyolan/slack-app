@@ -12,6 +12,7 @@ const PUBLIC_ROUTES = [
 const PRIVATE_ROUTES = [
   { path: ":channelId", element: <Channel /> },
   { path: "me", element: <Dashboard /> },
+  { path: "me/:userId", element: <Dashboard /> },
 ];
 
 const NOTFOUND_ROUTE = { path: "*", element: <NotFound /> };
