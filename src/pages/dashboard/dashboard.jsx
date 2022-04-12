@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { AuthContext } from "context/auth-context";
 import styles from "./dashboard.module.css";
 import { useParams } from "react-router-dom";
 import DashboardSidebar from "components/dashboard/dashboard-sidebar";
-import ColumnContainer from "components/ui/containers/column-container";
 import MessageArea from "components/channel/message-area";
 import DashboardInterface from "components/dashboard/dashboard-interface";
 import useAxiosGet from "hooks/useAxiosGet";

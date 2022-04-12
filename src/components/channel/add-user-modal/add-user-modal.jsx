@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import styles from "./add-user-modal.module.css";
 import UnorderedList from "components/ui/unordered-list";
 import Header from "components/ui/texts/header";

@@ -3,7 +3,6 @@ import useDebounce from "./useDebounce";
 
 function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [search, setSearch] = useState("");
-  // const [users, setUsers] = useState(unFilteredUsers);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const debounceSearch = useDebounce(
     search => filterUsers(search),

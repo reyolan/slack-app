@@ -9,7 +9,7 @@ import InputField from "components/ui/input-field";
 import useAxiosPost from "hooks/useAxiosPost";
 
 function AddChannelModal({ toggleModal }) {
-  const { loggedInId, loginHeaders } = useContext(AuthContext);
+  const { loginHeaders } = useContext(AuthContext);
   const { fetchChannels } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
   const { isPosting, postRequest } = useAxiosPost();

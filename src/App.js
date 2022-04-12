@@ -5,7 +5,6 @@ import PublicRoute from "routes/public-route";
 import PrivateRoute from "routes/private-route";
 import AuthProvider from "context/auth-context";
 import DataProvider from "context/data-context";
-import { Channel, Home, Login, Register, Dashboard } from "pages";
 import Sidebar from "components/sidebar";
 
 function App() {
