@@ -11,11 +11,11 @@ import { getEmailUsername } from "utils/helpers";
 
 function Channel() {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
-  const { channelId } = useParams();
   const [channelDetails, setChannelDetails] = useState({});
   const [usernames, setUsernames] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
+  const { channelId } = useParams();
   const [
     channelResponse,
     channelError,
@@ -25,18 +25,19 @@ function Channel() {
   const [allUsersResponse, allUsersError, isAllUsersLoading, refetchUsers] =
     useAxiosGet("users", loginHeaders, channelId);
 
-  // useEffect(() => {
-  //   if (channelId) {
-  //     getChannelDetails();
-  //     getAllUsers();
-  //   }
-  // }, [channelId]);
-
   useEffect(() => {
+    const fetchInterval = setInterval(() => {
+      refetchChannelDetails();
+      console.log(channelResponse);
+    }, 2000);
+
     if (channelResponse) {
       setChannelDetails(channelResponse.data.data);
-      // console.log(channelResponse);
     }
+
+    return () => {
+      clearInterval(fetchInterval);
+    };
   }, [channelResponse]);
 
   useEffect(() => {
@@ -47,6 +48,9 @@ function Channel() {
       }));
       setAllUsers(allUsers);
     }
+    //sabay dapat ung channel details pati allusersResponse
+    //put both in the same setinterval (refetchAllUsers and refetchChannelDetails para walang conflict sa data)
+    //para if may new user sa channel, makikita agad name sa don sa all users
   }, [allUsersResponse]);
 
   useEffect(() => {

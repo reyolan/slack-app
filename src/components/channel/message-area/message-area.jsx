@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "context/auth-context";
 import styles from "./message-area.module.css";
 import MessageContainer from "components/channel/message-area/message-container";
@@ -14,6 +14,12 @@ function MessageArea({ id, receiver, name = "" }) {
       loginHeaders,
       id
     );
+
+  // useEffect(() => {
+  //   const interval = setInterval(refetchMessages, 2000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <ColumnContainer className={styles.messagesContainer}>

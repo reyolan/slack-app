@@ -23,6 +23,7 @@ function MessageContainer({ messagesResponse }) {
           key={i}
           name={getEmailUsername(message.sender.uid)}
           message={message.body}
+          date={message.created_at}
         />
       ))}
     </ColumnContainer>

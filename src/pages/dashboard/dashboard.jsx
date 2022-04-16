@@ -20,12 +20,12 @@ function Dashboard() {
 
   useEffect(() => {
     if (allUsersResponse) {
-      const allUsers = allUsersResponse.data.data
-        .filter(user => user.id !== loggedInId)
-        .map(user => ({
-          ...user,
-          uid: getEmailUsername(user.uid),
-        }));
+      const allUsers = allUsersResponse.data.data.reduce((acc, currentUser) => {
+        return currentUser.id !== loggedInId
+          ? [...acc, { ...currentUser, uid: getEmailUsername(currentUser.uid) }]
+          : acc;
+      }, []);
+
       setAllUsers(allUsers);
     }
   }, [allUsersResponse]);

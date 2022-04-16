@@ -1,5 +1,3 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "context/auth-context";
 import { NavLink } from "react-router-dom";
 import InputField from "components/ui/input-field";
 import styles from "./dashboard-sidebar.module.css";
@@ -7,15 +5,11 @@ import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-co
 import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
-import useAxiosGet from "hooks/useAxiosGet";
 import LoadingContainer from "components/ui/containers/loading-container";
 import useFilterUser from "hooks/useFilterUser";
 import { getEmailUsername } from "utils/helpers";
 
-const NAMES = ["Daniel", "Dominique", "Evan"];
-
 function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
-  const { loginHeaders } = useContext(AuthContext);
   const { search, filteredUsers, debounceSearch, setSearch } =
     useFilterUser(allUsers);
 
@@ -32,7 +26,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         }}
       />
       <UnorderedList>
-        {filteredUsers.map((user, i) => {
+        {filteredUsers.map(user => {
           return (
             <li key={user.id}>
               <NavLink to={`/channels/me/${user.id}`}>

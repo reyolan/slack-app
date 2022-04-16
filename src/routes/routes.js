@@ -1,5 +1,6 @@
 import { Login, Register, Home, Channel, Dashboard, NotFound } from "pages";
 
+
 const PUBLIC_ROUTES = [
   { path: "/", element: <Home /> },
   {

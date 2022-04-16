@@ -5,6 +5,7 @@
 
 .name {
   color: white;
+  margin-right: 8px;
   font-weight: 500;
 }
 
@@ -12,4 +13,9 @@
   height: 48px;
   width: 48px;
   font-size: 1.6rem;
+}
+
+.date {
+  font-size: 1.1rem;
+  align-self: center;
 }
