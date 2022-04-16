@@ -10,7 +10,7 @@ import useAxiosPost from "hooks/useAxiosPost";
 
 function AddChannelModal({ toggleModal }) {
   const { loginHeaders } = useContext(AuthContext);
-  const { fetchChannels } = useContext(DataContext);
+  const { refetchChannels } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
   const { isPosting, postRequest } = useAxiosPost();
 
@@ -25,7 +25,7 @@ function AddChannelModal({ toggleModal }) {
     ).then(res => {
       console.log(res);
       //create error if same channel name has already been taken
-      fetchChannels();
+      refetchChannels();
     });
   };
   return (

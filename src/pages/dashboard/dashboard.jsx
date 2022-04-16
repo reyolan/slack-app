@@ -1,34 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/auth-context";
-import styles from "./dashboard.module.css";
+import { DataContext } from "context/data-context";
 import { useParams } from "react-router-dom";
 import DashboardSidebar from "components/dashboard/dashboard-sidebar";
 import MessageArea from "components/channel/message-area";
 import DashboardInterface from "components/dashboard/dashboard-interface";
-import useAxiosGet from "hooks/useAxiosGet";
-import { getEmailUsername } from "utils/helpers";
 
 function Dashboard() {
-  const { loggedInUser, loggedInId, loginHeaders } = useContext(AuthContext);
+  const { loggedInUser, loggedInId } = useContext(AuthContext);
+  const { allUsers } = useContext(DataContext);
   const { userId } = useParams();
-  const [allUsers, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(allUsers);
   const [clickedUser, setClickedUser] = useState("");
-  const [allUsersResponse, allUsersError, isLoading] = useAxiosGet(
-    "users",
-    loginHeaders
-  );
 
   useEffect(() => {
-    if (allUsersResponse) {
-      const allUsers = allUsersResponse.data.data.reduce((acc, currentUser) => {
-        return currentUser.id !== loggedInId
-          ? [...acc, { ...currentUser, uid: getEmailUsername(currentUser.uid) }]
-          : acc;
-      }, []);
-
-      setAllUsers(allUsers);
+    if (allUsers) {
+      const filteredUsers = allUsers.filter(user => user.id !== loggedInId);
+      setFilteredUsers(filteredUsers);
     }
-  }, [allUsersResponse]);
+  }, [allUsers]);
 
   useEffect(() => {
     if (userId && allUsers) {
@@ -41,7 +31,7 @@ function Dashboard() {
       <DashboardSidebar
         loggedInUser={loggedInUser}
         loggedInId={loggedInId}
-        allUsers={allUsers}
+        allUsers={filteredUsers}
       />
       {userId ? (
         <MessageArea receiver="User" id={userId} name={clickedUser} />

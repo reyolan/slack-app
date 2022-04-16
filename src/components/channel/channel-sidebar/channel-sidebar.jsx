@@ -42,7 +42,6 @@ function ChannelSideBar({
       const usersAbleToAdd = allUsers.filter(
         user => !channelUsers.find(channelUser => channelUser.id === user.id)
       );
-      console.log(usersAbleToAdd);
       setUsersAbleToAdd(usersAbleToAdd);
     }
   }, [allUsers, isOpen, channelUsers]);

@@ -7,12 +7,12 @@ function useAxiosGet(relativeUrl, config = null, dependency = null) {
   const [isLoading, setIsLoading] = useState(true);
 
   const getRequest = () => {
-    if (!isLoading) {
-      setIsLoading(true);
-    }
     API.get(relativeUrl, config)
       .then(res => {
-        setResponse(res);
+        const {
+          data: { data },
+        } = res;
+        setResponse(data);
       })
       .catch(err => setError(err))
       .finally(() => setIsLoading(false));

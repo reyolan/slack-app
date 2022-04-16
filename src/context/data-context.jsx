@@ -1,31 +1,51 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { AuthContext } from "./auth-context";
-import { getRequest } from "services/axios-resolver";
+import { getEmailUsername } from "utils/helpers";
+import useAxiosGet from "hooks/useAxiosGet";
 
 export const DataContext = createContext();
 
 function DataProvider({ children }) {
   const { loginHeaders } = useContext(AuthContext);
-  const [channels, setChannels] = useState([]);
-  const [channelUsers, setChannelUsers] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
+    useAxiosGet("users", loginHeaders);
+  const [
+    channelList,
+    channelListError,
+    isChannelListLoading,
+    refetchChannelList,
+  ] = useAxiosGet("channels", loginHeaders);
 
-  const fetchChannels = () => {
-    getRequest("channels", loginHeaders).then(res =>
-      setChannels(res.response.data.data)
-    );
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetchAllUsers();
+      refetchChannelList();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (allUsersResponse) {
+      const allUsers = allUsersResponse.map(user => ({
+        ...user,
+        uid: getEmailUsername(user.uid),
+      }));
+
+      setAllUsers(allUsers);
+    }
+  }, [allUsersResponse]);
 
   return (
     <DataContext.Provider
       value={{
-        channels,
-        setChannels,
-        channelUsers,
-        setChannelUsers,
-        messages,
-        setMessages,
-        fetchChannels,
+        allUsers,
+        isAllUsersLoading,
+        refetchAllUsers,
+        channelList,
+        isChannelListLoading,
+        refetchChannelList,
       }}
     >
       {children}

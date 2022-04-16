@@ -15,11 +15,11 @@ function MessageArea({ id, receiver, name = "" }) {
       id
     );
 
-  // useEffect(() => {
-  //   const interval = setInterval(refetchMessages, 2000);
+  useEffect(() => {
+    const interval = setInterval(refetchMessages, 2000);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <ColumnContainer className={styles.messagesContainer}>

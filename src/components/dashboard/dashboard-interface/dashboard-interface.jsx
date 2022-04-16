@@ -1,9 +1,12 @@
+import { useContext } from "react";
+import { AuthContext } from "context/auth-context";
 import styles from "./dashboard-interface.module.css";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 
 function DashboardInterface({ loggedInUser, loggedInId }) {
+  const { setIsAuthenticated } = useContext(AuthContext);
   return (
     <ColumnCenterContainer className={styles.interface}>
       <Header level={1}>Welcome!</Header>
@@ -13,7 +16,11 @@ function DashboardInterface({ loggedInUser, loggedInId }) {
       <Header level={2} className={styles.username}>
         ID: {loggedInId}
       </Header>
-      <Button type="button" className={styles.signOut}>
+      <Button
+        type="button"
+        className={styles.signOut}
+        onClick={() => setIsAuthenticated(false)}
+      >
         Sign out
       </Button>
     </ColumnCenterContainer>
