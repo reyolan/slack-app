@@ -31,13 +31,12 @@ function Channel() {
 
   useEffect(() => {
     if (allUsers && channelResponse) {
-      const channelUsers = allUsers
-        .filter(user =>
+      const channelUsers = allUsers.filter(
+        user =>
           channelResponse.channel_members.some(
             member => member.user_id === user.id
-          )
-        )
-        .filter(user => user.id !== channelResponse.owner_id);
+          ) && user.id !== channelResponse.owner_id
+      );
       setChannelUsers(channelUsers);
     }
   }, [allUsers, channelResponse]);
@@ -45,8 +44,10 @@ function Channel() {
   useEffect(() => {
     if (channelResponse.owner_id === +loggedInId) {
       setIsOwner(true);
+      return;
     }
-  }, [channelResponse, loggedInId]);
+    setIsOwner(false);
+  }, [loggedInId, channelResponse]);
 
   return (
     <>

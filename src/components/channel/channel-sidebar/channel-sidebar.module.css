@@ -3,7 +3,8 @@ body .addMemberBtn {
   padding: 0.5rem;
 }
 
-.userCard:hover {
+.userCard:hover,
+.active {
   background: gray;
   border-radius: 5px;
 }

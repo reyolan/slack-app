@@ -9,7 +9,7 @@ import ColumnContainer from "components/ui/containers/column-container";
 import { getFirstChar } from "utils/helpers";
 import InputField from "components/ui/input-field";
 
-function UserDetailCard({ id, name, className }) {
+function UserDetailCard({ id, name, className, isOwner }) {
   const { loginHeaders } = useContext(AuthContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
@@ -38,13 +38,15 @@ function UserDetailCard({ id, name, className }) {
       <Header level={2}>{name}</Header>
       <Header level={2}>ID: #{id}</Header>
 
-      <InputField
-        placeholder={`Message ${name}`}
-        value={messageInput}
-        onChange={e => setMessageInput(e.target.value)}
-        className={styles.messageInput}
-        onKeyPress={e => handleKeyPress(e, id)}
-      />
+      {isOwner && (
+        <InputField
+          placeholder={`Message ${name}`}
+          value={messageInput}
+          onChange={e => setMessageInput(e.target.value)}
+          className={styles.messageInput}
+          onKeyPress={e => handleKeyPress(e, id)}
+        />
+      )}
     </ColumnContainer>
   );
 }

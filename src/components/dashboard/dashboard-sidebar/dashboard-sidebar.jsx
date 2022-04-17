@@ -38,7 +38,6 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
               <NavLink
                 to={`/channels/me/${user.id}`}
                 onClick={() => handleClick(user.uid)}
-                className={({ isActive }) => (isActive ? styles.gray : "")}
               >
                 <UserCard
                   name={user.uid}

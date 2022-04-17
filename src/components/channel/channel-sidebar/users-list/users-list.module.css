@@ -1,0 +1,5 @@
+.userCard:hover,
+.active {
+  background: gray;
+  border-radius: 5px;
+}

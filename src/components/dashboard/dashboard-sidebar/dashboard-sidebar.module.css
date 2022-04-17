@@ -7,9 +7,8 @@ body .sidebarContainer {
   width: 290px;
 }
 
-.gray {
+.active {
   background-color: gray;
-  color: red;
 }
 
 .transparent {
