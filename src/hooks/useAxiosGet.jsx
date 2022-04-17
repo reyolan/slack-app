@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "services/api";
 
-function useAxiosGet(relativeUrl, config = null, dependency = null) {
+function useAxiosGet(relativeUrl, config = null) {
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -19,8 +19,9 @@ function useAxiosGet(relativeUrl, config = null, dependency = null) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getRequest();
-  }, [dependency]);
+  }, [relativeUrl]);
 
   return [response, error, isLoading, getRequest];
 }

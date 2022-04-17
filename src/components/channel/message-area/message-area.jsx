@@ -7,24 +7,27 @@ import ColumnContainer from "components/ui/containers/column-container";
 import useAxiosGet from "hooks/useAxiosGet";
 import LoadingContainer from "components/ui/containers/loading-container";
 
-function MessageArea({ id, receiver, name = "" }) {
+function MessageArea({ id, receiver, name, isLoading }) {
   const { loginHeaders } = useContext(AuthContext);
   const [messagesResponse, messagesError, isMessagesLoading, refetchMessages] =
     useAxiosGet(
       `messages?receiver_id=${id}&receiver_class=${receiver}`,
-      loginHeaders,
-      id
+      loginHeaders
     );
 
   useEffect(() => {
-    const interval = setInterval(refetchMessages, 2000);
+    const controller = new AbortController();
+    const fetchInterval = setInterval(refetchMessages, 2000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      clearInterval(fetchInterval);
+      controller.abort();
+    };
+  }, [id]);
 
   return (
     <>
-      {!isMessagesLoading ? (
+      {!(isMessagesLoading && isLoading) ? (
         <ColumnContainer className={styles.messagesContainer}>
           <MessageContainer messagesResponse={messagesResponse} />
           <MessageField

@@ -6,14 +6,19 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const debounceSearch = useDebounce(
     search => filterUsers(search),
-    800,
+    1000,
     unFilteredUsers
   );
 
   const filterUsers = search => {
-    if (!search) {
-      setFilteredUsers(unFilteredUsers);
+    if (!search.trim().length) {
+      if (immediateLoading) {
+        setFilteredUsers(unFilteredUsers);
+      }
+
+      return;
     }
+    //lagay naman ng condition dito kapag immediateloading
 
     console.log("search", search);
     setFilteredUsers(
@@ -24,20 +29,20 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   };
 
   useEffect(() => {
-    if (unFilteredUsers && immediateLoading) {
+    if (immediateLoading && unFilteredUsers) {
       setFilteredUsers(unFilteredUsers);
     }
-  }, [unFilteredUsers, immediateLoading]);
-
-  useEffect(() => {
-    if (search) {
-      setFilteredUsers(
-        unFilteredUsers.filter(user =>
-          user.uid.toLowerCase().includes(search.toLowerCase())
-        )
-      );
-    }
   }, [unFilteredUsers]);
+
+  // useEffect(() => {
+  //   if (search) {
+  //     setFilteredUsers(
+  //       unFilteredUsers.filter(user =>
+  //         user.uid.toLowerCase().includes(search.toLowerCase())
+  //       )
+  //     );
+  //   }
+  // }, [unFilteredUsers]);
 
   return {
     search,

@@ -5,3 +5,7 @@
 .link {
   font-size: 2rem;
 }
+
+body .container {
+  background-color: var(--primary-color);
+}

@@ -10,40 +10,47 @@ import AddUserModal from "../add-user-modal";
 import useModal from "hooks/useModal";
 import UserDetailCard from "./user-card/user-detail-card";
 import useFilterUser from "hooks/useFilterUser";
+import LoadingContainer from "components/ui/containers/loading-container";
 
 function ChannelSideBar({
-  channelName = "",
-  isOwner = false,
+  channelName,
+  isOwner,
   channelId,
   ownerId,
-  channelUsers,
-  allUsers = [],
+  channelMembers,
+  allUsers,
   refetchChannelDetails,
+  isLoading,
 }) {
   const { isOpen, toggleModal } = useModal(false);
-  const [clickedId, setClickedId] = useState(0);
+  const [clickedId, setClickedId] = useState(-1);
   const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
+  const [channelOwner, setChannelOwner] = useState({});
   const { search, filteredUsers, debounceSearch, setSearch } = useFilterUser(
-    channelUsers,
+    channelMembers,
     true
   );
 
   const handleClick = id => {
+    console.log(id);
     if (clickedId === id) {
-      setClickedId(0);
+      setClickedId(-1);
       return;
     }
     setClickedId(id);
   };
 
   useEffect(() => {
-    if (allUsers && isOpen) {
-      const usersAbleToAdd = allUsers.filter(
-        user => !channelUsers.find(channelUser => channelUser.id === user.id)
-      );
-      setUsersAbleToAdd(usersAbleToAdd);
-    }
-  }, [allUsers, isOpen, channelUsers]);
+    const usersAbleToAdd = allUsers.filter(
+      user => !channelMembers.find(channelUser => channelUser.id === user.id)
+    );
+    setUsersAbleToAdd(usersAbleToAdd);
+  }, [allUsers, channelMembers]);
+
+  useEffect(() => {
+    const channelOwner = allUsers.find(user => user.id === ownerId);
+    setChannelOwner(channelOwner);
+  }, [channelId]);
 
   return (
     <>
@@ -57,55 +64,55 @@ function ChannelSideBar({
         />
       )}
       <ChannelSidebarContainer>
-        <Header level={2}>{channelName}</Header>
-        {isOwner && (
-          <Button
-            type="button"
-            onClick={toggleModal}
-            className={styles.addMemberBtn}
-          >
-            Add Members
-          </Button>
-        )}
-        <InputField
-          type="text"
-          placeholder="Search members"
-          onChange={e => {
-            setSearch(e.target.value);
-            debounceSearch(e.target.value);
-          }}
-          value={search}
-        />
-        {/* <Header level={2}>Admin</Header>
-        <UserCard name={"example123"} className={styles.userCard} />
-        {clickedId === ownerId && (
-          <div onClick={() => handleClick(0)}>
-            <UserDetailCard
-              email="example123@example.com"
-              className={styles.userDetailCard}
+        {isLoading ? (
+          <>
+            <Header level={2}>{channelName}</Header>
+            {isOwner && (
+              <Button
+                type="button"
+                onClick={toggleModal}
+                className={styles.addMemberBtn}
+              >
+                Add Members
+              </Button>
+            )}
+            <InputField
+              type="text"
+              placeholder="Search members"
+              onChange={e => {
+                setSearch(e.target.value);
+                debounceSearch(e.target.value);
+              }}
+              value={search}
             />
-          </div>
-        )} */}
+            <Header level={2}>Owner</Header>
+            <div onClick={() => handleClick(channelOwner.id)}>
+              <UserCard name={channelOwner.uid} className={styles.userCard} />
 
-        <Header level={2}>Members - {channelUsers.length}</Header>
-        <UnorderedList>
-          {filteredUsers.map(user => {
-            return (
-              <li key={user.id}>
-                <div onClick={() => handleClick(user.id)}>
-                  <UserCard name={user.uid} className={styles.userCard} />
-                </div>
-                {clickedId === user.id && (
-                  <UserDetailCard
-                    name={user.uid}
-                    id={user.id}
-                    className={styles.userDetailCard}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </UnorderedList>
+              {clickedId === channelOwner.id && (
+                <UserDetailCard name={channelOwner.uid} id={channelOwner.id} />
+              )}
+            </div>
+
+            <Header level={2}>Members - {channelMembers.length}</Header>
+            <UnorderedList>
+              {filteredUsers.map(user => {
+                return (
+                  <li key={user.id}>
+                    <div onClick={() => handleClick(user.id)}>
+                      <UserCard name={user.uid} className={styles.userCard} />
+                      {clickedId === user.id && (
+                        <UserDetailCard name={user.uid} id={user.id} />
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </UnorderedList>
+          </>
+        ) : (
+          <LoadingContainer className={styles.loadingContainer} />
+        )}
       </ChannelSidebarContainer>
     </>
   );

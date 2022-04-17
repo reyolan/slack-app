@@ -6,3 +6,17 @@
 body .sidebarContainer {
   width: 290px;
 }
+
+.gray {
+  background-color: gray;
+  color: red;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.sidebarContainer > .username {
+  user-select: all;
+  cursor: pointer;
+}

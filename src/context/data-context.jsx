@@ -18,12 +18,16 @@ function DataProvider({ children }) {
   ] = useAxiosGet("channels", loginHeaders);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const controller = new AbortController();
+    const fetchInterval = setInterval(() => {
       refetchAllUsers();
       refetchChannelList();
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(fetchInterval);
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {

@@ -5,12 +5,11 @@ import { DataContext } from "context/data-context";
 import useAxiosGet from "hooks/useAxiosGet";
 import ChannelSideBar from "components/channel/channel-sidebar";
 import MessageArea from "components/channel/message-area";
-import LoadingContainer from "components/ui/containers/loading-container";
 
 function Channel() {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
   const { allUsers, isAllUsersLoading } = useContext(DataContext);
-  const [usernames, setUsernames] = useState([]);
+  const [channelUsers, setChannelUsers] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const { channelId } = useParams();
   const [
@@ -18,27 +17,28 @@ function Channel() {
     channelError,
     isChannelLoading,
     refetchChannelDetails,
-  ] = useAxiosGet(`channels/${channelId}`, loginHeaders, channelId);
+  ] = useAxiosGet(`channels/${channelId}`, loginHeaders);
 
   useEffect(() => {
-    const fetchInterval = setInterval(() => {
-      refetchChannelDetails();
-      console.log(channelResponse);
-    }, 2000);
+    const controller = new AbortController();
+    const fetchInterval = setInterval(refetchChannelDetails, 1000);
 
     return () => {
       clearInterval(fetchInterval);
+      controller.abort();
     };
-  }, [channelResponse]);
+  }, [channelId]);
 
   useEffect(() => {
     if (allUsers && channelResponse) {
-      const usernames = allUsers.filter(user =>
-        channelResponse.channel_members.some(
-          member => member.user_id === user.id
+      const channelUsers = allUsers
+        .filter(user =>
+          channelResponse.channel_members.some(
+            member => member.user_id === user.id
+          )
         )
-      );
-      setUsernames(usernames);
+        .filter(user => user.id !== channelResponse.owner_id);
+      setChannelUsers(channelUsers);
     }
   }, [allUsers, channelResponse]);
 
@@ -50,27 +50,23 @@ function Channel() {
 
   return (
     <>
-      {!(isAllUsersLoading && isChannelLoading) ? (
-        <>
-          <ChannelSideBar
-            channelName={channelResponse.name}
-            isOwner={isOwner}
-            channelId={channelResponse.id}
-            ownerId={channelResponse.owner_id}
-            channelUsers={usernames}
-            allUsers={allUsers}
-            refetchChannelDetails={refetchChannelDetails}
-          />
+      <ChannelSideBar
+        channelName={channelResponse.name}
+        isOwner={isOwner}
+        channelId={channelResponse.id}
+        ownerId={channelResponse.owner_id}
+        channelMembers={channelUsers}
+        allUsers={allUsers}
+        refetchChannelDetails={refetchChannelDetails}
+        isLoading={!(isAllUsersLoading || isChannelLoading)}
+      />
 
-          <MessageArea
-            id={channelId}
-            receiver="Channel"
-            name={channelResponse.name}
-          />
-        </>
-      ) : (
-        <LoadingContainer />
-      )}
+      <MessageArea
+        id={channelId}
+        receiver="Channel"
+        name={channelResponse.name}
+        isLoading={!(isAllUsersLoading || isChannelLoading)}
+      />
     </>
   );
 }

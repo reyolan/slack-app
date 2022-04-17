@@ -5,17 +5,23 @@ import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-co
 import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
-import LoadingContainer from "components/ui/containers/loading-container";
 import useFilterUser from "hooks/useFilterUser";
-import { getEmailUsername } from "utils/helpers";
 
 function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
   const { search, filteredUsers, debounceSearch, setSearch } =
     useFilterUser(allUsers);
 
+  const handleClick = uid => {
+    setSearch(uid);
+    debounceSearch(uid);
+  };
+
   return (
     <ChannelSidebarContainer className={styles.sidebarContainer}>
-      <Header level={2}>{`${loggedInUser} #${loggedInId} `}</Header>
+      <Header
+        level={2}
+        className={styles.username}
+      >{`${loggedInUser} #${loggedInId} `}</Header>
       <InputField
         type="text"
         value={search}
@@ -29,7 +35,11 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         {filteredUsers.map(user => {
           return (
             <li key={user.id}>
-              <NavLink to={`/channels/me/${user.id}`}>
+              <NavLink
+                to={`/channels/me/${user.id}`}
+                onClick={() => handleClick(user.uid)}
+                className={({ isActive }) => (isActive ? styles.gray : "")}
+              >
                 <UserCard
                   name={user.uid}
                   id={user.id}

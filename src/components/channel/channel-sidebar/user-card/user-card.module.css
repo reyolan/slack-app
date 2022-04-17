@@ -13,4 +13,5 @@ body .userCard {
   font-weight: 500;
   font-size: 1.6rem;
   word-break: break-all;
+  user-select: none;
 }

@@ -1,11 +1,12 @@
 import styles from "./loading-container.module.css";
 import ColumnCenterContainer from "../column-center-container";
-import Header from "components/ui/texts/header";
 import LoadSpinner from "components/ui/load-spinner";
 
-function LoadingContainer({ children }) {
+function LoadingContainer({ children, className }) {
   return (
-    <ColumnCenterContainer className={styles.loadingContainer}>
+    <ColumnCenterContainer
+      className={`${styles.loadingContainer} ${className}`}
+    >
       <LoadSpinner />
       {children}
     </ColumnCenterContainer>

@@ -6,8 +6,8 @@ import styles from "./home.module.css";
 
 function Home() {
   return (
-    <ColumnCenterContainer>
-      <Header level={1}>Slack</Header>
+    <ColumnCenterContainer className={styles.container}>
+      <Header level={1}>Slock</Header>
       <RowContainer className={styles.linkContainer}>
         <Link to="/register" className={styles.link}>
           Register

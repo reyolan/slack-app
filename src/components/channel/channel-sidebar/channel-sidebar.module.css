@@ -7,3 +7,7 @@ body .addMemberBtn {
   background: gray;
   border-radius: 5px;
 }
+
+body .loadingContainer {
+  background: var(--secondary-color);
+}

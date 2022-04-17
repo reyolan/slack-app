@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import debounce from "utils/debounce";
 
-function useDebounce(callbackFn, delay, ...otherDependencies) {
+function useDebounce(callbackFn, delay, dataToSearch) {
   const debouncedFn = useCallback(
     debounce((...args) => callbackFn(...args), delay),
-    [delay, ...otherDependencies]
+    [delay, dataToSearch]
   );
 
   return debouncedFn;

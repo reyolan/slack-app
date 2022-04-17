@@ -43,7 +43,7 @@ function LoginForm() {
           setIsAuthenticated(true);
         } else {
           console.error(res.error);
-          setStatusMessage("Login Failed");
+          setStatusMessage("Invalid email or password");
         }
       });
     }
