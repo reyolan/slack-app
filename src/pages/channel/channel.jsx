@@ -50,7 +50,6 @@ function Channel() {
 
   return (
     <>
-      {/* implement NAND operator here */}
       {!(isAllUsersLoading && isChannelLoading) ? (
         <>
           <ChannelSideBar
@@ -60,7 +59,6 @@ function Channel() {
             ownerId={channelResponse.owner_id}
             channelUsers={usernames}
             allUsers={allUsers}
-            channelDetails={channelResponse}
             refetchChannelDetails={refetchChannelDetails}
           />
 

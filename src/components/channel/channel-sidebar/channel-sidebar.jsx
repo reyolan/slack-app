@@ -18,7 +18,6 @@ function ChannelSideBar({
   ownerId,
   channelUsers,
   allUsers = [],
-  channelDetails,
   refetchChannelDetails,
 }) {
   const { isOpen, toggleModal } = useModal(false);

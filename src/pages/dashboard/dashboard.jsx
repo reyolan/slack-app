@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import DashboardSidebar from "components/dashboard/dashboard-sidebar";
 import MessageArea from "components/channel/message-area";
 import DashboardInterface from "components/dashboard/dashboard-interface";
+import LoadingContainer from "components/ui/containers/loading-container";
 
 function Dashboard() {
   const { loggedInUser, loggedInId } = useContext(AuthContext);
-  const { allUsers } = useContext(DataContext);
+  const { allUsers, isAllUsersLoading } = useContext(DataContext);
   const { userId } = useParams();
   const [filteredUsers, setFilteredUsers] = useState(allUsers);
   const [clickedUser, setClickedUser] = useState("");
@@ -28,18 +29,24 @@ function Dashboard() {
 
   return (
     <>
-      <DashboardSidebar
-        loggedInUser={loggedInUser}
-        loggedInId={loggedInId}
-        allUsers={filteredUsers}
-      />
-      {userId ? (
-        <MessageArea receiver="User" id={userId} name={clickedUser} />
+      {!isAllUsersLoading ? (
+        <>
+          <DashboardSidebar
+            loggedInUser={loggedInUser}
+            loggedInId={loggedInId}
+            allUsers={filteredUsers}
+          />
+          {userId ? (
+            <MessageArea receiver="User" id={userId} name={clickedUser} />
+          ) : (
+            <DashboardInterface
+              loggedInUser={loggedInUser}
+              loggedInId={loggedInId}
+            />
+          )}
+        </>
       ) : (
-        <DashboardInterface
-          loggedInUser={loggedInUser}
-          loggedInId={loggedInId}
-        />
+        <LoadingContainer />
       )}
     </>
   );

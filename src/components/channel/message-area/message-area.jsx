@@ -5,6 +5,7 @@ import MessageContainer from "components/channel/message-area/message-container"
 import MessageField from "./message-field";
 import ColumnContainer from "components/ui/containers/column-container";
 import useAxiosGet from "hooks/useAxiosGet";
+import LoadingContainer from "components/ui/containers/loading-container";
 
 function MessageArea({ id, receiver, name = "" }) {
   const { loginHeaders } = useContext(AuthContext);
@@ -22,15 +23,21 @@ function MessageArea({ id, receiver, name = "" }) {
   }, []);
 
   return (
-    <ColumnContainer className={styles.messagesContainer}>
-      <MessageContainer messagesResponse={messagesResponse} />
-      <MessageField
-        id={id}
-        receiver={receiver}
-        name={name}
-        refetchMessages={refetchMessages}
-      />
-    </ColumnContainer>
+    <>
+      {!isMessagesLoading ? (
+        <ColumnContainer className={styles.messagesContainer}>
+          <MessageContainer messagesResponse={messagesResponse} />
+          <MessageField
+            id={id}
+            receiver={receiver}
+            name={name}
+            refetchMessages={refetchMessages}
+          />
+        </ColumnContainer>
+      ) : (
+        <LoadingContainer />
+      )}
+    </>
   );
 }
 
