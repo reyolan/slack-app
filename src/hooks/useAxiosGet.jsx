@@ -6,6 +6,8 @@ function useAxiosGet(relativeUrl, config = null) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  //make this an async function?
+
   const getRequest = () => {
     API.get(relativeUrl, config)
       .then(res => {

@@ -23,6 +23,7 @@ function UsersList({ filteredUsers, channelOwner, numberOfMembers }) {
         <div onClick={() => handleClick(channelOwner.id)}>
           <UserCard name={channelOwner.uid} className={styles.userCard} />
         </div>
+
         {clickedId === channelOwner.id && (
           <UserDetailCard name={channelOwner.uid} id={channelOwner.id} />
         )}
@@ -39,9 +40,11 @@ function UsersList({ filteredUsers, channelOwner, numberOfMembers }) {
               <div onClick={() => handleClick(user.id)}>
                 <UserCard name={user.uid} className={styles.userCard} />
               </div>
-              {clickedId === user.id && (
-                <UserDetailCard name={user.uid} id={user.id} />
-              )}
+              <div className={styles.userCardDetailContainer}>
+                {clickedId === user.id && (
+                  <UserDetailCard name={user.uid} id={user.id} />
+                )}
+              </div>
             </li>
           );
         })}

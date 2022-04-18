@@ -3,3 +3,7 @@
   background: gray;
   border-radius: 5px;
 }
+
+.userCardDetailContainer {
+  position: relative;
+}

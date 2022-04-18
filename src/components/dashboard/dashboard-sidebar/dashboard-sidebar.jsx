@@ -17,7 +17,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
   };
 
   return (
-    <ChannelSidebarContainer className={styles.sidebarContainer}>
+    <ChannelSidebarContainer>
       <Header
         level={2}
         className={styles.username}

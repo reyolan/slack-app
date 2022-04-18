@@ -9,7 +9,7 @@ import ColumnContainer from "components/ui/containers/column-container";
 import { getFirstChar } from "utils/helpers";
 import InputField from "components/ui/input-field";
 
-function UserDetailCard({ id, name, className }) {
+function UserDetailCard({ id, name, className = "" }) {
   const { loginHeaders, loggedInId } = useContext(AuthContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
@@ -22,13 +22,19 @@ function UserDetailCard({ id, name, className }) {
         { receiver_id: id, receiver_class: "User", body: messageInput },
         loginHeaders
       ).then(res => {
+        console.log(res);
         if (res.response.data.data) {
           navigate(`/channels/me/${id}`);
-          console.log(res);
         }
       });
     }
   };
+
+  useEffect(() => {
+    console.log(window.visualViewport.width);
+    console.log(window.innerWidth);
+    console.log(window.visualViewport.width < window.innerWidth);
+  }, []);
 
   return (
     <ColumnContainer className={`${styles.userDetailCard} ${className}`}>

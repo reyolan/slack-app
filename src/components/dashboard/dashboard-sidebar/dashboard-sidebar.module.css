@@ -3,10 +3,6 @@
   border-radius: 5px;
 }
 
-body .sidebarContainer {
-  width: 290px;
-}
-
 .active {
   background-color: gray;
 }

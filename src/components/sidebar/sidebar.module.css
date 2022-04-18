@@ -1,13 +1,13 @@
 body .container {
   height: 100%;
-  width: 96px;
   background-color: #202225;
   justify-content: flex-start;
-  padding: 1rem 0.5rem;
+  padding: 0.6rem 1rem;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  flex: 1 0 auto;
 }
 
 .container > .channelList {
