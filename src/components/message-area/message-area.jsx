@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "context/auth-context";
 import styles from "./message-area.module.css";
-import MessageContainer from "components/channel/message-area/message-container";
+import MessageContainer from "components/message-area/message-container";
 import MessageField from "./message-field";
 import ColumnContainer from "components/ui/containers/column-container";
 import useAxiosGet from "hooks/useAxiosGet";
@@ -17,7 +17,7 @@ function MessageArea({ id, receiver, name, isLoading }) {
 
   useEffect(() => {
     const controller = new AbortController();
-    const fetchInterval = setInterval(refetchMessages, 2000);
+    const fetchInterval = setInterval(refetchMessages, 1000);
 
     return () => {
       clearInterval(fetchInterval);

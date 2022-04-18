@@ -9,7 +9,7 @@ import CenterContainer from "components/ui/containers/center-container";
 
 function Login() {
   return (
-    <CenterContainer>
+    <CenterContainer className={styles.background}>
       <ColumnCenterContainer>
         <Header level={2} className={styles.title}>
           Welcome back!

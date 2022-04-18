@@ -78,7 +78,6 @@ function ChannelSideBar({
               filteredUsers={filteredUsers}
               channelOwner={channelOwner}
               numberOfMembers={channelMembers.length}
-              isOwner={isOwner}
             />
           </>
         ) : (

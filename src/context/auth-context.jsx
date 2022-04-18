@@ -14,6 +14,17 @@ function AuthProvider({ children }) {
       setLoggedInUser(getEmailUsername(loginHeaders.headers.uid));
   }, [loginHeaders]);
 
+  //if loginHeader changed, set to localStorage? lets see lets see
+  // useEffect(() => {
+  //   if (Object.keys(loginHeaders).length === 0) {
+  //     setLoginHeaders(JSON.parse(localStorage.getItem("token")));
+
+  //     if (loginHeaders) {
+  //       setIsAuthenticated(true);
+  //     }
+  //   }
+  // }, []);
+
   return (
     <AuthContext.Provider
       value={{

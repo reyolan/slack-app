@@ -1,9 +1,9 @@
 import ColumnCenterContainer from "../column-center-container";
 import styles from "./center-container.module.css";
 
-function CenterContainer({ children }) {
+function CenterContainer({ children, className = "" }) {
   return (
-    <ColumnCenterContainer>
+    <ColumnCenterContainer className={className}>
       <ColumnCenterContainer className={styles.container}>
         {children}
       </ColumnCenterContainer>

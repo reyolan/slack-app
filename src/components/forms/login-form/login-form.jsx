@@ -28,7 +28,11 @@ function LoginForm() {
       email &&
       password
     ) {
-      postRequest("auth/sign_in", { email, password }).then(res => {
+      postRequest("auth/sign_in", {
+        email,
+        password,
+      }).then(res => {
+        console.log(res);
         if (res.response) {
           const {
             "access-token": accessToken,

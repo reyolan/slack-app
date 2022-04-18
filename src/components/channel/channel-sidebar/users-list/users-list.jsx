@@ -5,7 +5,7 @@ import UserDetailCard from "../user-detail-card";
 import UnorderedList from "components/ui/unordered-list";
 import Header from "components/ui/texts/header";
 
-function UsersList({ filteredUsers, channelOwner, numberOfMembers, isOwner }) {
+function UsersList({ filteredUsers, channelOwner, numberOfMembers }) {
   const [clickedId, setClickedId] = useState(-1);
 
   const handleClick = id => {
@@ -40,11 +40,7 @@ function UsersList({ filteredUsers, channelOwner, numberOfMembers, isOwner }) {
                 <UserCard name={user.uid} className={styles.userCard} />
               </div>
               {clickedId === user.id && (
-                <UserDetailCard
-                  name={user.uid}
-                  id={user.id}
-                  isOwner={isOwner}
-                />
+                <UserDetailCard name={user.uid} id={user.id} />
               )}
             </li>
           );

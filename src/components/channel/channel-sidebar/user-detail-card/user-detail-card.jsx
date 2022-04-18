@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "context/auth-context";
 import { useNavigate } from "react-router-dom";
 import styles from "./user-detail-card.module.css";
@@ -9,8 +9,8 @@ import ColumnContainer from "components/ui/containers/column-container";
 import { getFirstChar } from "utils/helpers";
 import InputField from "components/ui/input-field";
 
-function UserDetailCard({ id, name, className, isOwner }) {
-  const { loginHeaders } = useContext(AuthContext);
+function UserDetailCard({ id, name, className }) {
+  const { loginHeaders, loggedInId } = useContext(AuthContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
   const { isPosting, postRequest } = useAxiosPost();
@@ -38,7 +38,7 @@ function UserDetailCard({ id, name, className, isOwner }) {
       <Header level={2}>{name}</Header>
       <Header level={2}>ID: #{id}</Header>
 
-      {isOwner && (
+      {id !== loggedInId && (
         <InputField
           placeholder={`Message ${name}`}
           value={messageInput}

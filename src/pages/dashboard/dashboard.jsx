@@ -3,7 +3,7 @@ import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import { useParams } from "react-router-dom";
 import DashboardSidebar from "components/dashboard/dashboard-sidebar";
-import MessageArea from "components/channel/message-area";
+import MessageArea from "components/message-area";
 import DashboardInterface from "components/dashboard/dashboard-interface";
 import LoadingContainer from "components/ui/containers/loading-container";
 

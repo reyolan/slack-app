@@ -4,7 +4,7 @@ import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import useAxiosGet from "hooks/useAxiosGet";
 import ChannelSideBar from "components/channel/channel-sidebar";
-import MessageArea from "components/channel/message-area";
+import MessageArea from "components/message-area";
 
 function Channel() {
   const { loggedInId, loginHeaders } = useContext(AuthContext);
