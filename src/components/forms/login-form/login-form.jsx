@@ -8,6 +8,7 @@ import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
 import Text from "components/ui/texts/text";
 import useAxiosPost from "hooks/useAxiosPost";
+import { storeInLocalStorage } from "utils/helpers";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -44,6 +45,7 @@ function LoginForm() {
             headers: { "access-token": accessToken, client, expiry, uid },
           });
           setLoggedInId(res.response.data.data.id);
+          storeInLocalStorage("id", res.response.data.data.id);
           setIsAuthenticated(true);
         } else {
           console.error(res.error);

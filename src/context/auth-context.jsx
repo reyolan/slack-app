@@ -11,10 +11,11 @@ function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginHeaders, setLoginHeaders] = useState({});
   const [loggedInUser, setLoggedInUser] = useState("");
-  const [loggedInId, setLoggedInId] = useState(0);
+  const [loggedInId, setLoggedInId] = useState(-1);
 
   useEffect(() => {
     if (Object.keys(loginHeaders).length > 0) {
+      console.log(loggedInId);
       const uid = getEmailUsername(loginHeaders.headers.uid);
       setLoggedInUser(uid);
       storeInLocalStorage("token", loginHeaders);
@@ -22,12 +23,6 @@ function AuthProvider({ children }) {
       return;
     }
   }, [loginHeaders]);
-
-  useEffect(() => {
-    if (loggedInId) {
-      storeInLocalStorage("id", loggedInId);
-    }
-  }, [loggedInId]);
 
   useEffect(() => {
     const token = getFromLocalStorage("token");
@@ -41,8 +36,6 @@ function AuthProvider({ children }) {
       setIsAuthenticated(true);
     }
   }, []);
-
-  //create function to check fi there is header, user and id in localStorage? if there is, access private route
 
   return (
     <AuthContext.Provider
