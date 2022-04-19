@@ -26,7 +26,7 @@ function Sidebar() {
                 </NavLink>
               </li>
 
-              {channelList.map((channel, i) => (
+              {channelList?.map((channel, i) => (
                 <li key={i}>
                   <NavLink to={`/channels/${channel.id}`}>
                     <ChannelCard channelName={channel.name} />

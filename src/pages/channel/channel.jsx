@@ -30,7 +30,7 @@ function Channel() {
   // }, [channelId]);
 
   useEffect(() => {
-    if (allUsers && channelResponse) {
+    if (allUsers && Object.keys(channelResponse).length > 0) {
       const channelUsers = allUsers.filter(
         user =>
           channelResponse.channel_members.some(

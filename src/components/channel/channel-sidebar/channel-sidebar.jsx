@@ -52,7 +52,7 @@ function ChannelSideBar({
         />
       )}
       <ChannelSidebarContainer>
-        {isLoading ? (
+        {isLoading && filteredUsers ? (
           <>
             <Header level={2}>{channelName}</Header>
             {isOwner && (

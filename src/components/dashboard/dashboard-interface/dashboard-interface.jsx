@@ -19,7 +19,10 @@ function DashboardInterface({ loggedInUser, loggedInId }) {
       <Button
         type="button"
         className={styles.signOut}
-        onClick={() => setIsAuthenticated(false)}
+        onClick={() => {
+          setIsAuthenticated(false);
+          localStorage.clear();
+        }}
       >
         Sign out <i className="las la-sign-out-alt" />
       </Button>
