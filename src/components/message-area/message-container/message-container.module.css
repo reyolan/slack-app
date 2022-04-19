@@ -28,3 +28,11 @@
   border: 2px solid #282a2d;
   border-radius: 10px;
 }
+
+.messageContainer .welcome {
+  font-size: 3.6rem;
+}
+
+.username {
+  font-weight: 700;
+}

@@ -7,7 +7,7 @@ import ColumnContainer from "components/ui/containers/column-container";
 import useAxiosGet from "hooks/useAxiosGet";
 import LoadingContainer from "components/ui/containers/loading-container";
 
-function MessageArea({ id, receiver, name, isLoading }) {
+function MessageArea({ id, receiver, name, isLoading, isChannel = false }) {
   const { loginHeaders } = useContext(AuthContext);
   const [messagesResponse, messagesError, isMessagesLoading, refetchMessages] =
     useAxiosGet(
@@ -29,7 +29,11 @@ function MessageArea({ id, receiver, name, isLoading }) {
     <>
       {!(isMessagesLoading && isLoading) ? (
         <ColumnContainer className={styles.messagesContainer}>
-          <MessageContainer messagesResponse={messagesResponse} />
+          <MessageContainer
+            messagesResponse={messagesResponse}
+            name={name}
+            isChannel={isChannel}
+          />
           <MessageField
             id={id}
             receiver={receiver}

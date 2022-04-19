@@ -19,15 +19,15 @@ function Channel() {
     refetchChannelDetails,
   ] = useAxiosGet(`channels/${channelId}`, loginHeaders);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchInterval = setInterval(refetchChannelDetails, 1000);
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   const fetchInterval = setInterval(refetchChannelDetails, 1000);
 
-    return () => {
-      clearInterval(fetchInterval);
-      controller.abort();
-    };
-  }, [channelId]);
+  //   return () => {
+  //     clearInterval(fetchInterval);
+  //     controller.abort();
+  //   };
+  // }, [channelId]);
 
   useEffect(() => {
     if (allUsers && channelResponse) {
@@ -67,6 +67,7 @@ function Channel() {
         receiver="Channel"
         name={channelResponse.name}
         isLoading={!(isAllUsersLoading || isChannelLoading)}
+        isChannel={true}
       />
     </>
   );

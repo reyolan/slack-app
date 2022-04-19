@@ -26,7 +26,7 @@ function Dashboard() {
       setClickedUser(allUsers.find(user => user.id === +userId)?.uid);
     }
   }, [userId, allUsers]);
-
+  //ung isasave natin sa local storage is yung ownerId + the ID na mga namessage
   return (
     <>
       {!isAllUsersLoading ? (

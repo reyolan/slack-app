@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { DataContext } from "context/data-context";
+import { NavLink, Link, useParams } from "react-router-dom";
 import InputField from "components/ui/input-field";
 import styles from "./dashboard-sidebar.module.css";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
@@ -10,10 +12,13 @@ import useFilterUser from "hooks/useFilterUser";
 function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
   const { search, filteredUsers, debounceSearch, setSearch } =
     useFilterUser(allUsers);
+  const { directMessages, addDirectMessageUser } = useContext(DataContext);
+  const { userId } = useParams();
 
-  const handleClick = uid => {
-    setSearch(uid);
-    debounceSearch(uid);
+  const handleClick = (uid, id) => {
+    setSearch("");
+    debounceSearch("");
+    addDirectMessageUser(id, uid);
   };
 
   return (
@@ -22,6 +27,25 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         level={2}
         className={styles.username}
       >{`${loggedInUser} #${loggedInId} `}</Header>
+
+      <Header level={2}>Direct Messages</Header>
+      <UnorderedList className={styles.directMessageList}>
+        {directMessages.map(directMessage => (
+          <li
+            key={directMessage.id}
+            className={directMessage.id === +userId ? styles.active : ""}
+          >
+            <Link to={`/channels/me/${directMessage.id}`}>
+              <UserCard
+                name={directMessage.uid}
+                id={directMessage.id}
+                className={styles.userCard}
+              />
+            </Link>
+          </li>
+        ))}
+      </UnorderedList>
+
       <InputField
         type="text"
         value={search}
@@ -37,7 +61,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
             <li key={user.id}>
               <NavLink
                 to={`/channels/me/${user.id}`}
-                onClick={() => handleClick(user.uid)}
+                onClick={() => handleClick(user.uid, user.id)}
               >
                 <UserCard
                   name={user.uid}

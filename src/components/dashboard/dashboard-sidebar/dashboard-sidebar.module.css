@@ -1,17 +1,23 @@
 .userCard:hover {
-  background: gray;
+  background: var(--primary-color);
   border-radius: 5px;
 }
 
 .active {
   background-color: gray;
-}
-
-.transparent {
-  background-color: transparent;
+  border-radius: 5px;
 }
 
 .sidebarContainer > .username {
   user-select: all;
   cursor: pointer;
+}
+
+body .messageUserBtn {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+}
+
+body .directMessageList {
+  max-height: 250px;
 }

@@ -33,7 +33,7 @@ function ChannelSideBar({
       user => !channelMembers.find(channelUser => channelUser.id === user.id)
     );
     setUsersAbleToAdd(usersAbleToAdd);
-  }, [allUsers, channelMembers]);
+  }, [allUsers, channelMembers, isOpen]);
 
   useEffect(() => {
     const channelOwner = allUsers.find(user => user.id === ownerId);

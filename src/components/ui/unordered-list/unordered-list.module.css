@@ -1,7 +1,6 @@
 .list {
   list-style: none;
   overflow: hidden;
-  height: 100%;
 }
 
 .list:hover {

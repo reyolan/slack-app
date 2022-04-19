@@ -23,14 +23,15 @@ function UsersList({ filteredUsers, channelOwner, numberOfMembers }) {
         <div onClick={() => handleClick(channelOwner.id)}>
           <UserCard name={channelOwner.uid} className={styles.userCard} />
         </div>
-
-        {clickedId === channelOwner.id && (
-          <UserDetailCard name={channelOwner.uid} id={channelOwner.id} />
-        )}
+        <div className={styles.userCardDetailContainer}>
+          {clickedId === channelOwner.id && (
+            <UserDetailCard name={channelOwner.uid} id={channelOwner.id} />
+          )}
+        </div>
       </div>
 
       <Header level={2}>Members - {numberOfMembers}</Header>
-      <UnorderedList>
+      <UnorderedList className={styles.memberList}>
         {filteredUsers.map(user => {
           return (
             <li

@@ -7,3 +7,7 @@
 .userCardDetailContainer {
   position: relative;
 }
+
+.memberList {
+  height: 100%;
+}

@@ -14,12 +14,12 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
     if (!search.trim().length) {
       if (immediateLoading) {
         setFilteredUsers(unFilteredUsers);
+      } else {
+        setFilteredUsers([]);
       }
-
       return;
     }
     //lagay naman ng condition dito kapag immediateloading
-
     console.log("search", search);
     setFilteredUsers(
       unFilteredUsers.filter(user =>
@@ -31,11 +31,13 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   useEffect(() => {
     if (immediateLoading && unFilteredUsers) {
       setFilteredUsers(unFilteredUsers);
+      return;
     }
+    //if magchachange ung unfilteredUsers, dapat maupdate yung filteredUsers
   }, [unFilteredUsers]);
 
   // useEffect(() => {
-  //   if (search) {
+  //   if (!search.trim().length) {
   //     setFilteredUsers(
   //       unFilteredUsers.filter(user =>
   //         user.uid.toLowerCase().includes(search.toLowerCase())

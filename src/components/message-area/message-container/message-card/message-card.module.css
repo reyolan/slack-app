@@ -3,6 +3,11 @@
   align-items: center;
 }
 
+.messageCard:hover {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+}
+
 .name {
   color: white;
   margin-right: 8px;

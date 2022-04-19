@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "context/auth-context";
+import { DataContext } from "context/data-context";
 import { useNavigate } from "react-router-dom";
 import styles from "./user-detail-card.module.css";
 import useAxiosPost from "hooks/useAxiosPost";
@@ -11,11 +12,12 @@ import InputField from "components/ui/input-field";
 
 function UserDetailCard({ id, name, className = "" }) {
   const { loginHeaders, loggedInId } = useContext(AuthContext);
+  const { addDirectMessageUser } = useContext(DataContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
   const { isPosting, postRequest } = useAxiosPost();
 
-  const handleKeyPress = (e, id) => {
+  const handleKeyPress = (e, id, uid) => {
     if (e.key === "Enter") {
       postRequest(
         "messages",
@@ -24,17 +26,12 @@ function UserDetailCard({ id, name, className = "" }) {
       ).then(res => {
         console.log(res);
         if (res.response.data.data) {
+          addDirectMessageUser(id, uid);
           navigate(`/channels/me/${id}`);
         }
       });
     }
   };
-
-  useEffect(() => {
-    console.log(window.visualViewport.width);
-    console.log(window.innerWidth);
-    console.log(window.visualViewport.width < window.innerWidth);
-  }, []);
 
   return (
     <ColumnContainer className={`${styles.userDetailCard} ${className}`}>
@@ -50,7 +47,7 @@ function UserDetailCard({ id, name, className = "" }) {
           value={messageInput}
           onChange={e => setMessageInput(e.target.value)}
           className={styles.messageInput}
-          onKeyPress={e => handleKeyPress(e, id)}
+          onKeyPress={e => handleKeyPress(e, id, name)}
         />
       )}
     </ColumnContainer>

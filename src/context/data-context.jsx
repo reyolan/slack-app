@@ -8,6 +8,7 @@ export const DataContext = createContext();
 function DataProvider({ children }) {
   const { loginHeaders } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState([]);
+  const [directMessages, setDirectMessages] = useState([]);
   const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
     useAxiosGet("users", loginHeaders);
   const [
@@ -22,7 +23,7 @@ function DataProvider({ children }) {
     const fetchInterval = setInterval(() => {
       refetchAllUsers();
       refetchChannelList();
-    }, 1000);
+    }, 5000);
 
     return () => {
       clearInterval(fetchInterval);
@@ -41,6 +42,16 @@ function DataProvider({ children }) {
     }
   }, [allUsersResponse]);
 
+  const addDirectMessageUser = (id, uid) => {
+    const message = directMessages.find(
+      directMessage => directMessage.id === id
+    );
+
+    if (!message) {
+      setDirectMessages(prevState => [...prevState, { id, uid }]);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -50,6 +61,8 @@ function DataProvider({ children }) {
         channelList,
         isChannelListLoading,
         refetchChannelList,
+        directMessages,
+        addDirectMessageUser,
       }}
     >
       {children}

@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import styles from "./add-channel-modal.module.css";
@@ -10,9 +11,10 @@ import useAxiosPost from "hooks/useAxiosPost";
 
 function AddChannelModal({ toggleModal }) {
   const { loginHeaders } = useContext(AuthContext);
-  const { refetchChannels } = useContext(DataContext);
+  const { refetchChannelList } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
   const { isPosting, postRequest } = useAxiosPost();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     postRequest(
@@ -25,7 +27,9 @@ function AddChannelModal({ toggleModal }) {
     ).then(res => {
       console.log(res);
       //create error if same channel name has already been taken
-      refetchChannels();
+      toggleModal();
+      refetchChannelList();
+      navigate(`/channels/${res.response.data.data.id}`);
     });
   };
   return (
@@ -40,10 +44,7 @@ function AddChannelModal({ toggleModal }) {
       />
       <Button
         type="button"
-        onClick={() => {
-          handleSubmit();
-          toggleModal();
-        }}
+        onClick={() => handleSubmit()}
         className={styles.addChannelBtn}
       >
         Create channel
