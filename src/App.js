@@ -35,11 +35,7 @@ function App() {
                 <Route
                   key={i}
                   path={route.path}
-                  element={
-                    <>
-                      <PrivateRoute>{route.element}</PrivateRoute>
-                    </>
-                  }
+                  element={<PrivateRoute>{route.element}</PrivateRoute>}
                 />
               ))}
             </Route>

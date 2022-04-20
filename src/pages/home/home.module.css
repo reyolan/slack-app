@@ -9,6 +9,7 @@
 .pageContainer {
   height: 100%;
   background-color: #404eed;
+  overflow: auto;
 }
 
 .appNameContainer {
@@ -16,6 +17,13 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.appNameContainer > img {
+  height: 54px;
+  width: 54px;
 }
 
 .appNameContainer > .name {
@@ -24,20 +32,26 @@
 }
 
 .headline {
-  font-size: 6.6rem;
+  font-size: 6.8rem;
   color: white;
   text-align: center;
+  margin-bottom: 6px;
 }
 
 .text {
-  width: 95ch;
+  max-width: 70ch;
+  font-size: 1.8rem;
   text-align: center;
 }
 
 body .linkContainer {
   gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(100% - 32px);
 }
 
 body .contentContainer {
-  gap: 2rem;
+  gap: 3rem;
+  width: calc(100% - 32px);
 }

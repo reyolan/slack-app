@@ -5,12 +5,13 @@ import Header from "components/ui/texts/header";
 import styles from "./home.module.css";
 import CurvedLink from "components/home/curved-link";
 import Text from "components/ui/texts/text";
+import logo from "assets/images/logo.png";
 
 function Home() {
   return (
-    <ColumnContainer className={styles.pageContainer}>
+    <ColumnCenterContainer className={styles.pageContainer}>
       <RowContainer className={styles.appNameContainer}>
-        <img src="assets/images/logo.png" alt="DiSlack Logo" />
+        <img src={logo} alt="DiSlack Logo" />
         <Header level={1} className={styles.name}>
           DiSlack
         </Header>
@@ -22,7 +23,9 @@ function Home() {
           </Header>
           <Text className={styles.text}>
             ...where you can communicate digitally. A place to communicate
-            without needing to show up face-to-face.
+            without needing to show up face-to-face. A place to connect people
+            to get the information as soon as possible. A place to bring people
+            together and work as a team.
           </Text>
         </ColumnContainer>
         <RowContainer className={styles.linkContainer}>
@@ -39,7 +42,7 @@ function Home() {
           Login
         </Link>
       </RowContainer> */}
-    </ColumnContainer>
+    </ColumnCenterContainer>
   );
 }
 
