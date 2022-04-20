@@ -8,7 +8,7 @@
   border-radius: 5px;
 }
 
-.sidebarContainer > .username {
+body .username {
   user-select: all;
   cursor: pointer;
 }
@@ -19,5 +19,10 @@ body .messageUserBtn {
 }
 
 body .directMessageList {
-  max-height: 250px;
+  min-height: 50px;
+  max-height: 300px;
+}
+
+body .userList {
+  height: 100%;
 }

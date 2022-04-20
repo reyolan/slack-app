@@ -6,6 +6,38 @@
   font-size: 2rem;
 }
 
-body .container {
-  background-color: var(--primary-color);
+.pageContainer {
+  height: 100%;
+  background-color: #404eed;
+}
+
+.appNameContainer {
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.appNameContainer > .name {
+  font-size: 5rem;
+  color: white;
+}
+
+.headline {
+  font-size: 6.6rem;
+  color: white;
+  text-align: center;
+}
+
+.text {
+  width: 95ch;
+  text-align: center;
+}
+
+body .linkContainer {
+  gap: 3rem;
+}
+
+body .contentContainer {
+  gap: 2rem;
 }

@@ -26,7 +26,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
       <Header
         level={2}
         className={styles.username}
-      >{`${loggedInUser} #${loggedInId} `}</Header>
+      >{`${loggedInUser} #${loggedInId}`}</Header>
 
       <Header level={2}>Direct Messages</Header>
       <UnorderedList className={styles.directMessageList}>
@@ -55,7 +55,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
           debounceSearch(e.target.value);
         }}
       />
-      <UnorderedList>
+      <UnorderedList className={styles.userList}>
         {filteredUsers.map(user => {
           return (
             <li key={user.id}>

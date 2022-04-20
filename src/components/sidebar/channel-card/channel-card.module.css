@@ -2,6 +2,7 @@
   position: relative;
 }
 
+.active,
 .channelCardContainer > .icon {
   height: 56px;
   width: 56px;
@@ -13,9 +14,14 @@
 }
 
 .icon:hover {
-  background: gray;
+  background: var(--secondary-color);
   border-radius: 8px;
   transition: all 0.3s;
+}
+
+.active {
+  background: gray;
+  border-radius: 8px;
 }
 
 .channelCardContainer > .arrow {
@@ -34,5 +40,6 @@
   text-align: center;
   opacity: 1;
   transition: opacity 0.3s;
+
   z-index: 1;
 }

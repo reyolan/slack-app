@@ -51,7 +51,7 @@ function convertUTCDatetoLocalDate(date) {
     return `Yesterday at ${getTime(date)}`;
   }
 
-  return new Date(date).toLocaleDateString();
+  return `${new Date(date).toLocaleDateString()} at ${getTime(date)} `;
 }
 
 function storeInLocalStorage(key, value) {

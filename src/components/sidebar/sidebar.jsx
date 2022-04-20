@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { DataContext } from "context/data-context";
+import { useParams } from "react-router-dom";
 import useModal from "hooks/useModal";
 import styles from "./sidebar.module.css";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
@@ -12,6 +13,7 @@ import LoadingContainer from "components/ui/containers/loading-container";
 function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { isChannelListLoading, channelList } = useContext(DataContext);
+  const { channelId } = useParams();
 
   return (
     <>
@@ -22,14 +24,20 @@ function Sidebar() {
             <UnorderedList className={styles.channelList}>
               <li>
                 <NavLink to="/channels/me">
-                  <ChannelCard channelName="Home" />
+                  <ChannelCard
+                    channelName="Home"
+                    isSelected={!channelId ? true : false}
+                  />
                 </NavLink>
               </li>
 
               {channelList?.map((channel, i) => (
                 <li key={i}>
                   <NavLink to={`/channels/${channel.id}`}>
-                    <ChannelCard channelName={channel.name} />
+                    <ChannelCard
+                      channelName={channel.name}
+                      isSelected={+channelId === channel.id ? true : false}
+                    />
                   </NavLink>
                 </li>
               ))}

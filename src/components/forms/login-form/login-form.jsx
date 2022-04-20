@@ -33,7 +33,6 @@ function LoginForm() {
         email,
         password,
       }).then(res => {
-        console.log(res);
         if (res.response) {
           const {
             "access-token": accessToken,
@@ -48,7 +47,6 @@ function LoginForm() {
           storeInLocalStorage("id", res.response.data.data.id);
           setIsAuthenticated(true);
         } else {
-          console.error(res.error);
           setStatusMessage("Invalid email or password");
         }
       });
