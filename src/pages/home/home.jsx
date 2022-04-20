@@ -10,6 +10,7 @@ function Home() {
   return (
     <ColumnContainer className={styles.pageContainer}>
       <RowContainer className={styles.appNameContainer}>
+        <img src="assets/images/logo.png" alt="DiSlack Logo" />
         <Header level={1} className={styles.name}>
           DiSlack
         </Header>
@@ -25,7 +26,7 @@ function Home() {
           </Text>
         </ColumnContainer>
         <RowContainer className={styles.linkContainer}>
-          <CurvedLink to="/register">Register Now</CurvedLink>
+          <CurvedLink to="register">Register Now</CurvedLink>
           <CurvedLink to="login">Login to DiSlack</CurvedLink>
         </RowContainer>
       </ColumnCenterContainer>

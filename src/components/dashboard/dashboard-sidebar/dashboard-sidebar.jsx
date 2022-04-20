@@ -7,7 +7,7 @@ import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-co
 import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
-import useFilterUser from "hooks/useFilterUser";
+import useFilterUser from "hooks/use-filter-user";
 
 function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
   const { search, filteredUsers, debounceSearch, setSearch } =

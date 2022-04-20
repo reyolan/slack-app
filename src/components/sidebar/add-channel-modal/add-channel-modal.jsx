@@ -7,7 +7,7 @@ import Modal from "components/ui/modal";
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 import InputField from "components/ui/input-field";
-import useAxiosPost from "hooks/useAxiosPost";
+import useAxiosPost from "hooks/use-axios-post";
 
 function AddChannelModal({ toggleModal }) {
   const { loginHeaders } = useContext(AuthContext);

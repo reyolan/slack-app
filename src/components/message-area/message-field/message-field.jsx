@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "context/auth-context";
-import useAxiosPost from "hooks/useAxiosPost";
+import useAxiosPost from "hooks/use-axios-post";
 import styles from "./message-field.module.css";
 import RowContainer from "components/ui/containers/row-container";
 import Button from "components/ui/button";

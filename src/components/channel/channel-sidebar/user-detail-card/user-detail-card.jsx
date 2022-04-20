@@ -3,7 +3,7 @@ import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import { useNavigate } from "react-router-dom";
 import styles from "./user-detail-card.module.css";
-import useAxiosPost from "hooks/useAxiosPost";
+import useAxiosPost from "hooks/use-axios-post";
 import LetterAvatar from "components/ui/letter-avatar";
 import Header from "components/ui/texts/header";
 import ColumnContainer from "components/ui/containers/column-container";

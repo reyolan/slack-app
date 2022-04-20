@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
-import useAxiosGet from "hooks/useAxiosGet";
+import useAxiosGet from "hooks/use-axios-get";
 import ChannelSideBar from "components/channel/channel-sidebar";
 import MessageArea from "components/message-area";
 

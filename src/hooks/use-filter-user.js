@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useDebounce from "./useDebounce";
+import useDebounce from "./use-debounce";
 
 function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [search, setSearch] = useState("");

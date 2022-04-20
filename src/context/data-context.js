@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { AuthContext } from "./auth-context";
 import { getEmailUsername } from "utils/helpers";
-import useAxiosGet from "hooks/useAxiosGet";
+import useAxiosGet from "hooks/use-axios-get";
 
 export const DataContext = createContext();
 
@@ -23,7 +23,7 @@ function DataProvider({ children }) {
     const fetchInterval = setInterval(() => {
       refetchAllUsers();
       refetchChannelList();
-    }, 5000);
+    }, 2000);
 
     return () => {
       clearInterval(fetchInterval);

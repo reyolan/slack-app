@@ -5,8 +5,8 @@ import Button from "components/ui/button";
 import Header from "components/ui/texts/header";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
 import AddUserModal from "../add-user-modal";
-import useModal from "hooks/useModal";
-import useFilterUser from "hooks/useFilterUser";
+import useModal from "hooks/use-modal";
+import useFilterUser from "hooks/use-filter-user";
 import LoadingContainer from "components/ui/containers/loading-container";
 import UsersList from "./users-list";
 

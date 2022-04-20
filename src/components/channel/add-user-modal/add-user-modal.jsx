@@ -7,10 +7,10 @@ import UserCard from "../channel-sidebar/user-card";
 import RowContainer from "components/ui/containers/row-container";
 import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
-import useFilterUser from "hooks/useFilterUser";
+import useFilterUser from "hooks/use-filter-user";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
-import useAxiosPost from "hooks/useAxiosPost";
+import useAxiosPost from "hooks/use-axios-post";
 
 function AddUserModal({
   toggleModal,

@@ -4,7 +4,7 @@ import styles from "./message-area.module.css";
 import MessageContainer from "components/message-area/message-container";
 import MessageField from "./message-field";
 import ColumnContainer from "components/ui/containers/column-container";
-import useAxiosGet from "hooks/useAxiosGet";
+import useAxiosGet from "hooks/use-axios-get";
 import LoadingContainer from "components/ui/containers/loading-container";
 
 function MessageArea({ id, receiver, name, isLoading, isChannel = false }) {

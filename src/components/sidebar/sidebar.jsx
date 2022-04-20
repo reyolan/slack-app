@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { DataContext } from "context/data-context";
 import { useParams } from "react-router-dom";
-import useModal from "hooks/useModal";
+import useModal from "hooks/use-modal";
 import styles from "./sidebar.module.css";
 import ColumnCenterContainer from "components/ui/containers/column-center-container";
 import ChannelCard from "components/sidebar/channel-card";

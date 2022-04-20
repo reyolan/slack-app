@@ -4,7 +4,7 @@ import FormContainer from "components/ui/containers/form-container";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
 import { registerValidation } from "utils/form-validate";
-import useAxiosPost from "hooks/useAxiosPost";
+import useAxiosPost from "hooks/use-axios-post";
 import Text from "components/ui/texts/text";
 
 function RegisterForm() {
