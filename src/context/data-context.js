@@ -48,7 +48,7 @@ function DataProvider({ children }) {
     );
 
     if (!message) {
-      setDirectMessages(prevState => [...prevState, { id, uid }]);
+      setDirectMessages(prevState => [{ id, uid }, ...prevState]);
     }
   };
 

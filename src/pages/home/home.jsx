@@ -19,7 +19,7 @@ function Home() {
       <ColumnCenterContainer className={styles.contentContainer}>
         <ColumnContainer>
           <Header level={1} className={styles.headline}>
-            VISUALIZE A WORLD...
+            VISUALIZE A PLACE...
           </Header>
           <Text className={styles.text}>
             ...where you can communicate digitally. A place to communicate

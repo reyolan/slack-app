@@ -9,6 +9,7 @@ import { loginValidation } from "utils/form-validate";
 import Text from "components/ui/texts/text";
 import useAxiosPost from "hooks/use-axios-post";
 import { storeInLocalStorage } from "utils/helpers";
+import ErrorText from "components/ui/texts/error-text";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -33,6 +34,7 @@ function LoginForm() {
         email,
         password,
       }).then(res => {
+        console.log(res);
         if (res.response) {
           const {
             "access-token": accessToken,
@@ -46,9 +48,9 @@ function LoginForm() {
           setLoggedInId(res.response.data.data.id);
           storeInLocalStorage("id", res.response.data.data.id);
           setIsAuthenticated(true);
-        } else {
-          setStatusMessage("Invalid email or password");
+          return;
         }
+        setStatusMessage("Invalid email or password");
       });
     }
   };
@@ -75,7 +77,7 @@ function LoginForm() {
       <Button type="submit" className={styles.loginBtn}>
         Login
       </Button>
-      {statusMessage && <Text>{statusMessage}</Text>}
+      <ErrorText>{statusMessage}</ErrorText>
     </FormContainer>
   );
 }

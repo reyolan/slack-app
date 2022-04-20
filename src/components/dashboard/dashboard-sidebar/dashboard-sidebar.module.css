@@ -19,7 +19,7 @@ body .messageUserBtn {
 }
 
 body .directMessageList {
-  min-height: 45px;
+  min-height: 150px;
   max-height: 300px;
 }
 

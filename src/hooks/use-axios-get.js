@@ -6,8 +6,7 @@ function useAxiosGet(relativeUrl, config = {}) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  //make this an async function?
-  const getRequest = (relativeUrl, config) => {
+  const getRequest = () => {
     API.get(relativeUrl, config)
       .then(res => {
         const {
@@ -21,18 +20,7 @@ function useAxiosGet(relativeUrl, config = {}) {
 
   useEffect(() => {
     setIsLoading(true);
-    const getRequest = (relativeUrl, config) => {
-      API.get(relativeUrl, config)
-        .then(res => {
-          const {
-            data: { data },
-          } = res;
-          setResponse(data);
-        })
-        .catch(err => setError(err))
-        .finally(() => setIsLoading(false));
-    };
-    getRequest(relativeUrl, config);
+    getRequest();
   }, [relativeUrl]);
 
   //add na lang tayo dto ng setInterval para hindi na tayo maguseEffect sa mga components

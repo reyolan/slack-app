@@ -7,12 +7,14 @@ import Modal from "components/ui/modal";
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 import InputField from "components/ui/input-field";
+import ErrorText from "components/ui/texts/error-text";
 import useAxiosPost from "hooks/use-axios-post";
 
 function AddChannelModal({ toggleModal }) {
   const { loginHeaders } = useContext(AuthContext);
   const { refetchChannelList } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
   const { isPosting, postRequest } = useAxiosPost();
   const navigate = useNavigate();
 
@@ -25,11 +27,13 @@ function AddChannelModal({ toggleModal }) {
       },
       loginHeaders
     ).then(res => {
-      console.log(res);
-      //create error if same channel name has already been taken
-      toggleModal();
-      refetchChannelList();
-      navigate(`/channels/${res.response.data.data.id}`);
+      if (res.response.data.data) {
+        toggleModal();
+        refetchChannelList();
+        navigate(`/channels/${res.response.data.data.id}`);
+        return;
+      }
+      setStatusMessage(res.response.data.errors[0]);
     });
   };
   return (
@@ -42,6 +46,7 @@ function AddChannelModal({ toggleModal }) {
         placeholder="Channel Name"
         className={styles.inputChannel}
       />
+      <ErrorText>{statusMessage}</ErrorText>
       <Button
         type="button"
         onClick={() => handleSubmit()}

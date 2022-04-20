@@ -6,6 +6,7 @@ body .addChannelModal {
 
 body .inputChannel {
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .addChannelModal > .addChannelBtn {

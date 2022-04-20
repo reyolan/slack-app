@@ -46,6 +46,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         ))}
       </UnorderedList>
 
+      <Header level={2}>Start conversation</Header>
       <InputField
         type="text"
         value={search}

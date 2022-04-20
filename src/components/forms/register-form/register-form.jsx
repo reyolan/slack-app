@@ -6,6 +6,7 @@ import Button from "components/ui/button";
 import { registerValidation } from "utils/form-validate";
 import useAxiosPost from "hooks/use-axios-post";
 import Text from "components/ui/texts/text";
+import ErrorText from "components/ui/texts/error-text";
 
 function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -31,10 +32,10 @@ function RegisterForm() {
     ) {
       const data = { email, password, password_confirmation: confirmPassword };
       postRequest("auth", data).then(res => {
+        console.log(res);
         if (res.response) {
           setStatusMessage("Registration Success. Proceed to Login page.");
         } else {
-          console.error(res.error);
           setStatusMessage("Registration Failed");
         }
       });
@@ -71,9 +72,7 @@ function RegisterForm() {
       <Button type="submit" className={styles.registerBtn}>
         Register
       </Button>
-      {statusMessage && (
-        <Text className={styles.statusMessage}>{statusMessage}</Text>
-      )}
+      <Text className={styles.statusMessage}>{statusMessage}</Text>
     </FormContainer>
   );
 }
