@@ -72,7 +72,7 @@ function ChannelSideBar({ channelResponse, isLoading }) {
         />
       )}
       <ChannelSidebarContainer className={styles.channelSidebar}>
-        {isLoading && filteredUsers ? (
+        {isLoading ? (
           <>
             <Header level={2}>{channelResponse.name}</Header>
             {isOwner && (

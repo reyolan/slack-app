@@ -6,7 +6,7 @@ import FormContainer from "components/ui/containers/form-container";
 import { useContext } from "react";
 import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
-import useAxiosPost from "hooks/use-axios-post";
+import usePostRequest from "hooks/use-post-request";
 import { storeInLocalStorage } from "utils/helpers";
 
 function LoginForm() {
@@ -15,7 +15,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
-  const { isPosting, postRequest } = useAxiosPost("auth/sign_in");
+  const { isPosting, postRequest } = usePostRequest("auth/sign_in");
 
   const handleSubmit = e => {
     e.preventDefault();

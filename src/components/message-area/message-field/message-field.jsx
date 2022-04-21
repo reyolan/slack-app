@@ -1,12 +1,12 @@
 import { useState } from "react";
-import useAxiosPost from "hooks/use-axios-post";
+import usePostRequest from "hooks/use-post-request";
 import styles from "./message-field.module.css";
 import RowContainer from "components/ui/containers/row-container";
 import Button from "components/ui/button";
 import useMutation from "hooks/use-mutation";
 
 function MessageField({ id, receiver, name = "" }) {
-  const { isPosting, postRequest } = useAxiosPost("messages");
+  const { isPosting, postRequest } = usePostRequest("messages");
   const [messageInput, setMessageInput] = useState("");
   const revalidate = useMutation();
 

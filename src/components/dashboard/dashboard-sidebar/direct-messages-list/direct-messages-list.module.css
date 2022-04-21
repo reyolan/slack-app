@@ -1,0 +1,30 @@
+body .directMessageList {
+  min-height: 150px;
+  max-height: 300px;
+}
+
+.directMessageCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.directMessageCard:hover {
+  background: var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.directMessageCard > i {
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+.directMessageCard > i:hover {
+  color: gray;
+}
+
+.active {
+  background-color: gray;
+  border-radius: 5px;
+}

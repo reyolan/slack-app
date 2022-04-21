@@ -7,12 +7,12 @@ import RowContainer from "components/ui/containers/row-container";
 import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/use-filter-user";
-import useAxiosPost from "hooks/use-axios-post";
+import usePostRequest from "hooks/use-post-request";
 import useMutation from "hooks/use-mutation";
 
 function AddUserModal({ toggleModal, channelResponse, usersAbleToAdd }) {
   const { search, filteredUsers, setSearch } = useFilterUser(usersAbleToAdd);
-  const { isPosting, postRequest } = useAxiosPost("channel/add_member");
+  const { isPosting, postRequest } = usePostRequest("channel/add_member");
   const revalidate = useMutation();
 
   const addUser = member_id => {

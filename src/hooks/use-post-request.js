@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "context/auth-context";
 import API from "services/api";
 
-function useAxiosPost(relativeUrl) {
+function usePostRequest(relativeUrl) {
   const { loginHeaders } = useContext(AuthContext);
   const [isPosting, setIsPosting] = useState(false);
 
@@ -27,4 +27,4 @@ function useAxiosPost(relativeUrl) {
 
   return { isPosting, postRequest };
 }
-export default useAxiosPost;
+export default usePostRequest;

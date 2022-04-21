@@ -7,13 +7,13 @@ import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 import InputField from "components/ui/input-field";
 import ErrorText from "components/ui/texts/error-text";
-import useAxiosPost from "hooks/use-axios-post";
+import usePostRequest from "hooks/use-post-request";
 import useMutation from "hooks/use-mutation";
 
 function AddChannelModal({ toggleModal }) {
   const [channelName, setChannelName] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
-  const { isPosting, postRequest } = useAxiosPost("channels");
+  const { isPosting, postRequest } = usePostRequest("channels");
   const navigate = useNavigate();
   const revalidate = useMutation();
 

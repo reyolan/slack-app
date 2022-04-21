@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
-import { NavLink, Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import InputField from "components/ui/input-field";
 import styles from "./dashboard-sidebar.module.css";
 import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-container";
@@ -9,12 +9,12 @@ import Header from "components/ui/texts/header";
 import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
 import useFilterUser from "hooks/use-filter-user";
+import DirectMessagesList from "./direct-messages-list";
 
 function DashboardSidebar({ allUsers }) {
   const { loggedInId, loggedInUser } = useContext(AuthContext);
   const { search, filteredUsers, setSearch } = useFilterUser(allUsers);
-  const { directMessages, addDirectMessageUser } = useContext(DataContext);
-  const { userId } = useParams();
+  const { addDirectMessageUser } = useContext(DataContext);
 
   const handleClick = (uid, id) => {
     setSearch("");
@@ -28,22 +28,7 @@ function DashboardSidebar({ allUsers }) {
         className={styles.username}
       >{`${loggedInUser} #${loggedInId}`}</Header>
 
-      <Header level={2}>Direct Messages</Header>
-      <UnorderedList className={styles.directMessageList}>
-        {directMessages.map(directMessage => (
-          <li
-            key={directMessage.id}
-            className={`${styles.directMessageCard} ${
-              directMessage.id === +userId ? styles.active : ""
-            }`}
-          >
-            <Link to={`/channels/me/${directMessage.id}`}>
-              <UserCard name={directMessage.uid} id={directMessage.id} />
-            </Link>
-            <div>X</div>
-          </li>
-        ))}
-      </UnorderedList>
+      <DirectMessagesList />
 
       <Header level={2}>Start conversation</Header>
       <InputField
@@ -56,7 +41,7 @@ function DashboardSidebar({ allUsers }) {
         {filteredUsers.map(user => {
           return (
             <li key={user.id}>
-              <NavLink
+              <Link
                 to={`/channels/me/${user.id}`}
                 onClick={() => handleClick(user.uid, user.id)}
               >
@@ -65,7 +50,7 @@ function DashboardSidebar({ allUsers }) {
                   id={user.id}
                   className={styles.userCard}
                 />
-              </NavLink>
+              </Link>
             </li>
           );
         })}

@@ -3,7 +3,7 @@ import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import { useNavigate } from "react-router-dom";
 import styles from "./user-detail-card.module.css";
-import useAxiosPost from "hooks/use-axios-post";
+import usePostRequest from "hooks/use-post-request";
 import LetterAvatar from "components/ui/letter-avatar";
 import Header from "components/ui/texts/header";
 import ColumnContainer from "components/ui/containers/column-container";
@@ -15,7 +15,7 @@ function UserDetailCard({ id, name, className = "" }) {
   const { addDirectMessageUser } = useContext(DataContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
-  const { isPosting, postRequest } = useAxiosPost("messages");
+  const { isPosting, postRequest } = usePostRequest("messages");
 
   const handleKeyPress = (key, id, uid) => {
     if (key === "Enter") {
