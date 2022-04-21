@@ -12,7 +12,7 @@ import UsersList from "./users-list";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 
-function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
+function ChannelSideBar({ channelResponse, isLoading }) {
   const { loggedInId } = useContext(AuthContext);
   const { allUsers } = useContext(DataContext);
   const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
@@ -26,7 +26,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
   );
 
   useEffect(() => {
-    if (Object.keys(channelResponse).length > 0) {
+    if (channelResponse.channel_members.length > 0) {
       const channelUsers = allUsers.filter(
         user =>
           channelResponse.channel_members.some(
@@ -34,8 +34,9 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
           ) && user.id !== channelResponse.owner_id
       );
       setChannelMembers(channelUsers);
+      console.log(channelUsers);
     }
-  }, [channelResponse.channel_members]);
+  }, [channelResponse.channel_members.length]);
 
   useEffect(() => {
     if (isOpen) {
@@ -68,7 +69,6 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
           toggleModal={toggleModal}
           channelResponse={channelResponse}
           usersAbleToAdd={usersAbleToAdd}
-          refetchChannelDetails={refetchChannelDetails}
         />
       )}
       <ChannelSidebarContainer className={styles.channelSidebar}>

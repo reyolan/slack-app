@@ -19,8 +19,8 @@ function AuthProvider({ children }) {
       setLoggedInUser(uid);
       storeInLocalStorage("token", loginHeaders);
       storeInLocalStorage("user", uid);
-      return;
     }
+    console.log(loginHeaders);
   }, [loginHeaders]);
 
   useEffect(() => {

@@ -8,26 +8,27 @@ import Button from "components/ui/button";
 import InputField from "components/ui/input-field";
 import ErrorText from "components/ui/texts/error-text";
 import useAxiosPost from "hooks/use-axios-post";
+import useMutation from "hooks/use-mutation";
 
 function AddChannelModal({ toggleModal }) {
-  const { refetchChannelList } = useContext(DataContext);
   const [channelName, setChannelName] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const { isPosting, postRequest } = useAxiosPost("channels");
   const navigate = useNavigate();
+  const revalidate = useMutation();
 
   const handleSubmit = () => {
     postRequest({
       name: channelName,
       user_ids: [],
     }).then(res => {
-      if (res.response.data.errors.length) {
+      if (res.response.data.errors.length || res.error) {
         setStatusMessage(res.response.data.errors[0]);
         throw new Error(res.response.data.errors[0]);
       }
 
       toggleModal();
-      refetchChannelList();
+      revalidate("channels");
       navigate(`/channels/${res.response.data.data.id}`);
     });
   };

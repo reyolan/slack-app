@@ -1,20 +1,16 @@
 import { createContext, useState, useEffect } from "react";
 import { getEmailUsername } from "utils/helpers";
-import useAxiosGet from "hooks/use-axios-get";
+import useGetRequest from "hooks/use-get-request";
 
 export const DataContext = createContext();
 
 function DataProvider({ children }) {
   const [allUsers, setAllUsers] = useState([]);
   const [directMessages, setDirectMessages] = useState([]);
-  const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
-    useAxiosGet("users", 5000);
-  const [
-    channelList,
-    channelListError,
-    isChannelListLoading,
-    refetchChannelList,
-  ] = useAxiosGet("channels", 3000);
+  const [channelList, isChannelListLoading, channelListError] =
+    useGetRequest("channels");
+  const [allUsersResponse, isAllUsersLoading, allUsersError] =
+    useGetRequest("users");
 
   useEffect(() => {
     if (allUsersResponse) {
@@ -42,10 +38,8 @@ function DataProvider({ children }) {
       value={{
         allUsers,
         isAllUsersLoading,
-        refetchAllUsers,
         channelList,
         isChannelListLoading,
-        refetchChannelList,
         directMessages,
         addDirectMessageUser,
       }}
