@@ -6,7 +6,7 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const debounceSearch = useDebounce(
     search => filterUsers(search),
-    1000,
+    700,
     unFilteredUsers
   );
 
@@ -20,36 +20,45 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
       return;
     }
     //lagay naman ng condition dito kapag immediateloading
-    console.log("search", search);
-    setFilteredUsers(
-      unFilteredUsers.filter(user =>
-        user.uid.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    // console.log("search", search);
+    // setFilteredUsers(
+    //   unFilteredUsers.filter(user =>
+    //     user.uid.toLowerCase().includes(search.toLowerCase())
+    //   )
+    // );
   };
 
   useEffect(() => {
-    if (immediateLoading && unFilteredUsers) {
-      setFilteredUsers(unFilteredUsers);
+    if (search.trim().length) {
+      const filteredUsers = unFilteredUsers.filter(user =>
+        user.uid.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredUsers(filteredUsers);
+      console.log(search);
       return;
     }
+
+    if (immediateLoading && unFilteredUsers) {
+      setFilteredUsers(unFilteredUsers);
+    }
+
     //if magchachange ung unfilteredUsers, dapat maupdate yung filteredUsers
+  }, [unFilteredUsers, immediateLoading]);
+
+  useEffect(() => {
+    if (search.trim().length) {
+      setFilteredUsers(
+        unFilteredUsers.filter(user =>
+          user.uid.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
   }, [unFilteredUsers]);
 
   const searchUsers = searchValue => {
     setSearch(searchValue);
     debounceSearch(searchValue);
   };
-
-  // useEffect(() => {
-  //   if (!search.trim().length) {
-  //     setFilteredUsers(
-  //       unFilteredUsers.filter(user =>
-  //         user.uid.toLowerCase().includes(search.toLowerCase())
-  //       )
-  //     );
-  //   }
-  // }, [unFilteredUsers]);
 
   return {
     search,

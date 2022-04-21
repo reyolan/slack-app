@@ -24,7 +24,7 @@ function Home() {
           <Text className={styles.text}>
             ...where you can communicate digitally. A place to communicate
             without needing to show up face-to-face. A place to connect people
-            to get the information as soon as possible. A place to bring people
+            to get information as soon as possible. A place to bring people
             together and work as a team.
           </Text>
         </ColumnContainer>
@@ -33,15 +33,6 @@ function Home() {
           <CurvedLink to="login">Login to DiSlack</CurvedLink>
         </RowContainer>
       </ColumnCenterContainer>
-      {/* <Header level={1}>Slack</Header>
-      <RowContainer className={styles.linkContainer}>
-        <Link to="/register" className={styles.link}>
-          Register
-        </Link>
-        <Link to="/login" className={styles.link}>
-          Login
-        </Link>
-      </RowContainer> */}
     </ColumnCenterContainer>
   );
 }

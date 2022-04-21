@@ -26,7 +26,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
   );
 
   useEffect(() => {
-    if (allUsers && Object.keys(channelResponse).length > 0) {
+    if (Object.keys(channelResponse).length > 0) {
       const channelUsers = allUsers.filter(
         user =>
           channelResponse.channel_members.some(
@@ -35,14 +35,18 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
       );
       setChannelMembers(channelUsers);
     }
-  }, [allUsers, channelResponse]);
+  }, [channelResponse]);
 
   useEffect(() => {
-    const usersAbleToAdd = allUsers.filter(
-      user => !channelMembers.find(channelUser => channelUser.id === user.id)
-    );
-    setUsersAbleToAdd(usersAbleToAdd);
-  }, [allUsers, channelMembers, isOpen]);
+    if (isOpen) {
+      const usersAbleToAdd = allUsers.filter(
+        user => !channelMembers.find(channelUser => channelUser.id === user.id)
+      );
+      //dapat naguupdate to kapag nagrefetch tayo para matanggal sa modal ung na-add na user
+      setUsersAbleToAdd(usersAbleToAdd);
+      console.log(channelMembers);
+    }
+  }, [isOpen, channelMembers]);
 
   useEffect(() => {
     const channelOwner = allUsers.find(

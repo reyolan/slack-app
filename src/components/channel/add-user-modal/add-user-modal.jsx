@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import styles from "./add-user-modal.module.css";
 import UnorderedList from "components/ui/unordered-list";
 import Header from "components/ui/texts/header";
@@ -8,7 +7,6 @@ import RowContainer from "components/ui/containers/row-container";
 import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/use-filter-user";
-import { DataContext } from "context/data-context";
 import useAxiosPost from "hooks/use-axios-post";
 
 function AddUserModal({
@@ -17,7 +15,6 @@ function AddUserModal({
   usersAbleToAdd,
   refetchChannelDetails,
 }) {
-  const { refetchAllUsers } = useContext(DataContext);
   const { search, filteredUsers, searchUsers } = useFilterUser(usersAbleToAdd);
   const { isPosting, postRequest } = useAxiosPost("channel/add_member");
 
@@ -25,14 +22,11 @@ function AddUserModal({
     postRequest({ id: channelResponse.id, member_id }).then(res => {
       if (res.response.data.data) {
         refetchChannelDetails();
-        // refetchAllUsers();
+        return;
       }
-      //dapat maremove yung nasa mismong list
-      console.log("USER ALREADY ADDED!");
     });
   };
-  // create a modal, then magpapasa nalang tayo ng function
-  //
+
   return (
     <Modal toggleModal={toggleModal}>
       <div className={styles.headerInputContainer}>
