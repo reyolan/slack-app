@@ -8,26 +8,13 @@ function DataProvider({ children }) {
   const [allUsers, setAllUsers] = useState([]);
   const [directMessages, setDirectMessages] = useState([]);
   const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
-    useAxiosGet("users");
+    useAxiosGet("users", 3000);
   const [
     channelList,
     channelListError,
     isChannelListLoading,
     refetchChannelList,
-  ] = useAxiosGet("channels");
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchInterval = setInterval(() => {
-      refetchAllUsers();
-      refetchChannelList();
-    }, 2000);
-
-    return () => {
-      clearInterval(fetchInterval);
-      controller.abort();
-    };
-  }, []);
+  ] = useAxiosGet("channels", 3000);
 
   useEffect(() => {
     if (allUsersResponse) {

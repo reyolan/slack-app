@@ -31,14 +31,12 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         {directMessages.map(directMessage => (
           <li
             key={directMessage.id}
-            className={directMessage.id === +userId ? styles.active : ""}
+            className={`${styles.directMessageCard} ${
+              directMessage.id === +userId ? styles.active : ""
+            }`}
           >
             <Link to={`/channels/me/${directMessage.id}`}>
-              <UserCard
-                name={directMessage.uid}
-                id={directMessage.id}
-                className={styles.userCard}
-              />
+              <UserCard name={directMessage.uid} id={directMessage.id} />
             </Link>
             <div>X</div>
           </li>

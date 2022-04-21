@@ -6,13 +6,12 @@ import { getEmailUsername } from "utils/helpers";
 import Text from "components/ui/texts/text";
 import Header from "components/ui/texts/header";
 
-function MessageContainer({ messagesResponse, name, isChannel }) {
+function MessageContainer({ messagesResponse, name, receiver = "User" }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if (messagesResponse) {
       setMessages(messagesResponse.reverse());
-      //check if there are optional layout to move the message cards at the bottom
     }
   }, [messagesResponse]);
 
@@ -27,7 +26,7 @@ function MessageContainer({ messagesResponse, name, isChannel }) {
         />
       ))}
       <Text>
-        {isChannel ? (
+        {receiver === "Channel" ? (
           `This is the start of the ${name} channel.`
         ) : (
           <>
@@ -37,7 +36,7 @@ function MessageContainer({ messagesResponse, name, isChannel }) {
         )}
       </Text>
       <Header level={1} className={styles.welcome}>
-        {isChannel ? `Welcome to ${name}!` : name}
+        {receiver === "Channel" ? `Welcome to ${name}!` : name}
       </Header>
     </ColumnContainer>
   );

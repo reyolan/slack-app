@@ -13,8 +13,7 @@ import useAxiosPost from "hooks/use-axios-post";
 
 function AddUserModal({
   toggleModal,
-  channelName,
-  channelId,
+  channelResponse,
   usersAbleToAdd,
   refetchChannelDetails,
 }) {
@@ -23,7 +22,7 @@ function AddUserModal({
   const { isPosting, postRequest } = useAxiosPost("channel/add_member");
 
   const addUser = member_id => {
-    postRequest({ id: channelId, member_id }).then(res => {
+    postRequest({ id: channelResponse.id, member_id }).then(res => {
       if (res.response.data.data) {
         refetchChannelDetails();
         // refetchAllUsers();
@@ -37,7 +36,7 @@ function AddUserModal({
   return (
     <Modal toggleModal={toggleModal}>
       <div className={styles.headerInputContainer}>
-        <Header level={2}>Invite users to {channelName}</Header>
+        <Header level={2}>Invite users to {channelResponse.name}</Header>
         <InputField
           type="text"
           placeholder="Search users"

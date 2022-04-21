@@ -1,23 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import useAxiosGet from "hooks/use-axios-get";
 import ChannelSideBar from "components/channel/channel-sidebar";
 import MessageArea from "components/message-area";
 
 function Channel() {
-  const { loggedInId } = useContext(AuthContext);
-  const { allUsers, isAllUsersLoading } = useContext(DataContext);
-  const [channelUsers, setChannelUsers] = useState([]);
-  const [isOwner, setIsOwner] = useState(false);
+  const { isAllUsersLoading } = useContext(DataContext);
   const { channelId } = useParams();
   const [
     channelResponse,
     channelError,
     isChannelLoading,
     refetchChannelDetails,
-  ] = useAxiosGet(`channels/${channelId}`);
+  ] = useAxiosGet(`channels/${channelId}`, 1000, channelId);
 
   // useEffect(() => {
   //   const controller = new AbortController();
@@ -29,35 +25,10 @@ function Channel() {
   //   };
   // }, [channelId]);
 
-  useEffect(() => {
-    if (allUsers && Object.keys(channelResponse).length > 0) {
-      const channelUsers = allUsers.filter(
-        user =>
-          channelResponse.channel_members.some(
-            member => member.user_id === user.id
-          ) && user.id !== channelResponse.owner_id
-      );
-      setChannelUsers(channelUsers);
-    }
-  }, [allUsers, channelResponse]);
-
-  useEffect(() => {
-    if (channelResponse.owner_id === +loggedInId) {
-      setIsOwner(true);
-      return;
-    }
-    setIsOwner(false);
-  }, [loggedInId, channelResponse]);
-
   return (
     <>
       <ChannelSideBar
-        channelName={channelResponse.name}
-        isOwner={isOwner}
-        channelId={channelResponse.id}
-        ownerId={channelResponse.owner_id}
-        channelMembers={channelUsers}
-        allUsers={allUsers}
+        channelResponse={channelResponse}
         refetchChannelDetails={refetchChannelDetails}
         isLoading={!(isAllUsersLoading || isChannelLoading)}
       />
@@ -67,7 +38,6 @@ function Channel() {
         receiver="Channel"
         name={channelResponse.name}
         isLoading={!(isAllUsersLoading || isChannelLoading)}
-        isChannel={true}
       />
     </>
   );

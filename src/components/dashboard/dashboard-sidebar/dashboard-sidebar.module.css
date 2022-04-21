@@ -1,6 +1,7 @@
-.userCard:hover {
+.directMessageCard:hover {
   background: var(--primary-color);
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .active {

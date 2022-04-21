@@ -17,8 +17,8 @@ function UserDetailCard({ id, name, className = "" }) {
   const [messageInput, setMessageInput] = useState("");
   const { isPosting, postRequest } = useAxiosPost("messages");
 
-  const handleKeyPress = (e, id, uid) => {
-    if (e.key === "Enter") {
+  const handleKeyPress = (key, id, uid) => {
+    if (key === "Enter") {
       postRequest({
         receiver_id: id,
         receiver_class: "User",
@@ -47,7 +47,7 @@ function UserDetailCard({ id, name, className = "" }) {
           value={messageInput}
           onChange={e => setMessageInput(e.target.value)}
           className={styles.messageInput}
-          onKeyPress={e => handleKeyPress(e, id, name)}
+          onKeyPress={e => handleKeyPress(e.key, id, name)}
         />
       )}
     </ColumnContainer>
