@@ -10,12 +10,12 @@ import UserCard from "components/channel/channel-sidebar/user-card";
 import useFilterUser from "hooks/use-filter-user";
 
 function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
-  const { search, filteredUsers, searchUsers } = useFilterUser(allUsers);
+  const { search, filteredUsers, setSearch } = useFilterUser(allUsers);
   const { directMessages, addDirectMessageUser } = useContext(DataContext);
   const { userId } = useParams();
 
   const handleClick = (uid, id) => {
-    searchUsers("");
+    setSearch("");
     addDirectMessageUser(id, uid);
   };
 
@@ -48,7 +48,7 @@ function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
         type="text"
         value={search}
         placeholder="Message a user"
-        onChange={e => searchUsers(e.target.value)}
+        onChange={e => setSearch(e.target.value)}
       />
       <UnorderedList className={styles.userList}>
         {filteredUsers.map(user => {

@@ -2,7 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "context/auth-context";
 import API from "services/api";
 
-function useAxiosGet(relativeUrl, refetchInterval, refetchDependency = null) {
+function useAxiosGet(
+  relativeUrl,
+  refetchTimeInterval,
+  refetchDependency = null
+) {
   const { loginHeaders } = useContext(AuthContext);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +31,7 @@ function useAxiosGet(relativeUrl, refetchInterval, refetchDependency = null) {
 
   useEffect(() => {
     const controller = new AbortController();
-    const fetchInterval = setInterval(getRequest, refetchInterval);
+    const fetchInterval = setInterval(getRequest, refetchTimeInterval);
 
     return () => {
       clearInterval(fetchInterval);

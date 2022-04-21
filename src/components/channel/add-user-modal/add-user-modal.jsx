@@ -15,7 +15,7 @@ function AddUserModal({
   usersAbleToAdd,
   refetchChannelDetails,
 }) {
-  const { search, filteredUsers, searchUsers } = useFilterUser(usersAbleToAdd);
+  const { search, filteredUsers, setSearch } = useFilterUser(usersAbleToAdd);
   const { isPosting, postRequest } = useAxiosPost("channel/add_member");
 
   const addUser = member_id => {
@@ -34,7 +34,7 @@ function AddUserModal({
         <InputField
           type="text"
           placeholder="Search users"
-          onChange={e => searchUsers(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
           value={search}
           className={styles.inputContainer}
         />

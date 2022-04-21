@@ -20,7 +20,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
   const [channelMembers, setChannelMembers] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const { isOpen, toggleModal } = useModal(false);
-  const { search, filteredUsers, searchUsers } = useFilterUser(
+  const { search, filteredUsers, setSearch } = useFilterUser(
     channelMembers,
     true
   );
@@ -89,7 +89,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
             <InputField
               type="text"
               placeholder="Search members"
-              onChange={e => searchUsers(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
               value={search}
             />
 
