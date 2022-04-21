@@ -8,7 +8,6 @@ import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
 import useAxiosPost from "hooks/use-axios-post";
 import { storeInLocalStorage } from "utils/helpers";
-import ErrorText from "components/ui/texts/error-text";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -16,7 +15,6 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
-  const [statusMessage, setStatusMessage] = useState("");
   const { isPosting, postRequest } = useAxiosPost("auth/sign_in");
 
   const handleSubmit = e => {
@@ -33,23 +31,26 @@ function LoginForm() {
         email,
         password,
       }).then(res => {
-        console.log(res);
-        if (res.response) {
-          const {
-            "access-token": accessToken,
-            client,
-            expiry,
-            uid,
-          } = res.response.headers;
-          setLoginHeaders({
-            headers: { "access-token": accessToken, client, expiry, uid },
+        if (res.error) {
+          setErrors({
+            email: "- Invalid Email or Password",
+            password: "- Invalid Email or Password",
           });
-          setLoggedInId(res.response.data.data.id);
-          storeInLocalStorage("id", res.response.data.data.id);
-          setIsAuthenticated(true);
-          return;
+          throw new Error(res.error);
         }
-        setStatusMessage("Invalid email or password");
+
+        const {
+          "access-token": accessToken,
+          client,
+          expiry,
+          uid,
+        } = res.response.headers;
+        setLoginHeaders({
+          headers: { "access-token": accessToken, client, expiry, uid },
+        });
+        setLoggedInId(res.response.data.data.id);
+        storeInLocalStorage("id", res.response.data.data.id);
+        setIsAuthenticated(true);
       });
     }
   };
@@ -76,7 +77,6 @@ function LoginForm() {
       <Button type="submit" className={styles.loginBtn}>
         Login
       </Button>
-      <ErrorText>{statusMessage}</ErrorText>
     </FormContainer>
   );
 }

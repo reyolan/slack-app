@@ -20,7 +20,10 @@ function useAxiosGet(
         } = res;
         setResponse(data);
       })
-      .catch(err => setError(err))
+      .catch(err => {
+        setError(err);
+        throw new Error(err);
+      })
       .finally(() => setIsLoading(false));
   };
 

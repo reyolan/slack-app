@@ -1,8 +1,7 @@
 import styles from "./error-text.module.css";
-import Text from "../text";
 
-function ErrorText({ children }) {
-  return <Text className={styles.text}>{children}</Text>;
+function ErrorText({ children, className = "" }) {
+  return <span className={`${styles.text} ${className}`}>{children}</span>;
 }
 
 export default ErrorText;

@@ -21,13 +21,14 @@ function AddChannelModal({ toggleModal }) {
       name: channelName,
       user_ids: [],
     }).then(res => {
-      if (res.response.data.data) {
-        toggleModal();
-        refetchChannelList();
-        navigate(`/channels/${res.response.data.data.id}`);
-        return;
+      if (res.response.data.errors.length) {
+        setStatusMessage(res.response.data.errors[0]);
+        throw new Error(res.response.data.errors[0]);
       }
-      setStatusMessage(res.response.data.errors[0]);
+
+      toggleModal();
+      refetchChannelList();
+      navigate(`/channels/${res.response.data.data.id}`);
     });
   };
   return (

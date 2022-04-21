@@ -5,6 +5,12 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
+    if (!immediateLoading && !search.trim().length) {
+      setFilteredUsers([]);
+    }
+
+    console.log(search);
+
     if (search.trim().length) {
       const filteredUsers = unFilteredUsers.filter(user =>
         user.uid.toLowerCase().includes(search.toLowerCase())
@@ -16,7 +22,9 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
     if (immediateLoading && unFilteredUsers) {
       setFilteredUsers(unFilteredUsers);
     }
-  }, [unFilteredUsers, immediateLoading]);
+
+    //double check pa natin ung dependency na unfilteredusers
+  }, [immediateLoading, search, unFilteredUsers]);
 
   return {
     search,
@@ -26,3 +34,7 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
 }
 
 export default useFilterUser;
+
+//kapag kinlick yung hamburger icon,
+//i transform translateX natin to the left then after that transition, display: none;
+//so dapat magbabago className nun

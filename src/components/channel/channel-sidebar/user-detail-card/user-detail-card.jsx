@@ -24,7 +24,6 @@ function UserDetailCard({ id, name, className = "" }) {
         receiver_class: "User",
         body: messageInput,
       }).then(res => {
-        console.log(res);
         if (res.response.data.data) {
           addDirectMessageUser(id, uid);
           navigate(`/channels/me/${id}`);

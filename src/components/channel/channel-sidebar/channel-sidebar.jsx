@@ -35,16 +35,14 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
       );
       setChannelMembers(channelUsers);
     }
-  }, [channelResponse]);
+  }, [channelResponse.channel_members]);
 
   useEffect(() => {
     if (isOpen) {
       const usersAbleToAdd = allUsers.filter(
         user => !channelMembers.find(channelUser => channelUser.id === user.id)
       );
-      //dapat naguupdate to kapag nagrefetch tayo para matanggal sa modal ung na-add na user
       setUsersAbleToAdd(usersAbleToAdd);
-      console.log(channelMembers);
     }
   }, [isOpen, channelMembers]);
 
@@ -53,7 +51,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
       user => user.id === channelResponse.owner_id
     );
     setChannelOwner(channelOwner);
-  }, [channelResponse.id]);
+  }, [channelResponse.owner_id]);
 
   useEffect(() => {
     if (channelResponse.owner_id === +loggedInId) {
@@ -61,7 +59,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
       return;
     }
     setIsOwner(false);
-  }, [loggedInId, channelResponse]);
+  }, [loggedInId, channelResponse.owner_id]);
 
   return (
     <>
@@ -73,7 +71,7 @@ function ChannelSideBar({ channelResponse, refetchChannelDetails, isLoading }) {
           refetchChannelDetails={refetchChannelDetails}
         />
       )}
-      <ChannelSidebarContainer>
+      <ChannelSidebarContainer className={styles.channelSidebar}>
         {isLoading && filteredUsers ? (
           <>
             <Header level={2}>{channelResponse.name}</Header>

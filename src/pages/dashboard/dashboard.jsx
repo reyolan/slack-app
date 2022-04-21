@@ -32,18 +32,11 @@ function Dashboard() {
     <>
       {!isAllUsersLoading ? (
         <>
-          <DashboardSidebar
-            loggedInUser={loggedInUser}
-            loggedInId={loggedInId}
-            allUsers={filteredUsers}
-          />
+          <DashboardSidebar allUsers={filteredUsers} />
           {userId ? (
             <MessageArea receiver="User" id={userId} name={clickedUser} />
           ) : (
-            <DashboardInterface
-              loggedInUser={loggedInUser}
-              loggedInId={loggedInId}
-            />
+            <DashboardInterface />
           )}
         </>
       ) : (

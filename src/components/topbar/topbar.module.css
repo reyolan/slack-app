@@ -1,0 +1,34 @@
+.topbar {
+  display: none;
+}
+
+.topbar > h1 {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.topbar > i {
+  color: var(--primary-font-color);
+}
+
+.topbar > i:active {
+  background-color: gray;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 480px) {
+  .topbar {
+    position: absolute;
+    display: flex;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    height: 48px;
+    color: white;
+    padding: 0.2rem 1rem;
+    font-size: 2.4rem;
+    border-bottom: solid var(--secondary-color) 1px;
+  }
+}

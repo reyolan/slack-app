@@ -5,8 +5,9 @@ import ColumnCenterContainer from "components/ui/containers/column-center-contai
 import Header from "components/ui/texts/header";
 import Button from "components/ui/button";
 
-function DashboardInterface({ loggedInUser, loggedInId }) {
-  const { setIsAuthenticated } = useContext(AuthContext);
+function DashboardInterface() {
+  const { setIsAuthenticated, loggedInUser, loggedInId } =
+    useContext(AuthContext);
   return (
     <ColumnCenterContainer className={styles.interface}>
       <Header level={1}>Welcome!</Header>

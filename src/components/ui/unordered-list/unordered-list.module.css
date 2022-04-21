@@ -1,10 +1,6 @@
 .list {
   list-style: none;
-  overflow: hidden;
-}
-
-.list:hover {
-  overflow-y: overlay;
+  overflow-y: auto;
 }
 
 .list::-webkit-scrollbar {

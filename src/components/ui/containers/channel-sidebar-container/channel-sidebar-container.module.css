@@ -9,3 +9,15 @@
   border-bottom: solid black 1px;
   padding: 0.4rem;
 }
+
+@media only screen and (max-width: 480px) {
+  .channelSidebar {
+    position: absolute;
+    right: 100%;
+    margin-top: 48px;
+  }
+
+  .channelSidebarClicked {
+    right: 0;
+  }
+}

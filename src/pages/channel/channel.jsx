@@ -15,16 +15,6 @@ function Channel() {
     refetchChannelDetails,
   ] = useAxiosGet(`channels/${channelId}`, 1000, channelId);
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const fetchInterval = setInterval(refetchChannelDetails, 1000);
-
-  //   return () => {
-  //     clearInterval(fetchInterval);
-  //     controller.abort();
-  //   };
-  // }, [channelId]);
-
   return (
     <>
       <ChannelSideBar

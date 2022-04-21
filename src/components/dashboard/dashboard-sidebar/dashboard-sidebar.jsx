@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import { NavLink, Link, useParams } from "react-router-dom";
 import InputField from "components/ui/input-field";
@@ -9,7 +10,8 @@ import UnorderedList from "components/ui/unordered-list";
 import UserCard from "components/channel/channel-sidebar/user-card";
 import useFilterUser from "hooks/use-filter-user";
 
-function DashboardSidebar({ loggedInUser, loggedInId, allUsers }) {
+function DashboardSidebar({ allUsers }) {
+  const { loggedInId, loggedInUser } = useContext(AuthContext);
   const { search, filteredUsers, setSearch } = useFilterUser(allUsers);
   const { directMessages, addDirectMessageUser } = useContext(DataContext);
   const { userId } = useParams();

@@ -8,7 +8,7 @@ function DataProvider({ children }) {
   const [allUsers, setAllUsers] = useState([]);
   const [directMessages, setDirectMessages] = useState([]);
   const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
-    useAxiosGet("users", 3000);
+    useAxiosGet("users", 5000);
   const [
     channelList,
     channelListError,
