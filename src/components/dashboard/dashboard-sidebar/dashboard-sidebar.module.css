@@ -26,3 +26,9 @@ body .directMessageList {
 body .userList {
   height: 100%;
 }
+
+.directMessageList > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

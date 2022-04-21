@@ -1,22 +1,20 @@
-import { createContext, useState, useContext, useEffect } from "react";
-import { AuthContext } from "./auth-context";
+import { createContext, useState, useEffect } from "react";
 import { getEmailUsername } from "utils/helpers";
 import useAxiosGet from "hooks/use-axios-get";
 
 export const DataContext = createContext();
 
 function DataProvider({ children }) {
-  const { loginHeaders } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState([]);
   const [directMessages, setDirectMessages] = useState([]);
   const [allUsersResponse, allUsersError, isAllUsersLoading, refetchAllUsers] =
-    useAxiosGet("users", loginHeaders);
+    useAxiosGet("users");
   const [
     channelList,
     channelListError,
     isChannelListLoading,
     refetchChannelList,
-  ] = useAxiosGet("channels", loginHeaders);
+  ] = useAxiosGet("channels");
 
   useEffect(() => {
     const controller = new AbortController();

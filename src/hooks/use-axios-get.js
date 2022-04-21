@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "context/auth-context";
 import API from "services/api";
 
-function useAxiosGet(relativeUrl, config = {}) {
+function useAxiosGet(
+  relativeUrl,
+  refetchDependency = null,
+  refetchInterval = null
+) {
+  const { loginHeaders } = useContext(AuthContext);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const getRequest = () => {
-    API.get(relativeUrl, config)
+    API.get(relativeUrl, loginHeaders)
       .then(res => {
         const {
           data: { data },

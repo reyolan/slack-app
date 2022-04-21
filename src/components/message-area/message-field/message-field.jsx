@@ -1,25 +1,19 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "context/auth-context";
+import { useState } from "react";
 import useAxiosPost from "hooks/use-axios-post";
 import styles from "./message-field.module.css";
 import RowContainer from "components/ui/containers/row-container";
 import Button from "components/ui/button";
 
 function MessageField({ id, receiver, name = "", refetchMessages }) {
-  const { loginHeaders } = useContext(AuthContext);
-  const { isPosting, postRequest } = useAxiosPost();
+  const { isPosting, postRequest } = useAxiosPost("messages");
   const [messageInput, setMessageInput] = useState("");
 
   const handleSendMessage = () => {
-    postRequest(
-      "messages",
-      {
-        receiver_id: id,
-        receiver_class: receiver,
-        body: messageInput,
-      },
-      loginHeaders
-    ).then(res => {
+    postRequest({
+      receiver_id: id,
+      receiver_class: receiver,
+      body: messageInput,
+    }).then(res => {
       if (res.response.data.data) {
         refetchMessages();
       }

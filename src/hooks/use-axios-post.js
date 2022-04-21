@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "context/auth-context";
 import API from "services/api";
 
-function useAxiosPost() {
+function useAxiosPost(relativeUrl) {
+  const { loginHeaders } = useContext(AuthContext);
   const [isPosting, setIsPosting] = useState(false);
 
-  async function postRequest(relativeUrl, data, config = null) {
+  async function postRequest(data, config = loginHeaders) {
+    if (Object.keys(config).length === 0) {
+      config = {};
+    }
+
     const resolved = { response: null, error: null };
     try {
       setIsPosting(true);

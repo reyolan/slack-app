@@ -36,6 +36,11 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
     //if magchachange ung unfilteredUsers, dapat maupdate yung filteredUsers
   }, [unFilteredUsers]);
 
+  const searchUsers = searchValue => {
+    setSearch(searchValue);
+    debounceSearch(searchValue);
+  };
+
   // useEffect(() => {
   //   if (!search.trim().length) {
   //     setFilteredUsers(
@@ -49,8 +54,7 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
   return {
     search,
     filteredUsers,
-    debounceSearch,
-    setSearch,
+    searchUsers,
   };
 }
 

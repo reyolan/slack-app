@@ -11,19 +11,19 @@ import { getFirstChar } from "utils/helpers";
 import InputField from "components/ui/input-field";
 
 function UserDetailCard({ id, name, className = "" }) {
-  const { loginHeaders, loggedInId } = useContext(AuthContext);
+  const { loggedInId } = useContext(AuthContext);
   const { addDirectMessageUser } = useContext(DataContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
-  const { isPosting, postRequest } = useAxiosPost();
+  const { isPosting, postRequest } = useAxiosPost("messages");
 
   const handleKeyPress = (e, id, uid) => {
     if (e.key === "Enter") {
-      postRequest(
-        "messages",
-        { receiver_id: id, receiver_class: "User", body: messageInput },
-        loginHeaders
-      ).then(res => {
+      postRequest({
+        receiver_id: id,
+        receiver_class: "User",
+        body: messageInput,
+      }).then(res => {
         console.log(res);
         if (res.response.data.data) {
           addDirectMessageUser(id, uid);

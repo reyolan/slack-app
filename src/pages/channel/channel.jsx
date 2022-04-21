@@ -7,7 +7,7 @@ import ChannelSideBar from "components/channel/channel-sidebar";
 import MessageArea from "components/message-area";
 
 function Channel() {
-  const { loggedInId, loginHeaders } = useContext(AuthContext);
+  const { loggedInId } = useContext(AuthContext);
   const { allUsers, isAllUsersLoading } = useContext(DataContext);
   const [channelUsers, setChannelUsers] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
@@ -17,7 +17,7 @@ function Channel() {
     channelError,
     isChannelLoading,
     refetchChannelDetails,
-  ] = useAxiosGet(`channels/${channelId}`, loginHeaders);
+  ] = useAxiosGet(`channels/${channelId}`);
 
   // useEffect(() => {
   //   const controller = new AbortController();

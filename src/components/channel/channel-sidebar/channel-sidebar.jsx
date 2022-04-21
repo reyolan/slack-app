@@ -23,7 +23,7 @@ function ChannelSideBar({
   const { isOpen, toggleModal } = useModal(false);
   const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
   const [channelOwner, setChannelOwner] = useState({});
-  const { search, filteredUsers, debounceSearch, setSearch } = useFilterUser(
+  const { search, filteredUsers, searchUsers } = useFilterUser(
     channelMembers,
     true
   );
@@ -67,10 +67,7 @@ function ChannelSideBar({
             <InputField
               type="text"
               placeholder="Search members"
-              onChange={e => {
-                setSearch(e.target.value);
-                debounceSearch(e.target.value);
-              }}
+              onChange={e => searchUsers(e.target.value)}
               value={search}
             />
 

@@ -8,7 +8,6 @@ import RowContainer from "components/ui/containers/row-container";
 import Modal from "components/ui/modal";
 import InputField from "components/ui/input-field";
 import useFilterUser from "hooks/use-filter-user";
-import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import useAxiosPost from "hooks/use-axios-post";
 
@@ -19,18 +18,12 @@ function AddUserModal({
   usersAbleToAdd,
   refetchChannelDetails,
 }) {
-  const { loginHeaders } = useContext(AuthContext);
   const { refetchAllUsers } = useContext(DataContext);
-  const { search, filteredUsers, debounceSearch, setSearch } =
-    useFilterUser(usersAbleToAdd);
-  const { isPosting, postRequest } = useAxiosPost();
+  const { search, filteredUsers, searchUsers } = useFilterUser(usersAbleToAdd);
+  const { isPosting, postRequest } = useAxiosPost("channel/add_member");
 
   const addUser = member_id => {
-    postRequest(
-      "channel/add_member",
-      { id: channelId, member_id },
-      loginHeaders
-    ).then(res => {
+    postRequest({ id: channelId, member_id }).then(res => {
       if (res.response.data.data) {
         refetchChannelDetails();
         // refetchAllUsers();
@@ -48,10 +41,7 @@ function AddUserModal({
         <InputField
           type="text"
           placeholder="Search users"
-          onChange={e => {
-            setSearch(e.target.value);
-            debounceSearch(e.target.value);
-          }}
+          onChange={e => searchUsers(e.target.value)}
           value={search}
           className={styles.inputContainer}
         />

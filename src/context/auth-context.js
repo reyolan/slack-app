@@ -15,7 +15,6 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     if (Object.keys(loginHeaders).length > 0) {
-      console.log(loggedInId);
       const uid = getEmailUsername(loginHeaders.headers.uid);
       setLoggedInUser(uid);
       storeInLocalStorage("token", loginHeaders);

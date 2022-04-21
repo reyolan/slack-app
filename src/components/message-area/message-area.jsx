@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react";
-import { AuthContext } from "context/auth-context";
+import { useEffect } from "react";
 import styles from "./message-area.module.css";
 import MessageContainer from "components/message-area/message-container";
 import MessageField from "./message-field";
@@ -8,12 +7,8 @@ import useAxiosGet from "hooks/use-axios-get";
 import LoadingContainer from "components/ui/containers/loading-container";
 
 function MessageArea({ id, receiver, name, isLoading, isChannel = false }) {
-  const { loginHeaders } = useContext(AuthContext);
   const [messagesResponse, messagesError, isMessagesLoading, refetchMessages] =
-    useAxiosGet(
-      `messages?receiver_id=${id}&receiver_class=${receiver}`,
-      loginHeaders
-    );
+    useAxiosGet(`messages?receiver_id=${id}&receiver_class=${receiver}`);
 
   useEffect(() => {
     const controller = new AbortController();

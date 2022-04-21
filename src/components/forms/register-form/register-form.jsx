@@ -18,7 +18,7 @@ function RegisterForm() {
     confirmPassword: null,
   });
   const [statusMessage, setStatusMessage] = useState("");
-  const { isPosting, postRequest } = useAxiosPost();
+  const { isPosting, postRequest } = useAxiosPost("auth");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function RegisterForm() {
       confirmPassword
     ) {
       const data = { email, password, password_confirmation: confirmPassword };
-      postRequest("auth", data).then(res => {
+      postRequest(data).then(res => {
         console.log(res);
         if (res.response) {
           setStatusMessage("Registration Success. Proceed to Login page.");
