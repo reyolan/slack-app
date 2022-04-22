@@ -6,7 +6,7 @@ import LoadingContainer from "components/ui/containers/loading-container";
 import useGetRequest from "hooks/use-get-request";
 
 function MessageArea({ id, receiver, name, isLoading }) {
-  const [messagesResponse, messagesError, isMessagesLoading] = useGetRequest(
+  const [messagesResponse, isMessagesLoading, messagesError] = useGetRequest(
     `messages?receiver_id=${id}&receiver_class=${receiver}`
   );
 

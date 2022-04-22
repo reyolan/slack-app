@@ -16,21 +16,19 @@ function Channel() {
   return (
     <>
       {!isChannelLoading ? (
-        <>
-          <ChannelSideBar
-            channelResponse={channelResponse}
-            isLoading={!(isAllUsersLoading || isChannelLoading)}
-          />
-          <MessageArea
-            id={channelId}
-            receiver="Channel"
-            name={channelResponse?.name}
-            isLoading={!(isAllUsersLoading || isChannelLoading)}
-          />
-        </>
+        <ChannelSideBar
+          channelResponse={channelResponse}
+          isLoading={!(isAllUsersLoading || isChannelLoading)}
+        />
       ) : (
         <LoadingContainer />
       )}
+      <MessageArea
+        id={channelId}
+        receiver="Channel"
+        name={channelResponse?.name}
+        isLoading={!(isAllUsersLoading || isChannelLoading)}
+      />
     </>
   );
 }

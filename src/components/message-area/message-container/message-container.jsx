@@ -24,7 +24,7 @@ function MessageContainer({ messagesResponse, name, receiver = "User" }) {
           `This is the start of the ${name} channel.`
         ) : (
           <>
-            This is beginning of your direct message history with{" "}
+            This is the beginning of your direct message history with{" "}
             <span className={styles.username}>{name}.</span>
           </>
         )}
