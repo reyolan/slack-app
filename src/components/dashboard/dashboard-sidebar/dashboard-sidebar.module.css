@@ -11,3 +11,8 @@ body .messageUserBtn {
 body .userList {
   height: 100%;
 }
+
+.userCard:hover {
+  background-color: gray;
+  border-radius: 5px;
+}

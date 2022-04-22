@@ -21,7 +21,7 @@ function AddChannelModal({ toggleModal }) {
       name: channelName,
       user_ids: [],
     }).then(res => {
-      if (res.response.data.errors.length) {
+      if (res.response.data.errors) {
         setResponseError(res.response.data.errors[0]);
         throw new Error(res.response.data.errors[0]);
       }
