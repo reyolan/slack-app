@@ -7,6 +7,7 @@ import { registerValidation } from "utils/form-validate";
 import usePostRequest from "hooks/use-post-request";
 import Text from "components/ui/texts/text";
 import ErrorText from "components/ui/texts/error-text";
+import { REGISTER_API } from "services/api";
 
 function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ function RegisterForm() {
   });
   const [statusMessage, setStatusMessage] = useState("");
   const [responseError, setResponseError] = useState("");
-  const postRequest = usePostRequest("auth");
+  const postRequest = usePostRequest(REGISTER_API);
 
   useEffect(() => {
     setErrors({ email: null, password: null, confirmPassword: null });
@@ -42,7 +43,7 @@ function RegisterForm() {
           setResponseError(res.error.response.data.errors.full_messages[0]);
           throw new Error(res.error);
         }
-        setStatusMessage("Registration Success. Please proceed to Login page.");
+        setStatusMessage("Registration Success! Please proceed to Login page.");
       });
     }
   };

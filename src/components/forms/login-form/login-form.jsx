@@ -9,6 +9,7 @@ import { loginValidation } from "utils/form-validate";
 import usePostRequest from "hooks/use-post-request";
 import { storeInLocalStorage } from "utils/helpers";
 import ErrorText from "components/ui/texts/error-text";
+import { SIGN_IN_API } from "services/api";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -17,7 +18,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
   const [responseError, setResponseError] = useState("");
-  const postRequest = usePostRequest("auth/sign_in");
+  const postRequest = usePostRequest(SIGN_IN_API);
 
   useEffect(() => {
     setErrors({ email: null, password: null });

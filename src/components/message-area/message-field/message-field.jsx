@@ -4,9 +4,10 @@ import styles from "./message-field.module.css";
 import RowContainer from "components/ui/containers/row-container";
 import Button from "components/ui/button";
 import useMutation from "hooks/use-mutation";
+import { SEND_MESSAGE_API, messageApi } from "services/api";
 
 function MessageField({ id, receiver, name = "" }) {
-  const postRequest = usePostRequest("messages");
+  const postRequest = usePostRequest(SEND_MESSAGE_API);
   const [messageInput, setMessageInput] = useState("");
   const revalidate = useMutation();
 
@@ -17,7 +18,7 @@ function MessageField({ id, receiver, name = "" }) {
       body: messageInput,
     }).then(res => {
       if (res.response.data.data) {
-        revalidate(`messages?receiver_id=${id}&receiver_class=${receiver}`);
+        revalidate(messageApi(id, receiver));
       }
     });
     setMessageInput("");
@@ -32,7 +33,7 @@ function MessageField({ id, receiver, name = "" }) {
   return (
     <RowContainer className={styles.messageField}>
       <input
-        type="text"
+        type="textarea"
         autoComplete="off"
         placeholder={`Message ${name}`}
         className={styles.messageInput}

@@ -8,11 +8,12 @@ import InputField from "components/ui/input-field";
 import ErrorText from "components/ui/texts/error-text";
 import usePostRequest from "hooks/use-post-request";
 import useMutation from "hooks/use-mutation";
+import { CHANNEL_LIST_API } from "services/api";
 
 function AddChannelModal({ toggleModal }) {
   const [channelName, setChannelName] = useState("");
   const [responseError, setResponseError] = useState("");
-  const postRequest = usePostRequest("channels");
+  const postRequest = usePostRequest(CHANNEL_LIST_API);
   const navigate = useNavigate();
   const revalidate = useMutation();
 
@@ -27,7 +28,7 @@ function AddChannelModal({ toggleModal }) {
       }
 
       toggleModal();
-      revalidate("channels");
+      revalidate(CHANNEL_LIST_API);
       navigate(`/channels/${res.response.data.data.id}`);
     });
   };

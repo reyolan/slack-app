@@ -4,11 +4,12 @@ import useGetRequest from "hooks/use-get-request";
 import ChannelSideBar from "components/channel/channel-sidebar";
 import MessageArea from "components/message-area";
 import LoadingContainer from "components/ui/containers/loading-container";
+import { channelDetailsApi } from "services/api";
 
 function Channel() {
   const { channelId } = useParams();
-  const [channelResponse, isChannelLoading, channelError] = useGetRequest(
-    `channels/${channelId}`
+  const [channelResponse, isChannelLoading] = useGetRequest(
+    channelDetailsApi(channelId)
   );
 
   return (

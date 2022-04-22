@@ -4,10 +4,11 @@ import MessageField from "./message-field";
 import ColumnContainer from "components/ui/containers/column-container";
 import LoadingContainer from "components/ui/containers/loading-container";
 import useGetRequest from "hooks/use-get-request";
+import { messageApi } from "services/api";
 
 function MessageArea({ id, receiver, name }) {
-  const [messagesResponse, isMessagesLoading, messagesError] = useGetRequest(
-    `messages?receiver_id=${id}&receiver_class=${receiver}`
+  const [messagesResponse, isMessagesLoading] = useGetRequest(
+    messageApi(id, receiver)
   );
 
   return (

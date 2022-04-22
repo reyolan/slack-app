@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import API from "services/api";
-import { AuthContext } from "context/auth-context";
 import useSWR from "swr";
+import API from "services/api";
+import { useContext } from "react";
+import { AuthContext } from "context/auth-context";
 
-const fetcher = (url, config) =>
+const swrFetcher = (url, config) =>
   API.get(url, config).then(res => {
     const {
       data: { data },
@@ -14,7 +14,7 @@ const fetcher = (url, config) =>
 
 function useGetRequest(relativeUrl) {
   const { loginHeaders } = useContext(AuthContext);
-  const { data, error } = useSWR([relativeUrl, loginHeaders], fetcher, {
+  const { data, error } = useSWR([relativeUrl, loginHeaders], swrFetcher, {
     refreshInterval: 1000,
   });
 

@@ -9,13 +9,14 @@ import Header from "components/ui/texts/header";
 import ColumnContainer from "components/ui/containers/column-container";
 import { getFirstChar } from "utils/helpers";
 import InputField from "components/ui/input-field";
+import { SEND_MESSAGE_API } from "services/api";
 
 function UserDetailCard({ id, name, className = "" }) {
   const { loggedInId } = useContext(AuthContext);
   const { addDirectMessageUser } = useContext(DataContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
-  const postRequest = usePostRequest("messages");
+  const postRequest = usePostRequest(SEND_MESSAGE_API);
 
   const handleKeyPress = (key, id, uid) => {
     if (key === "Enter") {
