@@ -5,6 +5,7 @@ import PublicRoute from "routes/public-route";
 import PrivateRoute from "routes/private-route";
 import AuthProvider from "context/auth-context";
 import DataProvider from "context/data-context";
+import MobileInterfaceProvider from "context/mobile-interface-context";
 import MainPage from "pages/main";
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
               element={
                 <PrivateRoute>
                   <DataProvider>
-                    <MainPage />
+                    <MobileInterfaceProvider>
+                      <MainPage />
+                    </MobileInterfaceProvider>
                   </DataProvider>
                 </PrivateRoute>
               }

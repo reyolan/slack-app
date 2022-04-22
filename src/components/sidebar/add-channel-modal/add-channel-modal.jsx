@@ -11,7 +11,7 @@ import useMutation from "hooks/use-mutation";
 
 function AddChannelModal({ toggleModal }) {
   const [channelName, setChannelName] = useState("");
-  const [statusMessage, setStatusMessage] = useState("");
+  const [responseError, setResponseError] = useState("");
   const postRequest = usePostRequest("channels");
   const navigate = useNavigate();
   const revalidate = useMutation();
@@ -22,7 +22,7 @@ function AddChannelModal({ toggleModal }) {
       user_ids: [],
     }).then(res => {
       if (res.response.data.errors.length) {
-        setStatusMessage(res.response.data.errors[0]);
+        setResponseError(res.response.data.errors[0]);
         throw new Error(res.response.data.errors[0]);
       }
 
@@ -41,7 +41,7 @@ function AddChannelModal({ toggleModal }) {
         placeholder="Channel Name"
         className={styles.inputChannel}
       />
-      <ErrorText>{statusMessage}</ErrorText>
+      <ErrorText>{responseError}</ErrorText>
       <Button
         type="button"
         onClick={() => handleSubmit()}

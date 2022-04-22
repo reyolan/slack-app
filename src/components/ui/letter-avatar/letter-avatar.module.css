@@ -6,7 +6,7 @@
   align-items: center;
   height: 32px;
   width: 32px;
-  color: var(--white);
+  color: white;
   background: black;
   font-size: 1.4rem;
   cursor: pointer;

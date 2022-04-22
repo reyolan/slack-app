@@ -1,25 +1,18 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { MobileInterfaceContext } from "context/mobile-interface-context";
 import styles from "./topbar.module.css";
 import Header from "components/ui/texts/header";
 
 function Topbar() {
-  const [isLeftSidebarClicked, setIsLeftSidebarClicked] = useState(false);
-  const [isRightSidebarClicked, setIsRightSidebarClicked] = useState(false);
+  const { handleClickLeftSidebar, handleClickRightSidebar } = useContext(
+    MobileInterfaceContext
+  );
 
-  const showSidebar = () => {
-    console.log("clicked");
-    //pag kinlick ko to, may className
-    //create a mobile component?
-  };
-
-  const showSecondSidebar = () => {
-    console.log("another click");
-  };
   return (
     <div className={styles.topbar}>
-      <i className="las la-bars" onClick={showSidebar} />
+      <i className="las la-bars" onClick={handleClickLeftSidebar} />
       <Header level={1}>DiSlack</Header>
-      <i className="las la-users" onClick={showSecondSidebar} />
+      <i className="las la-user-friends" onClick={handleClickRightSidebar} />
     </div>
   );
 }

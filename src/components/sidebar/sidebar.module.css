@@ -33,13 +33,12 @@ body .container {
 }
 
 @media only screen and (max-width: 480px) {
-  /* I want this to element to be on the left */
   body .container {
     position: absolute;
     margin-top: 48px;
-    left: 0;
-    /* left: 100%; */
-    transition: left 1s;
+    left: -100%;
+    transition: left 0.3s;
+    height: calc(100% - 48px);
   }
 
   body .containerClicked {

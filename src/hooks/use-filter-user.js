@@ -20,8 +20,6 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
     if (immediateLoading && unFilteredUsers) {
       setFilteredUsers(unFilteredUsers);
     }
-
-    //double check pa natin ung dependency na unfilteredusers
   }, [immediateLoading, search, unFilteredUsers]);
 
   return {
@@ -32,7 +30,3 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
 }
 
 export default useFilterUser;
-
-//kapag kinlick yung hamburger icon,
-//i transform translateX natin to the left then after that transition, display: none;
-//so dapat magbabago className nun

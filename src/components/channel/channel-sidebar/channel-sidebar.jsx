@@ -1,4 +1,6 @@
 import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "context/auth-context";
+import { DataContext } from "context/data-context";
 import styles from "./channel-sidebar.module.css";
 import InputField from "components/ui/input-field";
 import Button from "components/ui/button";
@@ -8,8 +10,6 @@ import AddUserModal from "../add-user-modal";
 import useModal from "hooks/use-modal";
 import useFilterUser from "hooks/use-filter-user";
 import UsersList from "./users-list";
-import { AuthContext } from "context/auth-context";
-import { DataContext } from "context/data-context";
 
 function ChannelSideBar({ channelResponse }) {
   const { loggedInId } = useContext(AuthContext);

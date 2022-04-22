@@ -11,13 +11,15 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .channelSidebar {
+  body .channelSidebar {
     position: absolute;
-    right: 100%;
     margin-top: 48px;
+    height: calc(100% - 48px);
+    display: none;
   }
 
-  .channelSidebarClicked {
+  body .sidebarClicked {
+    display: flex;
     right: 0;
   }
 }

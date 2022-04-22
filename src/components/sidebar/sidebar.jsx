@@ -8,16 +8,22 @@ import ColumnCenterContainer from "components/ui/containers/column-center-contai
 import ChannelCard from "components/sidebar/channel-card";
 import UnorderedList from "components/ui/unordered-list";
 import AddChannelModal from "./add-channel-modal";
+import { MobileInterfaceContext } from "context/mobile-interface-context";
 
 function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { channelList } = useContext(DataContext);
+  const { isLeftSidebarClicked } = useContext(MobileInterfaceContext);
   const { channelId, userId } = useParams();
 
   return (
     <>
       {isOpen && <AddChannelModal toggleModal={toggleModal} />}
-      <ColumnCenterContainer className={styles.container}>
+      <ColumnCenterContainer
+        className={`${styles.container} ${
+          isLeftSidebarClicked ? styles.containerClicked : ""
+        }`}
+      >
         <UnorderedList className={styles.channelList}>
           <li>
             <Link to="/channels/me">
