@@ -19,10 +19,7 @@ function ChannelSideBar({ channelResponse }) {
   const [channelMembers, setChannelMembers] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const { isOpen, toggleModal } = useModal(false);
-  const { search, filteredUsers, setSearch } = useFilterUser(
-    channelMembers,
-    true
-  );
+  const { search, filteredUsers, setSearch } = useFilterUser(channelMembers);
 
   useEffect(() => {
     if (channelResponse.channel_members.length > 0) {

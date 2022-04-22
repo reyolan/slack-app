@@ -13,7 +13,11 @@ import DirectMessagesList from "./direct-messages-list";
 
 function DashboardSidebar({ allUsers }) {
   const { loggedInId, loggedInUser } = useContext(AuthContext);
-  const { search, filteredUsers, setSearch } = useFilterUser(allUsers);
+  const { search, filteredUsers, setSearch } = useFilterUser(
+    allUsers,
+    false,
+    true
+  );
   const { addDirectMessageUser } = useContext(DataContext);
 
   const handleClick = (uid, id) => {

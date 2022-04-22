@@ -8,7 +8,7 @@ import DashboardInterface from "components/dashboard/dashboard-interface";
 import LoadingContainer from "components/ui/containers/loading-container";
 
 function Dashboard() {
-  const { loggedInUser, loggedInId } = useContext(AuthContext);
+  const { loggedInId } = useContext(AuthContext);
   const { allUsers, isAllUsersLoading } = useContext(DataContext);
   const { userId } = useParams();
   const [filteredUsers, setFilteredUsers] = useState(allUsers);
@@ -19,14 +19,13 @@ function Dashboard() {
       const filteredUsers = allUsers.filter(user => user.id !== loggedInId);
       setFilteredUsers(filteredUsers);
     }
-  }, [allUsers]);
+  }, [allUsers, loggedInId]);
 
   useEffect(() => {
     if (userId && allUsers) {
       setClickedUser(allUsers.find(user => user.id === +userId)?.uid);
     }
   }, [userId, allUsers]);
-  //ung isasave natin sa local storage is yung ownerId + the ID na mga namessage
 
   return (
     <>

@@ -11,14 +11,17 @@ import usePostRequest from "hooks/use-post-request";
 import useMutation from "hooks/use-mutation";
 
 function AddUserModal({ toggleModal, channelResponse, usersAbleToAdd }) {
-  const { search, filteredUsers, setSearch } = useFilterUser(usersAbleToAdd);
+  const { search, filteredUsers, setSearch } = useFilterUser(
+    usersAbleToAdd,
+    false,
+    true
+  );
   const postRequest = usePostRequest("channel/add_member");
   const revalidate = useMutation();
 
   const addUser = member_id => {
     const data = { id: channelResponse.id, member_id };
     postRequest(data).then(res => {
-      console.log(res);
       if (res.response.data.data) {
         revalidate(`channels/${channelResponse.id}`);
         return;

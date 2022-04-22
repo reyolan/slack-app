@@ -1,26 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import debounce from "lodash.debounce";
 
-function useFilterUser(unFilteredUsers, immediateLoading = false) {
+function useFilterUser(
+  unFilteredUsers,
+  isImmediateLoading = true,
+  isDebouncedSearch = false
+) {
   const [search, setSearch] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  useEffect(() => {
-    if (!immediateLoading && !search.trim().length) {
-      setFilteredUsers([]);
-    }
+  const filterUsers = (users, search) => {
+    const filteredUsers = users.filter(user =>
+      user.uid.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredUsers(filteredUsers);
+  };
 
-    if (search.trim().length) {
-      const filteredUsers = unFilteredUsers.filter(user =>
-        user.uid.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredUsers(filteredUsers);
+  const debouncedFilterUsers = useCallback(
+    debounce((users, search) => filterUsers(users, search), 800),
+    []
+  );
+
+  useEffect(() => {
+    if (!isImmediateLoading && !search.trim().length) {
+      setFilteredUsers([]);
       return;
     }
 
-    if (immediateLoading && unFilteredUsers) {
+    if (isImmediateLoading && unFilteredUsers) {
       setFilteredUsers(unFilteredUsers);
     }
-  }, [immediateLoading, search, unFilteredUsers]);
+  }, [isImmediateLoading, search, unFilteredUsers]);
+
+  useEffect(() => {
+    if (search.trim().length) {
+      if (isDebouncedSearch) {
+        console.log(search);
+        debouncedFilterUsers(unFilteredUsers, search);
+        return;
+      }
+
+      filterUsers(unFilteredUsers, search);
+    }
+  }, [search, unFilteredUsers, isDebouncedSearch]);
 
   return {
     search,
