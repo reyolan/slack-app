@@ -35,7 +35,6 @@ function useFilterUser(
   useEffect(() => {
     if (search.trim().length) {
       if (isDebouncedSearch) {
-        console.log(search);
         debouncedFilterUsers(unFilteredUsers, search);
         return;
       }
