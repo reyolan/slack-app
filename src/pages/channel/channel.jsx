@@ -1,3 +1,4 @@
+import styles from "./channel.module.css";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "context/data-context";
@@ -16,18 +17,14 @@ function Channel() {
   return (
     <>
       {!isChannelLoading ? (
-        <ChannelSideBar
-          channelResponse={channelResponse}
-          isLoading={!(isAllUsersLoading || isChannelLoading)}
-        />
+        <ChannelSideBar channelResponse={channelResponse} />
       ) : (
-        <LoadingContainer />
+        <LoadingContainer className={styles.loadingChannel} />
       )}
       <MessageArea
         id={channelId}
         receiver="Channel"
         name={channelResponse?.name}
-        isLoading={!(isAllUsersLoading || isChannelLoading)}
       />
     </>
   );

@@ -1,5 +1,5 @@
 import InputField from "components/ui/input-field";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./login-form.module.css";
 import Button from "components/ui/button";
 import FormContainer from "components/ui/containers/form-container";
@@ -8,6 +8,7 @@ import { AuthContext } from "context/auth-context";
 import { loginValidation } from "utils/form-validate";
 import usePostRequest from "hooks/use-post-request";
 import { storeInLocalStorage } from "utils/helpers";
+import ErrorText from "components/ui/texts/error-text";
 
 function LoginForm() {
   const { setIsAuthenticated, setLoginHeaders, setLoggedInId } =
@@ -15,7 +16,13 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: null, password: null });
-  const { isPosting, postRequest } = usePostRequest("auth/sign_in");
+  const [responseError, setResponseError] = useState("");
+  const postRequest = usePostRequest("auth/sign_in");
+
+  useEffect(() => {
+    setErrors({ email: null, password: null });
+    setResponseError("");
+  }, [email, password]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,10 +39,7 @@ function LoginForm() {
         password,
       }).then(res => {
         if (res.error) {
-          setErrors({
-            email: "- Invalid Email or Password",
-            password: "- Invalid Email or Password",
-          });
+          setResponseError(res.error.response.data.errors[0]);
           throw new Error(res.error);
         }
 
@@ -74,6 +78,7 @@ function LoginForm() {
         onChange={e => setPassword(e.target.value)}
         error={errors.password}
       />
+      <ErrorText>{responseError}</ErrorText>
       <Button type="submit" className={styles.loginBtn}>
         Login
       </Button>

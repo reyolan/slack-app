@@ -15,7 +15,7 @@ function UserDetailCard({ id, name, className = "" }) {
   const { addDirectMessageUser } = useContext(DataContext);
   const navigate = useNavigate();
   const [messageInput, setMessageInput] = useState("");
-  const { isPosting, postRequest } = usePostRequest("messages");
+  const postRequest = usePostRequest("messages");
 
   const handleKeyPress = (key, id, uid) => {
     if (key === "Enter") {

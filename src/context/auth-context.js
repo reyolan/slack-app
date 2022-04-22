@@ -20,7 +20,6 @@ function AuthProvider({ children }) {
       storeInLocalStorage("token", loginHeaders);
       storeInLocalStorage("user", uid);
     }
-    console.log(loginHeaders);
   }, [loginHeaders]);
 
   useEffect(() => {

@@ -7,12 +7,11 @@ import ChannelSidebarContainer from "components/ui/containers/channel-sidebar-co
 import AddUserModal from "../add-user-modal";
 import useModal from "hooks/use-modal";
 import useFilterUser from "hooks/use-filter-user";
-import LoadingContainer from "components/ui/containers/loading-container";
 import UsersList from "./users-list";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 
-function ChannelSideBar({ channelResponse, isLoading }) {
+function ChannelSideBar({ channelResponse }) {
   const { loggedInId } = useContext(AuthContext);
   const { allUsers } = useContext(DataContext);
   const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
@@ -34,7 +33,6 @@ function ChannelSideBar({ channelResponse, isLoading }) {
           ) && user.id !== channelResponse.owner_id
       );
       setChannelMembers(channelUsers);
-      console.log(channelUsers);
     }
   }, [channelResponse.channel_members.length]);
 
@@ -72,34 +70,28 @@ function ChannelSideBar({ channelResponse, isLoading }) {
         />
       )}
       <ChannelSidebarContainer className={styles.channelSidebar}>
-        {isLoading ? (
-          <>
-            <Header level={2}>{channelResponse.name}</Header>
-            {isOwner && (
-              <Button
-                type="button"
-                onClick={toggleModal}
-                className={styles.addMemberBtn}
-              >
-                Add Members
-              </Button>
-            )}
-            <InputField
-              type="text"
-              placeholder="Search members"
-              onChange={e => setSearch(e.target.value)}
-              value={search}
-            />
-
-            <UsersList
-              filteredUsers={filteredUsers}
-              channelOwner={channelOwner}
-              numberOfMembers={channelMembers.length}
-            />
-          </>
-        ) : (
-          <LoadingContainer className={styles.loadingContainer} />
+        <Header level={2}>{channelResponse.name}</Header>
+        {isOwner && (
+          <Button
+            type="button"
+            onClick={toggleModal}
+            className={styles.addMemberBtn}
+          >
+            Add Members
+          </Button>
         )}
+        <InputField
+          type="text"
+          placeholder="Search members"
+          onChange={e => setSearch(e.target.value)}
+          value={search}
+        />
+
+        <UsersList
+          filteredUsers={filteredUsers}
+          channelOwner={channelOwner}
+          numberOfMembers={channelMembers.length}
+        />
       </ChannelSidebarContainer>
     </>
   );

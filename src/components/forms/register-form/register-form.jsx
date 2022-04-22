@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./register-form.module.css";
 import FormContainer from "components/ui/containers/form-container";
 import InputField from "components/ui/input-field";
@@ -6,6 +6,7 @@ import Button from "components/ui/button";
 import { registerValidation } from "utils/form-validate";
 import usePostRequest from "hooks/use-post-request";
 import Text from "components/ui/texts/text";
+import ErrorText from "components/ui/texts/error-text";
 
 function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,13 @@ function RegisterForm() {
     confirmPassword: null,
   });
   const [statusMessage, setStatusMessage] = useState("");
-  const { isPosting, postRequest } = usePostRequest("auth");
+  const [responseError, setResponseError] = useState("");
+  const postRequest = usePostRequest("auth");
+
+  useEffect(() => {
+    setErrors({ email: null, password: null, confirmPassword: null });
+    setResponseError("");
+  }, [email, password, confirmPassword]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,7 +39,7 @@ function RegisterForm() {
       const data = { email, password, password_confirmation: confirmPassword };
       postRequest(data).then(res => {
         if (res.error) {
-          setStatusMessage("Registration Failed");
+          setResponseError(res.error.response.data.errors.full_messages[0]);
           throw new Error(res.error);
         }
         setStatusMessage("Registration Success. Please proceed to Login page.");
@@ -67,6 +74,7 @@ function RegisterForm() {
         onChange={e => setConfirmPassword(e.target.value)}
         error={errors.confirmPassword}
       />
+      <ErrorText>{responseError}</ErrorText>
       <Button type="submit" className={styles.registerBtn}>
         Register
       </Button>

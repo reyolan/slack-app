@@ -9,8 +9,6 @@ function useFilterUser(unFilteredUsers, immediateLoading = false) {
       setFilteredUsers([]);
     }
 
-    console.log(search);
-
     if (search.trim().length) {
       const filteredUsers = unFilteredUsers.filter(user =>
         user.uid.toLowerCase().includes(search.toLowerCase())

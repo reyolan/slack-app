@@ -9,6 +9,7 @@ function Topbar() {
   const showSidebar = () => {
     console.log("clicked");
     //pag kinlick ko to, may className
+    //create a mobile component?
   };
 
   const showSecondSidebar = () => {

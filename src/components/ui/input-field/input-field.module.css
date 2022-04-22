@@ -21,6 +21,7 @@
   align-items: center;
 }
 
-.error {
+.inputContainer .error {
   font-style: italic;
+  font-size: 1.4rem;
 }

@@ -12,7 +12,7 @@ import AddChannelModal from "./add-channel-modal";
 function Sidebar() {
   const { isOpen, toggleModal } = useModal(false);
   const { channelList } = useContext(DataContext);
-  const { channelId } = useParams();
+  const { channelId, userId } = useParams();
 
   return (
     <>
@@ -23,7 +23,7 @@ function Sidebar() {
             <Link to="/channels/me">
               <ChannelCard
                 channelName="Home"
-                isSelected={!channelId ? true : false}
+                isSelected={!channelId && !userId ? true : false}
               />
             </Link>
           </li>
