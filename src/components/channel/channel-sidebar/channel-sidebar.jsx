@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { AuthContext } from "context/auth-context";
 import { DataContext } from "context/data-context";
 import styles from "./channel-sidebar.module.css";
@@ -11,43 +11,37 @@ import useModal from "hooks/use-modal";
 import useFilterUser from "hooks/use-filter-user";
 import UsersList from "./users-list";
 
-function ChannelSideBar({ channelResponse }) {
+function ChannelSidebar({ channelResponse }) {
   const { loggedInId } = useContext(AuthContext);
   const { allUsers } = useContext(DataContext);
-  const [usersAbleToAdd, setUsersAbleToAdd] = useState([]);
-  const [channelOwner, setChannelOwner] = useState({});
-  const [channelMembers, setChannelMembers] = useState([]);
   const [isOwner, setIsOwner] = useState(false);
   const { isOpen, toggleModal } = useModal(false);
-  const { search, filteredUsers, setSearch } = useFilterUser(channelMembers);
 
-  useEffect(() => {
+  const channelMembers = useMemo(() => {
     if (channelResponse.channel_members.length > 0) {
-      const channelUsers = allUsers.filter(
+      return allUsers.filter(
         user =>
           channelResponse.channel_members.some(
             member => member.user_id === user.id
           ) && user.id !== channelResponse.owner_id
       );
-      setChannelMembers(channelUsers);
     }
-  }, [channelResponse.channel_members.length]);
+  }, [channelResponse.channel_members, channelResponse.owner_id, allUsers]);
 
-  useEffect(() => {
+  const { search, filteredUsers, setSearch } = useFilterUser(channelMembers);
+
+  const usersAbleToAdd = useMemo(() => {
     if (isOpen) {
-      const usersAbleToAdd = allUsers.filter(
+      return allUsers.filter(
         user => !channelMembers.find(channelUser => channelUser.id === user.id)
       );
-      setUsersAbleToAdd(usersAbleToAdd);
     }
-  }, [isOpen, channelMembers]);
+  }, [isOpen, channelMembers, allUsers]);
 
-  useEffect(() => {
-    const channelOwner = allUsers.find(
-      user => user.id === channelResponse.owner_id
-    );
-    setChannelOwner(channelOwner);
-  }, [channelResponse.owner_id]);
+  const channelOwner = useMemo(
+    () => allUsers.find(user => user.id === channelResponse.owner_id),
+    [channelResponse.owner_id, allUsers]
+  );
 
   useEffect(() => {
     if (channelResponse.owner_id === +loggedInId) {
@@ -94,4 +88,4 @@ function ChannelSideBar({ channelResponse }) {
   );
 }
 
-export default ChannelSideBar;
+export default ChannelSidebar;

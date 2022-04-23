@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useMemo } from "react";
 import { getEmailUsername } from "utils/helpers";
 import { ALL_USERS_API } from "services/api";
 import useGetRequest from "hooks/use-get-request";
@@ -6,18 +6,15 @@ import useGetRequest from "hooks/use-get-request";
 export const DataContext = createContext();
 
 function DataProvider({ children }) {
-  const [allUsers, setAllUsers] = useState([]);
   const [directMessages, setDirectMessages] = useState([]);
   const [allUsersResponse, isAllUsersLoading] = useGetRequest(ALL_USERS_API);
 
-  useEffect(() => {
+  const allUsers = useMemo(() => {
     if (allUsersResponse) {
-      const allUsers = allUsersResponse.map(user => ({
+      return allUsersResponse.map(user => ({
         ...user,
         uid: getEmailUsername(user.uid),
       }));
-
-      setAllUsers(allUsers);
     }
   }, [allUsersResponse]);
 

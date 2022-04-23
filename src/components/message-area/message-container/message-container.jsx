@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import styles from "./message-container.module.css";
 import ColumnContainer from "components/ui/containers/column-container";
 import MessageCard from "./message-card";
@@ -6,14 +6,10 @@ import Text from "components/ui/texts/text";
 import Header from "components/ui/texts/header";
 
 function MessageContainer({ messagesResponse, name, receiver = "User" }) {
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    if (messagesResponse) {
-      setMessages(messagesResponse.reverse());
-      console.log(messagesResponse);
-    }
-  }, [messagesResponse]);
+  const messages = useMemo(
+    () => messagesResponse.reverse(),
+    [messagesResponse]
+  );
 
   return (
     <ColumnContainer className={styles.messageContainer}>

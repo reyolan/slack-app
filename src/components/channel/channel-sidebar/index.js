@@ -1,3 +1,3 @@
-import ChannelSideBar from "./channel-sidebar";
+import ChannelSidebar from "./channel-sidebar";
 
-export default ChannelSideBar;
+export default ChannelSidebar;
