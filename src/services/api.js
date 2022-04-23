@@ -5,7 +5,7 @@ const API = axios.create({
 });
 
 function swrFetcher(url, config) {
-  API.get(url, config).then(res => {
+  return API.get(url, config).then(res => {
     const {
       data: { data },
     } = res;
@@ -32,6 +32,7 @@ const SIGN_IN_API = "auth/sign_in";
 const REGISTER_API = "auth";
 
 export {
+  API,
   messageApi,
   channelDetailsApi,
   swrFetcher,

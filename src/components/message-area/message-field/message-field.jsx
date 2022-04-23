@@ -11,7 +11,8 @@ function MessageField({ id, receiver, name = "" }) {
   const [messageInput, setMessageInput] = useState("");
   const revalidate = useMutation();
 
-  const handleSendMessage = () => {
+  const handleSendMessage = e => {
+    e.preventDefault();
     postRequest({
       receiver_id: id,
       receiver_class: receiver,
@@ -25,29 +26,25 @@ function MessageField({ id, receiver, name = "" }) {
   };
 
   const handleKeyPress = e => {
-    if (e.key === "Enter") {
-      handleSendMessage();
+    if (e.key === "Enter" && !e.shiftKey) {
+      handleSendMessage(e);
     }
   };
 
   return (
     <RowContainer className={styles.messageField}>
-      <input
-        type="textarea"
-        autoComplete="off"
-        placeholder={`Message ${name}`}
-        className={styles.messageInput}
-        value={messageInput}
-        onChange={e => setMessageInput(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-      <Button
-        type="button"
-        className={styles.sendBtn}
-        onClick={handleSendMessage}
-      >
-        <i className="las la-lg la-paper-plane" />
-      </Button>
+      <form onSubmit={handleSendMessage} onKeyPress={handleKeyPress}>
+        <textarea
+          className={styles.messageInput}
+          value={messageInput}
+          placeholder={`Message ${name}`}
+          onChange={e => setMessageInput(e.target.value)}
+          rows={1}
+        />
+        <Button type="submit" className={styles.sendBtn}>
+          <i className="las la-lg la-paper-plane" />
+        </Button>
+      </form>
     </RowContainer>
   );
 }

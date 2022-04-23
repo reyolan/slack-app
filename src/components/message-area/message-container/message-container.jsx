@@ -11,6 +11,7 @@ function MessageContainer({ messagesResponse, name, receiver = "User" }) {
   useEffect(() => {
     if (messagesResponse) {
       setMessages(messagesResponse.reverse());
+      console.log(messagesResponse);
     }
   }, [messagesResponse]);
 

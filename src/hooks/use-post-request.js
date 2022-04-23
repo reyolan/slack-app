@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "context/auth-context";
-import API from "services/api";
+import { API } from "services/api";
 
 function usePostRequest(relativeUrl) {
   const { loginHeaders } = useContext(AuthContext);

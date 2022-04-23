@@ -8,6 +8,7 @@ import LoadingContainer from "components/ui/containers/loading-container";
 
 function MainPage() {
   const { isChannelListLoading } = useContext(DataContext);
+
   return (
     <>
       {!isChannelListLoading ? (

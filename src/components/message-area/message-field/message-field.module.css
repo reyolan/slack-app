@@ -7,6 +7,13 @@
   color: white;
   font-size: 1.6rem;
   width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+.messageField > form {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .messageField {
@@ -17,4 +24,7 @@
 .sendBtn {
   width: auto;
   background-color: transparent;
+  height: 36px;
+  display: flex;
+  align-items: center;
 }
