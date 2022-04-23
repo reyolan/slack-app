@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 import debounce from "lodash.debounce";
 
 function useFilterUser(
@@ -16,8 +16,8 @@ function useFilterUser(
     setFilteredUsers(filteredUsers);
   };
 
-  const debouncedFilterUsers = useCallback(
-    debounce((users, search) => filterUsers(users, search), 800),
+  const debouncedFilterUsers = useMemo(
+    () => debounce((users, search) => filterUsers(users, search), 800),
     []
   );
 
@@ -41,7 +41,7 @@ function useFilterUser(
 
       filterUsers(unFilteredUsers, search);
     }
-  }, [search, unFilteredUsers, isDebouncedSearch]);
+  }, [search, unFilteredUsers, isDebouncedSearch, debouncedFilterUsers]);
 
   return {
     search,
