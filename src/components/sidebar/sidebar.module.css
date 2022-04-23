@@ -10,6 +10,10 @@ body .container {
   flex: 1 0 auto;
 }
 
+.loading {
+  background-color: #202225;
+}
+
 .container > .channelList {
   height: 100%;
 }
@@ -20,6 +24,10 @@ body .container {
 
 .channelList > li {
   margin-bottom: 0.8rem;
+}
+
+.channelList > li:first-child > div {
+  margin-top: 0.8rem;
 }
 
 .channelList > li:first-child {
