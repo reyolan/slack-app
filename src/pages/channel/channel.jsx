@@ -1,7 +1,7 @@
 import styles from "./channel.module.css";
 import { useParams } from "react-router-dom";
 import useGetRequest from "hooks/use-get-request";
-import ChannelSideBar from "components/channel/channel-sidebar";
+import ChannelSidebar from "components/channel/channel-sidebar";
 import MessageArea from "components/message-area";
 import LoadingContainer from "components/ui/containers/loading-container";
 import { channelDetailsApi } from "services/api";
@@ -15,7 +15,7 @@ function Channel() {
   return (
     <>
       {!isChannelLoading ? (
-        <ChannelSideBar channelResponse={channelResponse} />
+        <ChannelSidebar channelResponse={channelResponse} />
       ) : (
         <LoadingContainer className={styles.loadingChannel} />
       )}

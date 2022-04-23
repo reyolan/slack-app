@@ -43,6 +43,10 @@ function useFilterUser(
     }
   }, [search, unFilteredUsers, isDebouncedSearch, debouncedFilterUsers]);
 
+  useEffect(() => {
+    return () => debouncedFilterUsers.cancel();
+  }, []);
+
   return {
     search,
     filteredUsers,
