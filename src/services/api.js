@@ -1,8 +1,18 @@
 import axios from "axios";
 
-export default axios.create({
+const API = axios.create({
   baseURL: "http://206.189.91.54/api/v1",
 });
+
+function swrFetcher(url, config) {
+  API.get(url, config).then(res => {
+    const {
+      data: { data },
+    } = res;
+
+    return data;
+  });
+}
 
 //Relative URLs
 
@@ -24,6 +34,7 @@ const REGISTER_API = "auth";
 export {
   messageApi,
   channelDetailsApi,
+  swrFetcher,
   CHANNEL_LIST_API,
   ALL_USERS_API,
   ADD_MEMBER_API,
