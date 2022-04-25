@@ -1,30 +1,34 @@
-# Getting Started with Create React App
+# DiSlack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Preview](https://di-slack.vercel.app/);
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This project is built to apply and experience creating an application in React with API calls. The use of functional components and different hooks, with the addition of custom hooks are seen in the application. With this application, I gained the basic and somehow advanced understanding how React really works, with its virtual DOM.
 
-### `npm start`
+I have also learned the concept of memoization with the useMemo and useCallback hooks.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Setup
 
-### `npm test`
+```
+  git clone git@github.com:reyolan/slack-app.git
+  cd slack-app
+  npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Starting the app
 
-### `npm run build`
+```
+  npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- User is able to create an account with email and password.
+- User is able to login his/her credentials.
+- User is able to create and add users on a channel.
+- User is able to send message to other users and to a channel.
+- User is able to receive message from a channel and from other users.
+- Real time update of the app using SWR
