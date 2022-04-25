@@ -4,9 +4,9 @@
 
 ## Description
 
-This project is built to apply and experience creating an application in React with API calls. The use of functional components and different hooks, with the addition of custom hooks are seen in the application. With this application, I gained the basic and somehow advanced understanding how React really works, with its virtual DOM.
+This project is built to apply and experience creating an application in React with API calls. The use of functional components and different hooks, with the addition of custom hooks are seen in the application. With this application, the creator have gained the basic and somehow advanced understanding how React really works, with its virtual DOM. Additionally, the concept of memoization has been learned with the useMemo and useCallback hooks.
 
-I have also learned the concept of memoization with the useMemo and useCallback hooks.
+The application utilizes Avion School Slack API.
 
 ## Installation
 
