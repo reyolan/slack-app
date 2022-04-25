@@ -1,6 +1,6 @@
 # DiSlack
 
-[Preview](https://di-slack.vercel.app/);
+[Preview](https://di-slack.vercel.app/)
 
 ## Description
 
