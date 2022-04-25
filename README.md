@@ -13,15 +13,15 @@ The application utilizes Avion School Slack API.
 ### Setup
 
 ```
-  git clone git@github.com:reyolan/slack-app.git
-  cd slack-app
-  npm install
+$ git clone git@github.com:reyolan/slack-app.git
+$ cd slack-app
+$ npm install
 ```
 
 ### Starting the app
 
 ```
-  npm start
+$ npm start
 ```
 
 ## Features
