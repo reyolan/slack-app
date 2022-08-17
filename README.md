@@ -32,3 +32,6 @@ $ npm start
 - User is able to send message to other users and to a channel.
 - User is able to receive message from a channel and from other users.
 - Real time update of the app using SWR
+
+## Note
+If an error occurs in production environment, it is highly likely due to the back-end API that the application accesses, which I have no control to. With this, you can check the features through the development server.
